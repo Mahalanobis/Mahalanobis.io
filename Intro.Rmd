@@ -1,5 +1,5 @@
 ---
-title: "Introduzione"
+title: "Fine-Tuning a small LLM (using a statistical approach)"
 output:
   md_document:
     variant: markdown_github
@@ -10,8 +10,6 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## Fine-Tuning a small LLM (using a statistical approach)
 
 Recentemente ho avuto il piacere di tenere una conferenza didattica nell'ambito del corso "Analisi dei dati (data mining)", tenuto dal prof. [Bruno Scarpa](https://homes.stat.unipd.it/brunoscarpa/)  , presso il Dipartimento di Scienze Statistiche https://www.stat.unipd.it/ a Padova. L'intervento verteva sull'evoluzione dell'Intelligenza Artificiale (AI) negli ultimi anni, un percorso affascinante che ci ha portato dalle rappresentazioni lessicali come il Bag of Words alle architetture neurali avanzate basate sui Transformer.
 
