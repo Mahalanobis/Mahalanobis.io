@@ -11,7 +11,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Recentemente ho avuto il piacere di tenere una conferenza didattica nell'ambito del corso "_Analisi dei dati (data mining)_", tenuto dal prof. [Bruno Scarpa](https://homes.stat.unipd.it/brunoscarpa/), presso il [Dipartimento di Scienze Statistiche](https://www.stat.unipd.it/) a Padova. L'intervento verteva sull'evoluzione dell'**Intelligenza Artificiale (AI)** negli ultimi anni, _un percorso affascinante che ci ha portato dalle rappresentazioni lessicali come il Bag of Words alle architetture neurali avanzate basate sui Transformer_.
+Recentemente ho avuto il piacere di tenere una conferenza didattica nell'ambito del corso "_Analisi dei dati (data mining)_", tenuto dal prof. [Bruno Scarpa](https://homes.stat.unipd.it/brunoscarpa/), presso il [Dipartimento di Scienze Statistiche](https://www.stat.unipd.it/) a Padova. 
+
+L'intervento verteva sull'evoluzione che negli ultimi anni ha avuto l'**Intelligenza Artificiale (AI)** nell'ambito del [NLP](https://en.wikipedia.org/wiki/Natural_language_processing), _un percorso affascinante che ci ha portato dalle rappresentazioni lessicali come il Bag of Words alle architetture neurali avanzate basate sui Transformer_.
 
 Trattandosi di una discussione ad alto livello, ho sentito il desiderio di integrare quell'intervento con esempi più pratici e più vicini all'esperienza di chi, come me, proviene da quello stesso percorso formativo. Questo ha portato alla nascita di questa serie di tutorial, pensata per costruire un ponte tra l'_AI Generativa_ e l'_AI Tradizionale_.
 
