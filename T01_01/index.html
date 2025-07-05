@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://mahalanobis.github.io/Mahalanobis.io/">
+        <link rel="canonical" href="https://mahalanobis.github.io/Mahalanobis.io/T01_01/">
       
       
+        <link rel="prev" href="..">
       
-        <link rel="next" href="T01_01/">
+      
+        <link rel="next" href="../T01_02/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
-        <title>Fine-Tuning a small LLM (4Stats)</title>
+        <title>T01 01 - Fine-Tuning a small LLM (4Stats)</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -70,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#introduzione" class="md-skip">
+        <a href="#data" class="md-skip">
           Skip to content
         </a>
       
@@ -84,7 +86,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Fine-Tuning a small LLM (4Stats)" class="md-header__button md-logo" aria-label="Fine-Tuning a small LLM (4Stats)" data-md-component="logo">
+    <a href=".." title="Fine-Tuning a small LLM (4Stats)" class="md-header__button md-logo" aria-label="Fine-Tuning a small LLM (4Stats)" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -104,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Introduzione
+              T01 01
             
           </span>
         </div>
@@ -175,11 +177,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
         
   
   
@@ -196,11 +196,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="T01_01/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -234,7 +236,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Fine-Tuning a small LLM (4Stats)" class="md-nav__button md-logo" aria-label="Fine-Tuning a small LLM (4Stats)" data-md-component="logo">
+    <a href=".." title="Fine-Tuning a small LLM (4Stats)" class="md-nav__button md-logo" aria-label="Fine-Tuning a small LLM (4Stats)" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -249,19 +251,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -272,7 +265,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -281,26 +273,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -313,7 +310,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Dataset
@@ -324,10 +321,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="T01_01/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    T01 01
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -338,6 +357,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#struttura-e-caratteristiche" class="md-nav__link">
+    <span class="md-ellipsis">
+      Struttura e Caratteristiche
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-distribuzione-delle-classi" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Distribuzione delle Classi
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La Distribuzione delle Classi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implicazioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implicazioni
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -350,7 +422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="T01_02/" class="md-nav__link">
+      <a href="../T01_02/" class="md-nav__link">
         
   
   
@@ -393,6 +465,47 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#struttura-e-caratteristiche" class="md-nav__link">
+    <span class="md-ellipsis">
+      Struttura e Caratteristiche
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-distribuzione-delle-classi" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Distribuzione delle Classi
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La Distribuzione delle Classi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implicazioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implicazioni
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -407,46 +520,55 @@
 
 
 
-<h1 id="introduzione">Introduzione</h1>
-<p>Recentemente ho avuto il piacere di tenere una conferenza didattica
-nell’ambito del corso “<em>Analisi dei dati (data mining)</em>”, tenuto dal
-prof. <a href="https://homes.stat.unipd.it/brunoscarpa/">Bruno Scarpa</a>, presso
-il <a href="https://www.stat.unipd.it/">Dipartimento di Scienze Statistiche</a> a
-Padova.</p>
-<p>L’intervento verteva sull’evoluzione che negli ultimi anni ha avuto
-l’<strong>Intelligenza Artificiale (AI)</strong> nell’ambito del
-<a href="https://en.wikipedia.org/wiki/Natural_language_processing">NLP</a>, <em>un
-percorso affascinante che ci ha portato dalle rappresentazioni lessicali
-come il Bag of Words alle architetture neurali avanzate basate sui
-Transformer</em>.</p>
-<p>Trattandosi di una discussione ad alto livello, ho sentito il desiderio
-di integrare quell’intervento con esempi più pratici e più vicini
-all’esperienza di chi, come me, proviene da quello stesso percorso
-formativo. E' nata così questa serie di tutorial, 
-<em>pensati per costruire un ponte tra l’<em>AI Generativa</em> e l’<em>AI
-Tradizionale</em></em>.</p>
-<p>L’architrave di questo ponte è costituita dai problemi di <em>Supervised
-Classification</em>. Vedremo come, nel contesto dell’<em>AI Generativa</em>, questi
-problemi possano essere affrontati con il <strong>fine-tuning di un Large
-Language Model (LLM)</strong>. Un’occasione unica per mettere a confronto i due
-mondi.</p>
-<p>Un aspetto rilevante di questa comparazione sarà la misurazione
-dell’incertezza e dell’errore. Nel mondo dell’AI tradizionale siamo
-abituati a quantificare l’errore attraverso probabilità, intervalli di
-confidenza e metriche derivate dai <em>logit</em>. Vedremo che anche nel contesto
-degli LLM possiamo accedere ai <em>logit</em> e quindi trattare l’errore con la
-stessa familiarità e precisione a cui siamo abituati.</p>
-<p>L’aspetto pratico che guiderà lo sviluppo del codice utilizzato in
-questi tutorial sarà il focus sull’<strong>elaborazione su GPU</strong>, essenziale per
-la gestione efficiente di modelli complessi che richiedono un hardware
-specifico. </p>
-<p><strong>L’invito è sperimentare</strong>. Al di là delle complessità degli
-aspetti tecnici e metodologici è un mondo più accessibile di quanto uno
-possa pensare.</p>
-<p>Ringrazio i colleghi <a href="https://www.linkedin.com/in/guglielmo-strumia-70091215/">Guglielmo Strumia</a>
-e <a href="https://www.linkedin.com/in/marcocozzolino0/">Marco Cozzolino</a> per gli spunti
-e il supporto; questa serie è il frutto del lavoro di tutti noi. 
-Grazie ancora.</p>
+<ul>
+<li><a href="#data">Data</a><ul>
+<li><a href="#struttura-e-caratteristiche">Struttura e Caratteristiche</a></li>
+<li><a href="#la-distribuzione-delle-classi">La Distribuzione delle Classi</a><ul>
+<li><a href="#implicazioni">Implicazioni</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="data">Data</h1>
+<p>Per questa serie di tutorial, useremo l’<strong>Emotions Dataset</strong>, un
+classico esempio di <em>Supervised Classification</em>. Curato da <a href="https://www.linkedin.com/in/this-is-hari-shankar/">Hari
+Shankar</a> e
+disponibile sulla piattaforma <a href="https://huggingface.co/datasets/boltuix/emotions-dataset">Hugging
+Face</a>. Viene
+rilasciato con licenza MIT.</p>
+<h2 id="struttura-e-caratteristiche">Struttura e Caratteristiche</h2>
+<p>Il dataset è composto da una collezione di 131.306 frasi in lingua
+inglese (“Sentence”). La lunghezza media di queste frasi è di circa 14
+parole. A ogni frase è associata un’emozione (“Label”), per un totale di
+13 categorie diverse, inclusa l’opzione “Neutral” per identificare
+l’assenza di emozioni specifiche.</p>
+<h2 id="la-distribuzione-delle-classi">La Distribuzione delle Classi</h2>
+<p>Un aspetto fondamentale di questo dataset è che la distribuzione delle
+emozioni è sbilanciata. Ecco alcune delle categorie più frequenti:
+Happiness: presente in 31.205 frasi (circa il 24% del totale). Sadness:
+presente in 17.809 frasi (circa il 14%). Neutral: presente in 15.733
+frasi (circa il 12%).</p>
+<p>Le restanti categorie includono: Anger, Love, Fear, Disgust, Confusion,
+Surprise, Shame, Guilt, Sarcasm e Desire. Ognuna di queste ha un numero
+di occorrenze variabile, significativamente inferiore rispetto alle
+prime tre.</p>
+<h3 id="implicazioni">Implicazioni</h3>
+<p>Il buon senso ci suggerisce che questa distribuzione delle emozioni è
+quasi certamente il risultato del modo in cui il dataset è stato
+costruito, e non riflette la frequenza reale con cui le diverse emozioni
+vengono espresse nel linguaggio quotidiano.</p>
+<p>Di conseguenza, dovremo tenere a mente due punti chiave:</p>
+<p>Specificità del Dataset: Dobbiamo considerare la distribuzione delle
+classi come una caratteristica intrinseca di questo specifico dataset,
+non come una rappresentazione universale della probabilità delle
+emozioni.</p>
+<p>Gestione dello Sbilanciamento: Sarà cruciale gestire attivamente questo
+sbilanciamento delle classi. Il nostro obiettivo non è “correggere” una
+distribuzione reale sconosciuta, ma piuttosto assicurarci che i nostri
+modelli abbiano abbastanza esempi per imparare efficacemente a
+riconoscere anche le categorie meno rappresentate, garantendo una buona
+capacità di generalizzazione in fase di inferenza.</p>
 
 
 
@@ -495,10 +617,10 @@ Grazie ancora.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.56ea9cef.min.js"></script>
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
       
     
   </body>

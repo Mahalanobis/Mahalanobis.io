@@ -11,8 +11,6 @@
         <link rel="canonical" href="https://mahalanobis.github.io/Mahalanobis.io/T01/">
       
       
-        <link rel="prev" href="..">
-      
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>Dataset - Fine-Tuning a small LLM (4Stats)</title>
+        <title>T01 - Fine-Tuning a small LLM (4Stats)</title>
       
     
     
@@ -70,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#dataset" class="md-skip">
+        <a href="#struttura-e-caratteristiche" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Dataset
+              T01
             
           </span>
         </div>
@@ -194,20 +192,19 @@
   
   
   
-    
-  
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
-        
-  
   
     
+    
+      <li class="md-tabs__item">
+        <a href="../T01_01/" class="md-tabs__link">
+          
+  
   
   Dataset
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -270,20 +267,27 @@
       
   
   
+  
+  
     
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+    
+    
+    
       
       
         
       
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
           
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -292,192 +296,64 @@
   </span>
   
 
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Dataset
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T01_01/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Dataset
+    T01 01
     
   </span>
   
 
       </a>
-      
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+              
+            
+              
+                
   
   
   
+  
+    <li class="md-nav__item">
+      <a href="../T01_02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    T01 02
     
+  </span>
   
+
+      </a>
+    </li>
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#struttura-e-caratteristiche" class="md-nav__link">
-    <span class="md-ellipsis">
-      Struttura e Caratteristiche
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#la-distribuzione-delle-classi" class="md-nav__link">
-    <span class="md-ellipsis">
-      La Distribuzione delle Classi
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="La Distribuzione delle Classi">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#implicazioni" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implicazioni
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Implicazioni">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      ###########################################################################################################################
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#eda" class="md-nav__link">
-    <span class="md-ellipsis">
-      EDA
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="EDA">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      ###########################################################################################################################
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#trainvalid" class="md-nav__link">
-    <span class="md-ellipsis">
-      Train/Valid
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Train/Valid">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      ###########################################################################################################################
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#embeddings" class="md-nav__link">
-    <span class="md-ellipsis">
-      Embeddings
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Embeddings">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      #########################################################################################################
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#embeddings-utility" class="md-nav__link">
-    <span class="md-ellipsis">
-      Embeddings Utility
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Embeddings Utility">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      ################################################################
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#text-to-text-regression" class="md-nav__link">
-    <span class="md-ellipsis">
-      Text-to-Text Regression
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -500,8 +376,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -535,21 +409,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Implicazioni">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      ###########################################################################################################################
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -568,6 +427,25 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ###########################################################################################################################
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trainvalid" class="md-nav__link">
+    <span class="md-ellipsis">
+      Train/Valid
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Train/Valid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       ###########################################################################################################################
@@ -580,32 +458,8 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#trainvalid" class="md-nav__link">
-    <span class="md-ellipsis">
-      Train/Valid
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Train/Valid">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      ###########################################################################################################################
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#embeddings" class="md-nav__link">
     <span class="md-ellipsis">
       Embeddings
@@ -616,7 +470,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       #########################################################################################################
     </span>
@@ -635,7 +489,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       ################################################################
     </span>
@@ -654,6 +508,11 @@
       Text-to-Text Regression
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -679,13 +538,12 @@
 
 
 <ul>
-<li><a href="#dataset">Dataset</a><ul>
 <li><a href="#struttura-e-caratteristiche">Struttura e Caratteristiche</a></li>
 <li><a href="#la-distribuzione-delle-classi">La Distribuzione delle Classi</a><ul>
 <li><a href="#implicazioni">Implicazioni</a></li>
 </ul>
 </li>
-<li><a href="#eda">EDA</a></li>
+<li><a href="#eda">EDA</a><ul>
 <li><a href="#trainvalid">Train/Valid</a></li>
 <li><a href="#embeddings">Embeddings</a><ul>
 <li><a href="#embeddings-utility">Embeddings Utility</a></li>
@@ -695,7 +553,6 @@
 </ul>
 </li>
 </ul>
-<h1 id="dataset">Dataset</h1>
 <p>Per questa serie di tutorial, useremo l’<strong>Emotions Dataset</strong>, un
 classico esempio di <em>Supervised Classification</em>. Curato da <a href="https://www.linkedin.com/in/this-is-hari-shankar/">Hari
 Shankar</a> e
@@ -734,13 +591,12 @@ distribuzione reale sconosciuta, ma piuttosto assicurarci che i nostri
 modelli abbiano abbastanza esempi per imparare efficacemente a
 riconoscere anche le categorie meno rappresentate, garantendo una buona
 capacità di generalizzazione in fase di inferenza.</p>
-<h6 id="_1">###########################################################################################################################</h6>
-<h2 id="eda">EDA</h2>
+<h1 id="eda">EDA</h1>
 <p>Analisi esplorativa attraverso LDA.</p>
-<h6 id="_2">###########################################################################################################################</h6>
+<h6 id="_1">###########################################################################################################################</h6>
 <h2 id="trainvalid">Train/Valid</h2>
 <p>Setup</p>
-<h6 id="_3">###########################################################################################################################</h6>
+<h6 id="_2">###########################################################################################################################</h6>
 <h2 id="embeddings">Embeddings</h2>
 <p>Gli embeddings sono rappresentazioni vettoriali dense di entità
 discrete, come parole, token, frasi, o persino immagini e audio. Il loro
@@ -782,7 +638,7 @@ RoBERTa, Sentence-BERT, modelli basati su GPT (es. quelli di OpenAI).</p>
 stesso “pomodoro” avrà un ruolo e un sapore leggermente diverso se usato
 in una “salsa per pasta” rispetto a una “zuppa fredda”, adattando la sua
 preparazione di conseguenza.</p>
-<h6 id="_4">#########################################################################################################</h6>
+<h6 id="_3">#########################################################################################################</h6>
 <h3 id="embeddings-utility">Embeddings Utility</h3>
 <p>Esempio da fare per capire l’utilità degli Embeddings</p>
 <p>La Selezione del Personale: Dal Metodo Tradizionale agli Embeddings
@@ -874,7 +730,7 @@ degli embeddings consente un approccio continuo e sfumato, dove la
 rilevanza è definita dalla vicinanza nello spazio del significato,
 rendendo il processo di selezione molto più intelligente, efficiente e
 adattabile.</p>
-<h6 id="_5">################################################################</h6>
+<h6 id="_4">################################################################</h6>
 <h3 id="text-to-text-regression">Text-to-Text Regression</h3>
 <p>L’utilità e la flessibilità degli Embeddings è una delle tracce più
 seguite nella ricerca sull’AI Generativa. Poco tempo fa Google ha

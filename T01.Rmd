@@ -11,8 +11,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Dataset
-
 Per questa serie di tutorial, useremo l'__Emotions Dataset__, un classico esempio di _Supervised Classification_. 
 Curato da [Hari Shankar](https://www.linkedin.com/in/this-is-hari-shankar/) e disponibile sulla piattaforma [Hugging Face](https://huggingface.co/datasets/boltuix/emotions-dataset). 
 Viene rilasciato con licenza MIT. 
