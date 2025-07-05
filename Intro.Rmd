@@ -11,11 +11,11 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Recentemente ho avuto il piacere di tenere una conferenza didattica nell'ambito del corso "Analisi dei dati (data mining)", tenuto dal prof. [Bruno Scarpa](https://homes.stat.unipd.it/brunoscarpa/)  , presso il Dipartimento di Scienze Statistiche https://www.stat.unipd.it/ a Padova. L'intervento verteva sull'evoluzione dell'Intelligenza Artificiale (AI) negli ultimi anni, un percorso affascinante che ci ha portato dalle rappresentazioni lessicali come il Bag of Words alle architetture neurali avanzate basate sui Transformer.
+Recentemente ho avuto il piacere di tenere una conferenza didattica nell'ambito del corso "_Analisi dei dati (data mining)_", tenuto dal prof. [Bruno Scarpa](https://homes.stat.unipd.it/brunoscarpa/), presso il [Dipartimento di Scienze Statistiche](https://www.stat.unipd.it/) a Padova. L'intervento verteva sull'evoluzione dell'**Intelligenza Artificiale (AI)** negli ultimi anni, _un percorso affascinante che ci ha portato dalle rappresentazioni lessicali come il Bag of Words alle architetture neurali avanzate basate sui Transformer_.
 
-Trattandosi di una discussione ad alto livello, ho sentito il desiderio di integrare quell'intervento con esempi più pratici e più vicini all'esperienza di chi, come me, proviene da quello stesso percorso formativo. Questo ha portato alla nascita di una serie di tutorial, pensata per costruire un ponte tra l'AI Generativa e l'AI Tradizionale.
+Trattandosi di una discussione ad alto livello, ho sentito il desiderio di integrare quell'intervento con esempi più pratici e più vicini all'esperienza di chi, come me, proviene da quello stesso percorso formativo. Questo ha portato alla nascita di questa serie di tutorial, pensata per costruire un ponte tra l'_AI Generativa_ e l'_AI Tradizionale_.
 
-L'architrave di questo ponte è costituita dai problemi di Supervised Classification. 
+L'architrave di questo ponte è costituita dai problemi di _Supervised Classification_. 
 Vedremo come, nel contesto dell'AI Generativa, questi problemi possano essere affrontati con il fine-tuning di un Large Language Model (LLM). Un'occasione unica per mettere a confronto i due mondi.
 
 Un aspetto rilevante di questa comparazione sarà la misurazione dell'incertezza e dell'errore. 
