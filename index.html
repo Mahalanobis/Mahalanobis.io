@@ -239,6 +239,40 @@ rappresentando ogni documento come una miscela di questi argomenti e ogni argome
 <p>LDA pone alcuni limiti. E' una tecnica che nasce dall'approccio Bag-of-Words, per cui uno stesso concetto espresso con sinonimi o declinazioni di una stessa parola-radice viene trattato come se avesse significati differenti.
 Per limitare questa perdita di informazioni, prima di applicarla, trasformeremo ogni frase in una sequenza di lemmi.</p>
 <h2 id="lda">LDA</h2>
+<p>Attraverso il topic modelling sono stati identificati 10 cluster.
+Per ognuno di questi sono state identificate le 30 parole più rilevanti che, date in pasto ad un LLM, sono state utilizzate per identificare queste tipologie di frasi: </p>
+<ul>
+<li>
+<p><em>Topic 1</em>: <strong>Conversazioni su Intrattenimento e Ricordi Generali</strong>. Questo topic sembra raccogliere frasi che parlano di tempo libero, intrattenimento, sport e ricordi. Parole come "game," "watch," "movie," "play," e "enjoy" indicano attività ricreative. "Year," "old," "time," e "ago" suggeriscono discussioni su eventi passati o età. Termini come "good," "bad," "nice," e "shit" danno un tono valutativo, tipico di commenti su esperienze. Potrebbe rappresentare discussioni informali su hobby, film, partite o ricordi personali.</p>
+</li>
+<li>
+<p><em>Topic 2</em>: <strong>Problemi Tecnici e App/Servizi Digitali</strong>. Le parole chiave di questo topic puntano chiaramente a conversazioni relative a applicazioni, software e problemi tecnici. "App," "error," "glitch," "crash," e "fix" sono indicatori inequivocabili di difficoltà tecnologiche. La presenza di "update," "payment," "ticket," e "booking" suggerisce interazioni con servizi online o app transazionali. "Love," "fantastic," e "perfect" potrebbero indicare esperienze positive, mentre "fail," "lose," e "oh" esprimono frustrazione o delusione. Questo topic è molto specifico del mondo digitale e dei servizi basati su app.</p>
+</li>
+<li>
+<p><em>Topic 3</em>: <strong>Relazioni Interpersonali e Reazioni Emotive Forte</strong>. Questo topic è dominato da parole che esprimono emozioni intense e interazioni sociali. "Friend," "sorry," "hope," e "love" indicano legami e sentimenti. La forte presenza di "hate," "damn," "fucking," e "horrible" suggerisce reazioni molto negative o di rabbia. Si parla di "happen," "win," "loss," e "kill," che possono riferirsi a eventi drammatici, competizioni o conflitti. "People," "guy," e "family" rafforzano l'idea di discussioni centrate su persone e relazioni, spesso con un forte carico emotivo.</p>
+</li>
+<li>
+<p><em>Topic 4</em>: <strong>Discussioni, Opinioni e Interazioni Online</strong>. Questo topic sembra essere un crocevia di conversazioni e scambi di opinioni, spesso in contesti digitali. Parole come "think," "know," "say," "post," e "comment" sono tipiche di discussioni e condivisione di pensieri. "Lol" e "funny" suggeriscono umorismo o reazioni a contenuti. "People," "person," "right," e "wrong" indicano il confronto di idee. La presenza di "thank" e "sorry" rivela un'interazione sociale. "Sub" potrebbe riferirsi a subreddit o comunità online. È un topic che cattura il dialogo e il commento su vari argomenti.</p>
+</li>
+<li>
+<p><em>Topic 5</em>: <strong>Osservazioni su Persone, Età e Situazioni Quotidiane</strong>. Questo topic si concentra su osservazioni di persone (specialmente bambini e giovani), situazioni familiari e aspetti della vita quotidiana. "Look," "like," "kid," "young," "girl," "mother," "dog," e "cat" puntano a descrizioni di individui, animali domestici e dinamiche familiari. "Year," "old," "school," "home," e "day" contestualizzano queste osservazioni nel tempo e nello spazio quotidiano. La presenza di "joke," "die," "pass," e "afraid" potrebbe indicare un misto di umorismo, eventi della vita e paure comuni.</p>
+</li>
+<li>
+<p><em>Topic 6</em>: <strong>Sentimenti Profondi e Riflessioni su Esperienze</strong>. Questo topic sembra sondare sentimenti, esperienze significative e riflessioni più profonde. "Sense," "feeling," "profound," "experience," "deep," "fill," "frustration," "regret," "unease," e "heart" sono tutti termini legati a stati d'animo complessi e introspezione. Si parla di "situation," "relationship," "action," "result," e "behavior," suggerendo analisi di contesti e conseguenze. "Witness," "father," "parent," e "life" ampliano il raggio a osservazioni su figure genitoriali e sulla vita stessa, indicando un tono più mediativo e ponderato.</p>
+</li>
+<li>
+<p><em>Topic 7</em>: <strong>Stati d'Animo Personali e Gestione del Tempo/Benessere</strong>. Con "feel" come parola dominante, questo topic è strettamente legato agli stati d'animo personali e al modo in cui vengono gestiti nel tempo. "Time," "day," "long," "hour," "month," e "night" evidenziano la dimensione temporale del sentire. "Love," "help," "work," "eat," "sleep," "rest," e "bed" indicano attività quotidiane e la ricerca di benessere. "Know," "think," "try," "find," e "need" suggeriscono un processo di auto-analisi e di ricerca di soluzioni o comprensione. È un topic molto introspettivo e centrato sull'esperienza individuale.</p>
+</li>
+<li>
+<p><em>Topic 8</em>: <strong>Problemi Pratici, Necessità e Risorse (Finanziare/Team)</strong>. Questo topic ruota attorno a necessità pratiche, problemi e la gestione di risorse, spesso in un contesto di lavoro, denaro o squadra. "Need," "money," "pay," "support," "work," "problem," "job," e "player"/"team" sono chiari indicatori di sfide e bisogni concreti. "Come," "run," "drive," e "car" potrebbero riferirsi a spostamenti o logistica. "Talk," "ask," e "question" suggeriscono la ricerca di informazioni o aiuto. È un topic molto pragmatico, focalizzato sulla risoluzione di problemi e sulla gestione di aspetti materiali o organizzativi.</p>
+</li>
+<li>
+<p><em>Topic 9</em>: <strong>Sentimenti Intensi, Malessere e Desiderio di Cambiamento</strong>. Un altro topic dominato da "feel," ma qui con un'enfasi maggiore su sentimenti negativi, rabbia, malessere e il desiderio di un cambiamento. "Bad," "fuck," "awful," "afraid," e "wish" esprimono emozioni forti e insoddisfazione. "Want," "change," "life," e "start" indicano aspirazioni e la volontà di alterare una situazione. "Hear," "story," "live," e "imagine" possono riferirsi a narrazioni di esperienze o a proiezioni future. È un topic che cattura frustrazione, desiderio di evasione o trasformazione e la condivisione di esperienze difficili.</p>
+</li>
+<li>
+<p><em>Topic 10</em>: <strong>Sentire Generale, Riflessioni Quotidiane e Autoconsapevolezza</strong>. Questo topic, con un peso enorme su "feel," è il più ampio e generico riguardo al sentire e alla percezione di sé nel quotidiano. "Like," "little," "know," "think," "thing," "life," "time," e "day" indicano una riflessione continua sugli stati d'animo e sull'esistenza. "Happy," "love," e "good" suggeriscono positività, mentre "not" e "bit" indicano una sfumatura o incertezza. "Write" e "tell" potrebbero riferirsi alla condivisione di questi pensieri. È un topic che cattura il flusso di coscienza e le osservazioni quotidiane sulla propria condizione emotiva e mentale.</p>
+</li>
+</ul>
 <hr />
 <p><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.4.0/pyLDAvis/js/ldavis.v1.0.0.css"></p>
 <div id="ldavis_el1595451341899483832168251676553" style="background-color:white;"></div>
