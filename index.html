@@ -115,6 +115,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#text-to-text-regression" class="nav-link">Text-to-Text Regression</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -370,7 +374,6 @@ Gli embeddings trasformano il "pomodoro" da una semplice etichetta a una rappres
 </ul>
 <p>Gli embeddings contestuali si comportano come il cuoco che capisce che lo stesso "pomodoro" avrà un ruolo e un sapore leggermente diverso se usato in una "salsa per pasta" rispetto a una "zuppa fredda", adattando la sua preparazione di conseguenza. </p>
 <h2 id="embeddings-flessibilita">Embeddings = Flessibilità</h2>
-<p>Immaginiamo un'azienda che cerca di assumere un nuovo "Sviluppatore Software Senior".</p>
 <p>Immaginiamo un’azienda che sta cercando di assumere un nuovo Sviluppatore Software Senior .</p>
 <p>Fino a poco tempo fa, il processo di selezione avveniva in modo piuttosto rigido: si utilizzavano criteri predefiniti e si assegnavano punteggi basati su regole stabilite a priori. Questo approccio, pur essendo strutturato, presenta dei limiti significativi quando si cerca di valutare profili complessi e dinamici come quelli richiesti nel mondo della tecnologia.</p>
 <h3 id="il-metodo-tradizionale-classi-predefinite-e-scoring-manuale">Il Metodo Tradizionale: Classi Predefinite e Scoring Manuale</h3>
@@ -402,25 +405,27 @@ Questo tipo di approccio è efficace per schematizzare, ma rischia di escludere 
 - 🕐 Alto costo in termini di tempo ed energie
 - 🎯 Scarsa flessibilità e comprensione semantica</p>
 </blockquote>
-<p>Il Metodo Moderno: La Flessibilità e Utilità degli Embeddings
-Gli embeddings rappresentano una svolta radicale rispetto al passato. Non si basano più su liste di parole chiave o regole rigide, ma sulla comprensione semantica del contenuto.</p>
-<p>Come Funzionano Gli Embeddings
-Ogni CV inviato viene trasformato in un vettore di embedding , ovvero una rappresentazione matematica che cattura il significato complessivo del testo. In questo spazio vettoriale, parole e concetti simili si trovano vicine tra loro: ad esempio, “Python”, “programmazione orientata agli oggetti” e “sviluppo backend” saranno molto prossime a termini come “API REST” o “microservizi”.</p>
+<h3 id="il-metodo-moderno-la-flessibilita-e-utilita-degli-embeddings">Il Metodo Moderno: La Flessibilità e Utilità degli Embeddings</h3>
+<p>Gli embeddings rappresentano una svolta radicale rispetto al passato. Non si basano più su liste di parole chiave o regole rigide, ma sulla comprensione semantica del contenuto.</p>
+<h4 id="come-funzionano-gli-embeddings">Come Funzionano Gli Embeddings</h4>
+<p>Ogni CV inviato viene trasformato in un vettore di embedding , ovvero una rappresentazione matematica che cattura il significato complessivo del testo. In questo spazio vettoriale, parole e concetti simili si trovano vicine tra loro: ad esempio, “Python”, “programmazione orientata agli oggetti” e “sviluppo backend” saranno molto prossime a termini come “API REST” o “microservizi”.</p>
 <p>Questo processo è automatico e avviene grazie a modelli linguistici avanzati (come BERT o modelli fine-tuned ad hoc).</p>
-<p>Creazione del Profilo Ideale: Il “Professionista Sintetico”
-Invece di definire una lista di requisiti, il team HR scrive una descrizione completa del candidato ideale. Ad esempio:</p>
+<h4 id="creazione-del-profilo-ideale-il-professionista-sintetico">Creazione del Profilo Ideale: Il “Professionista Sintetico”</h4>
+<p>Invece di definire una lista di requisiti, il team HR scrive una descrizione completa del candidato ideale. Ad esempio:</p>
 <p>“Cerchiamo uno sviluppatore software senior con almeno 5 anni di esperienza nel backend, una buona conoscenza di Python e dei framework web come Django o Flask. È importante che abbia familiarità con database relazionali e non relazionali, e che abbia già lavorato in ambienti DevOps e cloud computing. Cerchiamo una persona proattiva, capace di lavorare in team e con forti capacità di problem-solving.” </p>
 <p>Questa descrizione viene anch’essa trasformata in un vettore di embedding, diventando un vero e proprio professionista sintetico .</p>
-<p>Calcolo della Similarità Semantica
-A questo punto, il sistema calcola la distanza tra il vettore del professionista sintetico e quelli di tutti i CV ricevuti. I candidati con un embedding più vicino a quello ideale sono semanticamente i più rilevanti per la posizione.</p>
-<p>Vantaggi del Nuovo Approccio
-Flessibilità : Un candidato che ha lavorato con tecnologie simili a quelle richieste non viene penalizzato. Il sistema riconosce la similarità semantica, anche se non trova esattamente le stesse parole chiave.
-Aggiornamento Rapido : Se i requisiti cambiano leggermente, basta modificare la descrizione del professionista sintetico e ricalcolare le distanze.
-Efficienza : Una volta generati gli embeddings, il matching avviene in pochi secondi, indipendentemente dal numero di CV.
-Riduzione del Bias Umano : Il sistema non si blocca su dettagli formali, ma valuta il contenuto complessivo.
-Scalabilità : Può processare migliaia di candidature senza perdita di qualità.
-Scoperta di Talenti Nascosti : Individua persone meritevoli anche se non usano le espressioni esatte attese.
-💡 Metodo Moderno:
+<h4 id="calcolo-della-similarita-semantica">Calcolo della Similarità Semantica</h4>
+<p>A questo punto, il sistema calcola la distanza tra il vettore del professionista sintetico e quelli di tutti i CV ricevuti. I candidati con un embedding più vicino a quello ideale sono semanticamente i più rilevanti per la posizione.</p>
+<h4 id="vantaggi-del-nuovo-approccio">Vantaggi del Nuovo Approccio</h4>
+<ul>
+<li>Flessibilità : Un candidato che ha lavorato con tecnologie simili a quelle richieste non viene penalizzato. Il sistema riconosce la similarità semantica, anche se non trova esattamente le stesse parole chiave.</li>
+<li>Aggiornamento Rapido : Se i requisiti cambiano leggermente, basta modificare la descrizione del professionista sintetico e ricalcolare le distanze.</li>
+<li>Efficienza : Una volta generati gli embeddings, il matching avviene in pochi secondi, indipendentemente dal numero di CV.</li>
+<li>Riduzione del Bias Umano : Il sistema non si blocca su dettagli formali, ma valuta il contenuto complessivo.</li>
+<li>Scalabilità : Può processare migliaia di candidature senza perdita di qualità.</li>
+<li>Scoperta di Talenti Nascosti : Individua persone meritevoli anche se non usano le espressioni esatte attese.</li>
+</ul>
+<p>💡 Metodo Moderno:
 🧠 Comprensione semantica
 Esempio: “Sviluppo backend” ≈ “Creazione di API REST”
 🔁 Flessibilità
@@ -431,8 +436,7 @@ Processo obiettivo e centrato sul significato
 Migliaia di CV analizzati in pochi secondi
 💡 Scoperta di talenti nascosti
 Candidati con competenze rilevanti, anche con termini diversi </p>
-<h6 id="_1"></h6>
-<h3 id="text-to-text-regression">Text-to-Text Regression</h3>
+<h2 id="text-to-text-regression">Text-to-Text Regression</h2>
 <p>L'utilità e la flessibilità degli Embeddings è una delle tracce più seguite nella ricerca sull'AI Generativa.
 Poco tempo fa Google ha rilasciato questo paper: Performance Prediction for Large Systems via Text-to-Text Regression / https://arxiv.org/pdf/2506.21718</p>
 <p>L'innovazione chiave proposta nell'articolo risiede nell'utilizzo di Large Language Models (LLM) e, implicitamente, degli embeddings, 
@@ -544,5 +548,5 @@ L'esempio HR ha mostrato come gli embeddings trasformino CV e job description in
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-06 22:17:33.724869+00:00
+Build Date UTC : 2025-07-06 22:21:09.109931+00:00
 -->
