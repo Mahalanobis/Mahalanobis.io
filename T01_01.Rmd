@@ -3,12 +3,15 @@ title: "Tutorial 1"
 output:
   md_document:
     variant: markdown_github
-    toc: true
+    toc: false
     pandoc_args: ["--extract-media", "docs/assets/images"]
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+require(arrow)
+require(data.table)
+require(knitr)
 ```
 
 # Data
@@ -19,6 +22,18 @@ Viene rilasciato con licenza MIT.
 
 ## Struttura e Caratteristiche
 Il dataset è composto da una collezione di 131.306 frasi in lingua inglese ("Sentence"). La lunghezza media di queste frasi è di circa 14 parole. A ogni frase è associata un'emozione ("Label"), per un totale di 13 categorie diverse, inclusa l'opzione "Neutral" per identificare l'assenza di emozioni specifiche.
+
+```{r my_table, echo=FALSE}
+
+tmp <- read_parquet('/home/dario/Downloads/Mahalanobis.io/code/emotions_dataset.parquet')
+tmp <- as.data.table(tmp)
+tmp <- tmp[,.N,by=.(Label)]
+tmp <- tmp[order(-N)]
+names(tmp)[1] = "Emotion"
+
+knitr::kable(tmp, caption = "Emotions Distribution")
+
+```
 
 ## La Distribuzione delle Classi
 Un aspetto fondamentale di questo dataset è che la distribuzione delle emozioni è sbilanciata. Ecco alcune delle categorie più frequenti:
