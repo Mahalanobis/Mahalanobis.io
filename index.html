@@ -227,7 +227,7 @@ Questo implica responsabilità significative, tra cui:</p>
 L'approfondimento di questi requisiti esula le finalità di questo tutorial, ma ci teniamo a ricordarlo.  </p>
 <h1 id="eda">EDA</h1>
 <p>Veniamo all'esplorazione dei contenuti di questo dataset (EDA).</p>
-<p>Proviamo a raggrupare le frasi attraverso l'applicazione di una tecnica di modellazione degli argomenti (<em>topic modeling</em>) chiamata <strong>Latent Dirichlet Allocation</strong> (LDA). </p>
+<p>Proviamo a raggrupare le frasi attraverso l'applicazione di una tecnica di modellazione degli argomenti (<em>topic modeling</em>) chiamata <strong>Latent Dirichlet Allocation</strong> (<a href="https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation">LDA</a>). </p>
 <p>L'LDA è un modello generativo probabilistico che ci permette di identificare gli "argomenti" latenti (cioè, i temi sottostanti) all'interno di una collezione di documenti, 
 rappresentando ogni documento come una miscela di questi argomenti e ogni argomento come una miscela di parole. </p>
 <p>LDA pone alcuni limiti. E' una tecnica che nasce dall'approccio Bag-of-Words, per cui uno stesso concetto espresso con sinonimi o declinazioni di una stessa parola-radice viene trattato come se avesse significati differenti.
@@ -313,7 +313,7 @@ if(typeof(LDAvis) !== "undefined"){
 <p>Per comprendere come ogni topic sia distintivo rispetto alle diverse emozioni ("Label"), 
 esaminiamo attentamente la tabella di contingenza che incrocia i topic con le emozioni.</p>
 <p>Per quantificare e visualizzare meglio questa relazione, utilizziamo una heatmap dei log odds ratio. 
-Il log odds ratio è una metrica potente che ci aiuta a identificare quali emozioni sono significativamente più (o meno) associate a un dato topic rispetto alla loro occorrenza generale nel dataset.</p>
+Il log odds ratio è una metrica per identificare quali emozioni sono significativamente associate a un dato topic rispetto alla loro occorrenza generale nel dataset.</p>
 <p><img alt="Emozioni by LDA Topic" src="assets/images/lda_emotion_topic_odds_ratio_heatmap_lemmatized.png" /></p>
 <h2 id="wordcloud">Wordcloud</h2>
 <p>Wordcloud delle 100 parole più caratterizzanti per ogni emozione.</p>
@@ -399,5 +399,5 @@ Il log odds ratio è una metrica potente che ci aiuta a identificare quali emozi
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-06 17:18:38.379886+00:00
+Build Date UTC : 2025-07-06 17:39:48.117569+00:00
 -->
