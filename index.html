@@ -111,6 +111,10 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#embeddings" class="nav-link">Embeddings</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#embeddings-flessibilita" class="nav-link">Embeddings = Flessibilità</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -364,7 +368,99 @@ Gli embeddings trasformano il "pomodoro" da una semplice etichetta a una rappres
 <li>Embeddings statici (non contestuali): Word2Vec, GloVe, FastText. </li>
 <li>Embeddings contestuali (basati su Transformer): BERT, RoBERTa, Sentence-BERT, modelli basati su GPT (es. quelli di OpenAI).</li>
 </ul>
-<p>Gli embeddings contestuali si comportano come il cuoco che capisce che lo stesso "pomodoro" avrà un ruolo e un sapore leggermente diverso se usato in una "salsa per pasta" rispetto a una "zuppa fredda", adattando la sua preparazione di conseguenza. </p></div>
+<p>Gli embeddings contestuali si comportano come il cuoco che capisce che lo stesso "pomodoro" avrà un ruolo e un sapore leggermente diverso se usato in una "salsa per pasta" rispetto a una "zuppa fredda", adattando la sua preparazione di conseguenza. </p>
+<h2 id="embeddings-flessibilita">Embeddings = Flessibilità</h2>
+<p>Immaginiamo un'azienda che cerca di assumere un nuovo "Sviluppatore Software Senior".</p>
+<p>Immaginiamo un’azienda che sta cercando di assumere un nuovo Sviluppatore Software Senior .</p>
+<p>Fino a poco tempo fa, il processo di selezione avveniva in modo piuttosto rigido: si utilizzavano criteri predefiniti e si assegnavano punteggi basati su regole stabilite a priori. Questo approccio, pur essendo strutturato, presenta dei limiti significativi quando si cerca di valutare profili complessi e dinamici come quelli richiesti nel mondo della tecnologia.</p>
+<h3 id="il-metodo-tradizionale-classi-predefinite-e-scoring-manuale">Il Metodo Tradizionale: Classi Predefinite e Scoring Manuale</h3>
+<p>Nel metodo tradizionale, il team HR utilizza software dedicati — spesso chiamati ATS (Applicant Tracking Systems ) — per gestire l’enorme quantità di candidature ricevute.</p>
+<h4 id="definizione-delle-competenze-richieste">Definizione delle Competenze Richieste</h4>
+<p>Prima di tutto, viene definita in modo esplicito la figura professionale desiderata, ad esempio “Sviluppatore Software Senior”. A questa definizione seguono una serie di requisiti specifici:</p>
+<ul>
+<li>Esperienza : ad esempio, almeno 5 anni di lavoro nel settore.</li>
+<li>Linguaggi di programmazione : come Python, Java o JavaScript.</li>
+<li>Framework e librerie : ad esempio Django, Spring Boot o React.</li>
+<li>Soft skill : come problem-solving, capacità di lavorare in team.</li>
+<li>Formazione accademica : tipicamente una laurea in Informatica o discipline affini.</li>
+</ul>
+<h4 id="valutazione-basata-su-regole">Valutazione Basata su Regole</h4>
+<p>Una volta ricevuti i CV, ciascuno viene analizzato confrontandolo con questi criteri. Viene assegnato un punteggio in base alla presenza (e qualità) delle competenze elencate. Si tratta spesso di un processo automatizzato, che ricerca parole chiave specifiche all’interno del testo: “Python”, “Django”, “Senior”.</p>
+<p>In alcuni casi, vengono applicate regole più sofisticate: ad esempio, “se ha esperienza con Python e Django, aggiungi X punti; se ha solo Python, aggiungi Y punti”.</p>
+<h4 id="limiti-del-metodo-tradizionale">Limiti del Metodo Tradizionale</h4>
+<p>Nonostante la sua apparente precisione, questo approccio presenta diversi svantaggi:</p>
+<ul>
+<li><strong>Rigidità</strong> : Se un candidato ha lavorato con un framework simile a Django ma non esattamente Django (ad esempio Node.js), potrebbe essere penalizzato o addirittura ignorato, anche se possiede le competenze richieste in contesti leggermente diversi.</li>
+<li><strong>Costo e Tempo</strong> : Analizzare centinaia o migliaia di CV richiede ore di lavoro da parte del team HR e può comunque essere soggetto a errori o bias umani.</li>
+<li><strong>Dipendenza dalle Etichette</strong> : L’efficacia del sistema dipende interamente dalla corrispondenza tra le parole chiave definite a priori e quelle presenti nei CV.
+Questo tipo di approccio è efficace per schematizzare, ma rischia di escludere figure interessanti solo perché non usano le "parole giuste" o non hanno seguito percorsi standard.</li>
+</ul>
+<blockquote>
+<p>📝 <strong>Metodo Tradizionale:</strong>
+- ✍️ Regole fisse e ricerca di parole chiave
+- ⛔ Rischio di escludere profili validi
+- 🕐 Alto costo in termini di tempo ed energie
+- 🎯 Scarsa flessibilità e comprensione semantica</p>
+</blockquote>
+<p>Il Metodo Moderno: La Flessibilità e Utilità degli Embeddings
+Gli embeddings rappresentano una svolta radicale rispetto al passato. Non si basano più su liste di parole chiave o regole rigide, ma sulla comprensione semantica del contenuto.</p>
+<p>Come Funzionano Gli Embeddings
+Ogni CV inviato viene trasformato in un vettore di embedding , ovvero una rappresentazione matematica che cattura il significato complessivo del testo. In questo spazio vettoriale, parole e concetti simili si trovano vicine tra loro: ad esempio, “Python”, “programmazione orientata agli oggetti” e “sviluppo backend” saranno molto prossime a termini come “API REST” o “microservizi”.</p>
+<p>Questo processo è automatico e avviene grazie a modelli linguistici avanzati (come BERT o modelli fine-tuned ad hoc).</p>
+<p>Creazione del Profilo Ideale: Il “Professionista Sintetico”
+Invece di definire una lista di requisiti, il team HR scrive una descrizione completa del candidato ideale. Ad esempio:</p>
+<p>“Cerchiamo uno sviluppatore software senior con almeno 5 anni di esperienza nel backend, una buona conoscenza di Python e dei framework web come Django o Flask. È importante che abbia familiarità con database relazionali e non relazionali, e che abbia già lavorato in ambienti DevOps e cloud computing. Cerchiamo una persona proattiva, capace di lavorare in team e con forti capacità di problem-solving.” </p>
+<p>Questa descrizione viene anch’essa trasformata in un vettore di embedding, diventando un vero e proprio professionista sintetico .</p>
+<p>Calcolo della Similarità Semantica
+A questo punto, il sistema calcola la distanza tra il vettore del professionista sintetico e quelli di tutti i CV ricevuti. I candidati con un embedding più vicino a quello ideale sono semanticamente i più rilevanti per la posizione.</p>
+<p>Vantaggi del Nuovo Approccio
+Flessibilità : Un candidato che ha lavorato con tecnologie simili a quelle richieste non viene penalizzato. Il sistema riconosce la similarità semantica, anche se non trova esattamente le stesse parole chiave.
+Aggiornamento Rapido : Se i requisiti cambiano leggermente, basta modificare la descrizione del professionista sintetico e ricalcolare le distanze.
+Efficienza : Una volta generati gli embeddings, il matching avviene in pochi secondi, indipendentemente dal numero di CV.
+Riduzione del Bias Umano : Il sistema non si blocca su dettagli formali, ma valuta il contenuto complessivo.
+Scalabilità : Può processare migliaia di candidature senza perdita di qualità.
+Scoperta di Talenti Nascosti : Individua persone meritevoli anche se non usano le espressioni esatte attese.
+💡 Metodo Moderno:
+🧠 Comprensione semantica
+Esempio: “Sviluppo backend” ≈ “Creazione di API REST”
+🔁 Flessibilità
+Modificare i criteri è semplice come aggiornare una descrizione
+⚖️ Riduzione del bias umano
+Processo obiettivo e centrato sul significato
+📈 Scalabilità
+Migliaia di CV analizzati in pochi secondi
+💡 Scoperta di talenti nascosti
+Candidati con competenze rilevanti, anche con termini diversi </p>
+<h6 id="_1"></h6>
+<h3 id="text-to-text-regression">Text-to-Text Regression</h3>
+<p>L'utilità e la flessibilità degli Embeddings è una delle tracce più seguite nella ricerca sull'AI Generativa.
+Poco tempo fa Google ha rilasciato questo paper: Performance Prediction for Large Systems via Text-to-Text Regression / https://arxiv.org/pdf/2506.21718</p>
+<p>L'innovazione chiave proposta nell'articolo risiede nell'utilizzo di Large Language Models (LLM) e, implicitamente, degli embeddings, 
+per trasformare il problema di predizione delle performance di sistemi software complessi in un compito di regressione text-to-text.</p>
+<ol>
+<li>Rappresentazione del Sistema e della Richiesta
+Nell'esempio HR, abbiamo trasformato un CV e una "professione ideale" in embeddings. Qui, il concetto è simile, ma applicato alla descrizione di un sistema e alla predizione della sua performance:</li>
+</ol>
+<p>Descrizione del Sistema (Input): Invece di avere valori numerici discreti per ogni parametro di configurazione (es. "CPU = 8 core", "RAM = 16 GB", "Tipo di Database = PostgreSQL"), l'articolo propone di descrivere il sistema come testo libero. Per esempio: "Questo è un cluster Kubernetes con 5 nodi, ognuno con 8 CPU virtuali e 16GB di RAM, che esegue un'applicazione di microservizi basata su Spring Boot e un database PostgreSQL. Utilizza un bilanciamento del carico NGINX."</p>
+<p>Perché gli embeddings sono utili qui? Un LLM trasforma questa descrizione testuale complessa in un vettore di embedding che cattura non solo la presenza di singoli componenti (CPU, RAM, DB), ma anche le loro relazioni contestuali e l'architettura complessiva. Ad esempio, "Kubernetes" e "microservizi" sono concetti semanticamente legati che gli embeddings possono riconoscere e posizionare vicini nello spazio vettoriale.</p>
+<p>Descrizione della Performance Richiesta (Output/Predizione): L'obiettivo non è solo prevedere un numero (es. "latenza = 200 ms"), ma generare una descrizione testuale della performance predetta. Ad esempio: "La latenza attesa per questa configurazione è di circa 200 millisecondi con un throughput di 1000 transazioni al secondo e un utilizzo della CPU del 70%."</p>
+<p>Questo approccio "text-to-text" sfrutta la capacità generativa degli LLM. Il modello, avendo "compreso" la configurazione tramite i suoi embeddings interni, può generare una descrizione complessa e multisfaccettata della performance.</p>
+<ol>
+<li>Addestramento e Flessibilità del Modello
+Il modello viene addestrato su coppie di dati: [Descrizione testuale del sistema] -&gt; [Descrizione testuale della sua performance misurata].</li>
+</ol>
+<p>Apprendimento delle Relazioni Complesse: Il LLM, attraverso i suoi meccanismi di attenzione e la sua enorme quantità di parametri, impara a mappare gli embeddings della descrizione del sistema agli embeddings della descrizione della performance. Questo gli permette di cogliere interazioni e dipendenze non lineari che sarebbero estremamente difficili da modellare con metodi tradizionali.</p>
+<p>Flessibilità alla Descrizione: Proprio come nel caso HR, dove potevi descrivere il professionista ideale in modo flessibile, qui puoi descrivere la configurazione del sistema usando un linguaggio naturale. Non devi aderire a schemi di input rigidi o a liste di parametri predefinite. Se un nuovo componente o una nuova architettura emerge, puoi semplicemente descriverla.</p>
+<p>Generalizzazione: Il modello può generalizzare a configurazioni leggermente diverse o a nuove combinazioni di componenti che non ha visto esplicitamente durante l'addestramento, basandosi sulla similarità semantica dei loro embeddings con le configurazioni già note.</p>
+<ol>
+<li>Utilità degli Embeddings nella Predizione delle Performance
+Gli embeddings agiscono come il ponte fondamentale tra il linguaggio naturale (le descrizioni del sistema e della performance) e la capacità di calcolo del modello.</li>
+</ol>
+<p>Cattura di Semantica e Contesto: Permettono al modello di "capire" che "8 core" e "otto processori" significano la stessa cosa, o che "ridondanza del database" è un concetto legato alla "disponibilità del sistema", anche se i termini esatti non sono stati visti in ogni combinazione.</p>
+<p>Gestione della Dimensionalità: Invece di lavorare con migliaia di variabili discrete e categoriche (ognuna delle quali sarebbe un "parametro" nel senso tradizionale), gli embeddings le comprimono in un vettore denso e a bassa dimensionalità, semplificando il compito di apprendimento per l'LLM.</p>
+<p>Spazio Continuo: La predizione avviene in uno spazio continuo di significato, non in classi discrete. Questo permette di generare previsioni più sfumate e accurate, come "circa 200 ms" invece di una semplice classificazione "lento" o "veloce".</p>
+<p>Connessione all'Esempio HR e Oltre
+L'esempio HR ha mostrato come gli embeddings trasformino CV e job description in "punti" in uno spazio semantico, permettendo di trovare candidati "vicini" alla posizione ideale. L'articolo "Performance Prediction for Large Systems" estende questo concetto in modo elegante:</p></div>
             </div>
         </div>
 
@@ -448,5 +544,5 @@ Gli embeddings trasformano il "pomodoro" da una semplice etichetta a una rappres
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-06 22:05:07.042344+00:00
+Build Date UTC : 2025-07-06 22:17:33.724869+00:00
 -->
