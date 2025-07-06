@@ -123,7 +123,7 @@ Padova.</p>
 l’<strong>Intelligenza Artificiale (AI)</strong> nell’ambito del
 <a href="https://en.wikipedia.org/wiki/Natural_language_processing">NLP</a>,
 <em>un percorso affascinante che ci ha portato dalle rappresentazioni lessicali
-come il Bag of Words alle architetture neurali avanzate basate sui
+come il Bag-of-Words alle architetture neurali avanzate basate sui
 Transformer</em>.</p>
 <p>Trattandosi di una discussione ad alto livello, ho sentito il desiderio
 di integrare quell’intervento con esempi più pratici e più vicini
@@ -233,8 +233,11 @@ rappresentando ogni documento come una miscela di questi argomenti e ogni argome
 <p>LDA pone alcuni limiti. E' una tecnica che nasce dall'approccio Bag-of-Words, per cui uno stesso concetto espresso con sinonimi o declinazioni di una stessa parola-radice viene trattato come se avesse significati differenti.
 Per limitare questa perdita di informazioni, prima di applicarla, trasformeremo ogni frase in una sequenza di lemmi.</p>
 <h2 id="lda">LDA</h2>
-<p>Attraverso il topic modelling sono stati identificati 10 cluster.
-Per ognuno di questi sono state identificate le 30 parole più rilevanti che, date in pasto ad un LLM, sono state utilizzate per identificare queste tipologie di frasi: </p>
+<p>Attraverso il topic modelling sono stati identificati 10 topics.
+Il numero ottimale di topic è stato individuato sulla base della <em>Topic Coherence</em>.</p>
+<p><img alt="Topic Coherence" src="assets/images/lda_coherence_scores.png" /></p>
+<p>Per ognuno di questi topic sono state identificate le 30 parole più rilevanti che, 
+date in pasto ad un LLM, sono state utilizzate per identificare queste tipologie di frasi: </p>
 <ul>
 <li>
 <p><em>Topic 1</em>: <strong>Conversazioni su Intrattenimento e Ricordi Generali</strong>. Questo topic sembra raccogliere frasi che parlano di tempo libero, intrattenimento, sport e ricordi. Parole come "game," "watch," "movie," "play," e "enjoy" indicano attività ricreative. "Year," "old," "time," e "ago" suggeriscono discussioni su eventi passati o età. Termini come "good," "bad," "nice," e "shit" danno un tono valutativo, tipico di commenti su esperienze. Potrebbe rappresentare discussioni informali su hobby, film, partite o ricordi personali.</p>
@@ -392,5 +395,5 @@ if(typeof(LDAvis) !== "undefined"){
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-06 12:51:30.257475+00:00
+Build Date UTC : 2025-07-06 13:38:18.006266+00:00
 -->
