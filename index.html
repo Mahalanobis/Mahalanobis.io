@@ -233,8 +233,8 @@ rappresentando ogni documento come una miscela di questi argomenti e ogni argome
 <p>LDA pone alcuni limiti. E' una tecnica che nasce dall'approccio Bag-of-Words, per cui uno stesso concetto espresso con sinonimi o declinazioni di una stessa parola-radice viene trattato come se avesse significati differenti.
 Per limitare questa perdita di informazioni, prima di applicarla, trasformeremo ogni frase in una sequenza di lemmi.</p>
 <h2 id="lda">LDA</h2>
-<p>Attraverso il topic modelling sono stati identificati 10 topics.
-Il numero ottimale di topic è stato individuato sulla base della <em>Topic Coherence</em> (<a href="https://www.linkedin.com/in/guglielmo-strumia-70091215/">code</a>).</p>
+<p>Attraverso il topic modelling sono stati identificati 10 topics.  </p>
+<p>Il numero ottimale di topic è stato individuato sulla base della <em>Topic Coherence</em> (<a href="https://www.linkedin.com/in/guglielmo-strumia-70091215/">code</a>).</p>
 <p><img alt="Topic Coherence" src="assets/images/lda_coherence_scores.png" /></p>
 <p>Per ognuno di questi topic sono state identificate le 30 parole più rilevanti che, 
 date in pasto ad un LLM, sono state utilizzate per identificare queste tipologie di frasi: </p>
@@ -310,6 +310,10 @@ if(typeof(LDAvis) !== "undefined"){
 }
 </script>
 
+<p>Per comprendere come ogni topic sia distintivo rispetto alle diverse emozioni ("Label"), 
+esaminiamo attentamente la tabella di contingenza che incrocia i topic con le emozioni.</p>
+<p>Per quantificare e visualizzare meglio questa relazione, utilizziamo una heatmap dei log odds ratio. 
+Il log odds ratio è una metrica potente che ci aiuta a identificare quali emozioni sono significativamente più (o meno) associate a un dato topic rispetto alla loro occorrenza generale nel dataset.</p>
 <p><img alt="Emozioni by LDA Topic" src="assets/images/lda_emotion_topic_odds_ratio_heatmap_lemmatized.png" /></p>
 <h2 id="wordcloud">Wordcloud</h2>
 <p>Wordcloud delle 100 parole più caratterizzanti per ogni emozione.</p>
@@ -395,5 +399,5 @@ if(typeof(LDAvis) !== "undefined"){
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-06 13:41:52.545359+00:00
+Build Date UTC : 2025-07-06 13:47:33.519843+00:00
 -->
