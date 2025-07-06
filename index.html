@@ -236,6 +236,12 @@ Questo implica responsabilità significative, tra cui:</p>
 <p>Considerare l'AI Act fin dalle prime fasi di sviluppo non è solo un obbligo legale, ma anche una best practice etica per garantire che l'intelligenza artificiale sia sviluppata e utilizzata in modo responsabile e inclusivo.<br />
 L'approfondimento di questi requisiti esula le finalità di questo tutorial, ma ci teniamo a ricordarlo.  </p>
 <h1 id="eda">EDA</h1>
+<p>Veniamo all'esplorazione dei contenuti di questo dataset (EDA).
+Proviamo a raggrupare le frasi attraverso l'applicazione di una tecnica di modellazione degli argomenti (topic modeling) chiamata Latent Dirichlet Allocation (LDA). 
+L'LDA è un modello generativo probabilistico che ci permette di identificare gli "argomenti" latenti (cioè, i temi sottostanti) all'interno di una collezione di documenti, 
+rappresentando ogni documento come una miscela di questi argomenti e ogni argomento come una miscela di parole. </p>
+<p>LDA pone alcuni limiti. E' una tecnica che nasce dall'approccio Bag-of-Words, per cui uno stesso concetto espresso con sinonimi o declinazioni di una stessa parola-radice viene trattato come se avesse significati differenti.
+Per limitare questa perdita di informazioni, prima di applicarla, trasformeremo ogni frase in una sequenza di lemmi.</p>
 <h2 id="lda">LDA</h2>
 <hr />
 <p><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.4.0/pyLDAvis/js/ldavis.v1.0.0.css"></p>
