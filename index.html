@@ -348,7 +348,17 @@ Il numero di parametri in questa matrice è dato da: Dimensione del Vocabolario�
 Ad esempio, se un LLM ha un vocabolario di 50.000 token e la dimensionalità dell'embedding è 768, la matrice di embedding avrà 50.000×768=38.400.000 parametri.</p>
 <p>Non dobbiamo confondere gli embeddings con i parametri di un LLM.
 I parametri di un LLM (milioni, miliardi o trilioni) sono i pesi e i bias di tutte le connessioni neuronali all'interno della rete neurale. 
-Questi includono i parametri degli strati di embedding stessi, ma anche e soprattutto i parametri delle reti Transformer (strati di attenzione, feed-forward networks, normalization layers, etc.) che processano questi embeddings.</p></div>
+Questi includono i parametri degli strati di embedding stessi, ma anche e soprattutto i parametri delle reti Transformer (strati di attenzione, feed-forward networks, normalization layers, etc.) che processano questi embeddings.</p>
+<p>Prova ad immaginare un LLM come se fosse un cuoco esperto.
+I Parametri sono tutte le ricette che il cuoco ha imparato, le sue tecniche di taglio, le sue conoscenze sugli ingredienti, come bilanciare i sapori, ecc. 
+Sono l'intera competenza del cuoco. Senza queste conoscenze (parametri), il cuoco non può cucinare nulla.
+Gli Embeddings sono gli ingredienti che il cuoco ha pre-processato e organizzato in modo significativo.
+Un "pomodoro" non è solo un "pomodoro" (una stringa di testo), ma è un "pomodoro" tagliato in cubetti, con una certa acidità, una certa consistenza, pronto per essere usato in una specifica ricetta.
+Gli embeddings trasformano il "pomodoro" da una semplice etichetta a una rappresentazione che il cuoco (i parametri) può capire e utilizzare immediatamente in una moltitudine di modi (come parte di una salsa, in un'insalata, ecc.).</p>
+<p>Relativamente ad embedding atti alla rappresentazione del testo, potremmo considerare:
+- Embeddings statici (non contestuali): Word2Vec, GloVe, FastText. 
+- Embeddings contestuali (basati su Transformer): BERT, RoBERTa, Sentence-BERT, modelli basati su GPT (es. quelli di OpenAI).</p>
+<p>Gli embeddings contestuali si comportano come il cuoco che capisce che lo stesso "pomodoro" avrà un ruolo e un sapore leggermente diverso se usato in una "salsa per pasta" rispetto a una "zuppa fredda", adattando la sua preparazione di conseguenza. </p></div>
             </div>
         </div>
 
@@ -430,5 +440,5 @@ Questi includono i parametri degli strati di embedding stessi, ma anche e soprat
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-06 21:16:34.333512+00:00
+Build Date UTC : 2025-07-06 21:18:48.239301+00:00
 -->
