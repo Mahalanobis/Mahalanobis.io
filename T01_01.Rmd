@@ -20,8 +20,10 @@ Per questa serie di tutorial, useremo l'__Emotions Dataset__, un classico esempi
 Curato da [Hari Shankar](https://www.linkedin.com/in/this-is-hari-shankar/) e disponibile sulla piattaforma [Hugging Face](https://huggingface.co/datasets/boltuix/emotions-dataset). 
 Viene rilasciato con licenza MIT. 
 
-## Struttura e Caratteristiche
 Il dataset è composto da una collezione di 131.306 frasi in lingua inglese ("Sentence"). La lunghezza media di queste frasi è di circa 14 parole. A ogni frase è associata un'emozione ("Label"), per un totale di 13 categorie diverse, inclusa l'opzione "Neutral" per identificare l'assenza di emozioni specifiche.
+
+Un aspetto fondamentale di questo dataset è che la distribuzione delle emozioni è sbilanciata. 
+Ecco alcune delle categorie più frequenti:
 
 ```{r my_table, echo=FALSE}
 
@@ -29,19 +31,15 @@ tmp <- read_parquet('/home/dario/Downloads/Mahalanobis.io/code/emotions_dataset.
 tmp <- as.data.table(tmp)
 tmp <- tmp[,.N,by=.(Label)]
 tmp <- tmp[order(-N)]
+tmp[,Pct := N / sum(tmp$N)]
+tmp[,Pct := paste0( sprintf("%.2f", Pct*100) ,"%") ]
 names(tmp)[1] = "Emotion"
-
-knitr::kable(tmp, caption = "Emotions Distribution")
+names(tmp)[3] = "%"
+knitr::kable( head(tmp,5) , caption = "Emotions Distribution")
 
 ```
 
-## La Distribuzione delle Classi
-Un aspetto fondamentale di questo dataset è che la distribuzione delle emozioni è sbilanciata. Ecco alcune delle categorie più frequenti:
-Happiness: presente in 31.205 frasi (circa il 24% del totale).
-Sadness: presente in 17.809 frasi (circa il 14%).
-Neutral: presente in 15.733 frasi (circa il 12%).
-
-Le restanti categorie includono: Anger, Love, Fear, Disgust, Confusion, Surprise, Shame, Guilt, Sarcasm e Desire. Ognuna di queste ha un numero di occorrenze variabile, significativamente inferiore rispetto alle prime tre.
+Le restanti categorie includono: Fear, Disgust, Confusion, Surprise, Shame, Guilt, Sarcasm e Desire. Ognuna di queste ha un numero di occorrenze variabile, significativamente inferiore rispetto alle prime cinque.
 
 ### Implicazioni 
 Il buon senso ci suggerisce che questa distribuzione delle emozioni è quasi certamente il risultato del modo in cui il dataset è stato costruito, e non riflette la frequenza reale con cui le diverse emozioni vengono espresse nel linguaggio quotidiano.

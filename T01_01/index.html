@@ -94,14 +94,6 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#data" class="nav-link">Data</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#struttura-e-caratteristiche" class="nav-link">Struttura e Caratteristiche</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#la-distribuzione-delle-classi" class="nav-link">La Distribuzione delle Classi</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -116,85 +108,54 @@ Shankar</a> e
 disponibile sulla piattaforma <a href="https://huggingface.co/datasets/boltuix/emotions-dataset">Hugging
 Face</a>. Viene
 rilasciato con licenza MIT.</p>
-<h2 id="struttura-e-caratteristiche">Struttura e Caratteristiche</h2>
 <p>Il dataset è composto da una collezione di 131.306 frasi in lingua
 inglese (“Sentence”). La lunghezza media di queste frasi è di circa 14
 parole. A ogni frase è associata un’emozione (“Label”), per un totale di
 13 categorie diverse, inclusa l’opzione “Neutral” per identificare
 l’assenza di emozioni specifiche.</p>
+<p>Un aspetto fondamentale di questo dataset è che la distribuzione delle
+emozioni è sbilanciata. Ecco alcune delle categorie più frequenti:</p>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;">Emotion</th>
 <th style="text-align: right;">N</th>
+<th style="text-align: left;">%</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">happiness</td>
 <td style="text-align: right;">31205</td>
+<td style="text-align: left;">23.77%</td>
 </tr>
 <tr>
 <td style="text-align: left;">sadness</td>
 <td style="text-align: right;">17809</td>
+<td style="text-align: left;">13.56%</td>
 </tr>
 <tr>
 <td style="text-align: left;">neutral</td>
 <td style="text-align: right;">15733</td>
+<td style="text-align: left;">11.98%</td>
 </tr>
 <tr>
 <td style="text-align: left;">anger</td>
 <td style="text-align: right;">13341</td>
+<td style="text-align: left;">10.16%</td>
 </tr>
 <tr>
 <td style="text-align: left;">love</td>
 <td style="text-align: right;">10512</td>
-</tr>
-<tr>
-<td style="text-align: left;">fear</td>
-<td style="text-align: right;">8795</td>
-</tr>
-<tr>
-<td style="text-align: left;">disgust</td>
-<td style="text-align: right;">8407</td>
-</tr>
-<tr>
-<td style="text-align: left;">confusion</td>
-<td style="text-align: right;">8209</td>
-</tr>
-<tr>
-<td style="text-align: left;">surprise</td>
-<td style="text-align: right;">4560</td>
-</tr>
-<tr>
-<td style="text-align: left;">shame</td>
-<td style="text-align: right;">4248</td>
-</tr>
-<tr>
-<td style="text-align: left;">guilt</td>
-<td style="text-align: right;">3470</td>
-</tr>
-<tr>
-<td style="text-align: left;">sarcasm</td>
-<td style="text-align: right;">2534</td>
-</tr>
-<tr>
-<td style="text-align: left;">desire</td>
-<td style="text-align: right;">2483</td>
+<td style="text-align: left;">8.01%</td>
 </tr>
 </tbody>
 </table>
 <p>Emotions Distribution</p>
-<h2 id="la-distribuzione-delle-classi">La Distribuzione delle Classi</h2>
-<p>Un aspetto fondamentale di questo dataset è che la distribuzione delle
-emozioni è sbilanciata. Ecco alcune delle categorie più frequenti:
-Happiness: presente in 31.205 frasi (circa il 24% del totale). Sadness:
-presente in 17.809 frasi (circa il 14%). Neutral: presente in 15.733
-frasi (circa il 12%).</p>
-<p>Le restanti categorie includono: Anger, Love, Fear, Disgust, Confusion,
-Surprise, Shame, Guilt, Sarcasm e Desire. Ognuna di queste ha un numero
-di occorrenze variabile, significativamente inferiore rispetto alle
-prime tre.</p>
+<p>Le restanti categorie includono: Fear, Disgust, Confusion, Surprise,
+Shame, Guilt, Sarcasm e Desire. Ognuna di queste ha un numero di
+occorrenze variabile, significativamente inferiore rispetto alle prime
+cinque.</p>
 <h3 id="implicazioni">Implicazioni</h3>
 <p>Il buon senso ci suggerisce che questa distribuzione delle emozioni è
 quasi certamente il risultato del modo in cui il dataset è stato
