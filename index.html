@@ -96,6 +96,11 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#dataset" class="nav-link">Dataset</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
@@ -139,7 +144,76 @@ possa pensare.</p>
 <p>Ringrazio i colleghi <a href="https://www.linkedin.com/in/guglielmo-strumia-70091215/">Guglielmo Strumia</a>
 e <a href="https://www.linkedin.com/in/marcocozzolino0/">Marco Cozzolino</a> per gli spunti
 e il supporto; questa serie è il frutto del lavoro di tutti noi. 
-Grazie ancora.</p></div>
+Grazie ancora.</p>
+<h1 id="dataset">Dataset</h1>
+<p>Per questa serie di tutorial, useremo l’<strong>Emotions Dataset</strong>, un
+classico esempio di <em>Supervised Classification</em>. Curato da <a href="https://www.linkedin.com/in/this-is-hari-shankar/">Hari
+Shankar</a> e
+disponibile sulla piattaforma <a href="https://huggingface.co/datasets/boltuix/emotions-dataset">Hugging
+Face</a>. Viene
+rilasciato con licenza MIT.</p>
+<p>Il dataset è composto da una collezione di 131.306 frasi in lingua
+inglese (“Sentence”). La lunghezza media di queste frasi è di circa 14
+parole. A ogni frase è associata un’emozione (“Label”), per un totale di
+13 categorie diverse, inclusa l’opzione “Neutral” per identificare
+l’assenza di emozioni specifiche.</p>
+<p>Un aspetto fondamentale di questo dataset è che la distribuzione delle
+emozioni è sbilanciata. Ecco alcune delle categorie più frequenti:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Emotion</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: left;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">happiness</td>
+<td style="text-align: right;">31205</td>
+<td style="text-align: left;">23.77%</td>
+</tr>
+<tr>
+<td style="text-align: left;">sadness</td>
+<td style="text-align: right;">17809</td>
+<td style="text-align: left;">13.56%</td>
+</tr>
+<tr>
+<td style="text-align: left;">neutral</td>
+<td style="text-align: right;">15733</td>
+<td style="text-align: left;">11.98%</td>
+</tr>
+<tr>
+<td style="text-align: left;">anger</td>
+<td style="text-align: right;">13341</td>
+<td style="text-align: left;">10.16%</td>
+</tr>
+<tr>
+<td style="text-align: left;">love</td>
+<td style="text-align: right;">10512</td>
+<td style="text-align: left;">8.01%</td>
+</tr>
+</tbody>
+</table>
+<p>Le restanti categorie includono: Fear, Disgust, Confusion, Surprise,
+Shame, Guilt, Sarcasm e Desire. Ognuna di queste ha un numero di
+occorrenze variabile, significativamente inferiore rispetto alle prime
+cinque.</p>
+<p>Il buon senso ci suggerisce che questa distribuzione delle emozioni è
+quasi certamente il risultato del modo in cui il dataset è stato
+costruito, e non riflette la frequenza reale con cui le diverse emozioni
+vengono espresse nel linguaggio quotidiano.</p>
+<p>Di conseguenza, dovremo tenere a mente due punti chiave:</p>
+<p>Specificità del Dataset: Dobbiamo considerare la distribuzione delle
+classi come una caratteristica intrinseca di questo specifico dataset,
+non come una rappresentazione universale della probabilità delle
+emozioni.</p>
+<p>Gestione dello Sbilanciamento: Sarà cruciale gestire attivamente questo
+sbilanciamento delle classi. Il nostro obiettivo non è “correggere” una
+distribuzione reale sconosciuta, ma piuttosto assicurarci che i nostri
+modelli abbiano abbastanza esempi per imparare efficacemente a
+riconoscere anche le categorie meno rappresentate, garantendo una buona
+capacità di generalizzazione in fase di inferenza.</p></div>
             </div>
         </div>
 
