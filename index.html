@@ -554,7 +554,15 @@ Poichè diversi embedding (es. BERT, Word2Vec, OpenAI text-embedding-ada-002, ..
 <li>Reranking</li>
 </ul>
 <p>Nel nostro caso, per esempio, si potrebbe consultare la leaderboard per identificare i top performer nei task di classificazione. </p>
-<p>Relatiamente a questo tutorial prenderemo in considerazione due sistemi di embeddings. Li compareremo a titolo esemplificativo focalizzandoci su soluzioni per architetture GPU.  </p></div>
+<p>Relatiamente a questo tutorial prenderemo in considerazione due sistemi di embeddings. Li compareremo a titolo esemplificativo focalizzandoci su soluzioni per architetture GPU. Verranno sperimentati questi due modelli:</p>
+<ul>
+<li>
+<p><a href="https://huggingface.co/BAAI/bge-m3">BGE-m3</a>, sviluppato da BAAI (Beijing Academy of Artificial Intelligence). Questo modello supporta oltre 100 lingue, gestisce input fino a 8192 token (Può processare contesti estremamente lunghi (~6-8k parole, contro i 512 token standard di BERT) ed è uno dei rimi modelli a supportare la multi-funzionalità nel retrievial (unificazione di retrieval denso, lessicale e multi-vec/colbert). Quest'ultimo aspetto è meno importante per il nostro scopo, poichè è una funzionalià pù appropriata per sistemi RAG.</p>
+</li>
+<li>
+<p>XXX</p>
+</li>
+</ul></div>
             </div>
         </div>
 
@@ -638,5 +646,5 @@ Poichè diversi embedding (es. BERT, Word2Vec, OpenAI text-embedding-ada-002, ..
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-12 15:26:32.787128+00:00
+Build Date UTC : 2025-07-12 15:41:52.050012+00:00
 -->
