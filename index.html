@@ -119,7 +119,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#text-to-text-regression" class="nav-link">Text-to-Text Regression</a>
+            <li class="nav-item" data-bs-level="2"><a href="#dalla-semantica-del-cv-alla-semantica-dei-sistemi" class="nav-link">Dalla semantica del CV alla semantica dei sistemi</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -490,35 +490,45 @@ Ancor di più oggi dove con l'introduzione di strumenti a supporto della program
 <li>L'HR può dedicarsi ad identificare le soft-skill e/o inquadrare la persona. Aspetti concreti che spesso sono più importanti delle competenze.</li>
 </ul>
 <p>Grazie agli embeddings, stiamo abbandonando l’era dei sistemi rigidi per entrare in quella dei modelli intelligenti, capaci di una maggior comprensione — e non solo classificazione — del linguaggio umano.</p>
-<h2 id="text-to-text-regression">Text-to-Text Regression</h2>
-<p>L'utilità e la flessibilità degli Embeddings è una delle tracce più seguite nella ricerca sull'AI Generativa.
-Poco tempo fa Google ha rilasciato questo paper: Performance Prediction for Large Systems via Text-to-Text Regression / https://arxiv.org/pdf/2506.21718</p>
-<p>L'innovazione chiave proposta nell'articolo risiede nell'utilizzo di Large Language Models (LLM) e, implicitamente, degli embeddings, 
-per trasformare il problema di predizione delle performance di sistemi software complessi in un compito di regressione text-to-text.</p>
-<ol>
-<li>Rappresentazione del Sistema e della Richiesta
-Nell'esempio HR, abbiamo trasformato un CV e una "professione ideale" in embeddings. Qui, il concetto è simile, ma applicato alla descrizione di un sistema e alla predizione della sua performance:</li>
-</ol>
-<p>Descrizione del Sistema (Input): Invece di avere valori numerici discreti per ogni parametro di configurazione (es. "CPU = 8 core", "RAM = 16 GB", "Tipo di Database = PostgreSQL"), l'articolo propone di descrivere il sistema come testo libero. Per esempio: "Questo è un cluster Kubernetes con 5 nodi, ognuno con 8 CPU virtuali e 16GB di RAM, che esegue un'applicazione di microservizi basata su Spring Boot e un database PostgreSQL. Utilizza un bilanciamento del carico NGINX."</p>
-<p>Perché gli embeddings sono utili qui? Un LLM trasforma questa descrizione testuale complessa in un vettore di embedding che cattura non solo la presenza di singoli componenti (CPU, RAM, DB), ma anche le loro relazioni contestuali e l'architettura complessiva. Ad esempio, "Kubernetes" e "microservizi" sono concetti semanticamente legati che gli embeddings possono riconoscere e posizionare vicini nello spazio vettoriale.</p>
-<p>Descrizione della Performance Richiesta (Output/Predizione): L'obiettivo non è solo prevedere un numero (es. "latenza = 200 ms"), ma generare una descrizione testuale della performance predetta. Ad esempio: "La latenza attesa per questa configurazione è di circa 200 millisecondi con un throughput di 1000 transazioni al secondo e un utilizzo della CPU del 70%."</p>
-<p>Questo approccio "text-to-text" sfrutta la capacità generativa degli LLM. Il modello, avendo "compreso" la configurazione tramite i suoi embeddings interni, può generare una descrizione complessa e multisfaccettata della performance.</p>
-<ol>
-<li>Addestramento e Flessibilità del Modello
-Il modello viene addestrato su coppie di dati: [Descrizione testuale del sistema] -&gt; [Descrizione testuale della sua performance misurata].</li>
-</ol>
-<p>Apprendimento delle Relazioni Complesse: Il LLM, attraverso i suoi meccanismi di attenzione e la sua enorme quantità di parametri, impara a mappare gli embeddings della descrizione del sistema agli embeddings della descrizione della performance. Questo gli permette di cogliere interazioni e dipendenze non lineari che sarebbero estremamente difficili da modellare con metodi tradizionali.</p>
-<p>Flessibilità alla Descrizione: Proprio come nel caso HR, dove potevi descrivere il professionista ideale in modo flessibile, qui puoi descrivere la configurazione del sistema usando un linguaggio naturale. Non devi aderire a schemi di input rigidi o a liste di parametri predefinite. Se un nuovo componente o una nuova architettura emerge, puoi semplicemente descriverla.</p>
-<p>Generalizzazione: Il modello può generalizzare a configurazioni leggermente diverse o a nuove combinazioni di componenti che non ha visto esplicitamente durante l'addestramento, basandosi sulla similarità semantica dei loro embeddings con le configurazioni già note.</p>
-<ol>
-<li>Utilità degli Embeddings nella Predizione delle Performance
-Gli embeddings agiscono come il ponte fondamentale tra il linguaggio naturale (le descrizioni del sistema e della performance) e la capacità di calcolo del modello.</li>
-</ol>
-<p>Cattura di Semantica e Contesto: Permettono al modello di "capire" che "8 core" e "otto processori" significano la stessa cosa, o che "ridondanza del database" è un concetto legato alla "disponibilità del sistema", anche se i termini esatti non sono stati visti in ogni combinazione.</p>
-<p>Gestione della Dimensionalità: Invece di lavorare con migliaia di variabili discrete e categoriche (ognuna delle quali sarebbe un "parametro" nel senso tradizionale), gli embeddings le comprimono in un vettore denso e a bassa dimensionalità, semplificando il compito di apprendimento per l'LLM.</p>
-<p>Spazio Continuo: La predizione avviene in uno spazio continuo di significato, non in classi discrete. Questo permette di generare previsioni più sfumate e accurate, come "circa 200 ms" invece di una semplice classificazione "lento" o "veloce".</p>
-<p>Connessione all'Esempio HR e Oltre
-L'esempio HR ha mostrato come gli embeddings trasformino CV e job description in "punti" in uno spazio semantico, permettendo di trovare candidati "vicini" alla posizione ideale. L'articolo "Performance Prediction for Large Systems" estende questo concetto in modo elegante:</p></div>
+<h2 id="dalla-semantica-del-cv-alla-semantica-dei-sistemi">Dalla semantica del CV alla semantica dei sistemi</h2>
+<p>Il passaggio da sistemi rigidi e predefiniti a sistemi più intelligenti, capaci di rappresentare la complessità in modo più efficiente, è un tema centrale nel campo dell'Intelligenza Artificiale Generativa. Un esempio significativo di questo sviluppo è il paper di Google,  <a href="https://arxiv.org/pdf/2506.21718">"Performance Prediction for Large Systems via Text-to-Text Regression"</a>, pubblicato a fine giugno 2025.</p>
+<p>L'innovazione chiave di questo articolo risiede nell'applicazione di Large Language Models (LLM) e degli embeddings per trasformare la predizione delle performance di sistemi software complessi in un compito di "regressione text-to-text".</p>
+<h3 id="linnovazione-della-regressione-text-to-text">L'Innovazione della Regressione Text-to-Text</h3>
+<p>Mentre l'analogia con i <a href="https://en.wikipedia.org/wiki/Regression_analysis">modelli di regressione classici</a> è immediata, la differenza fondamentale è che sia la variabile target (la performance) sia i suoi predittori (la configurazione del sistema) sono rappresentati in modo destrutturato tramite testo.</p>
+<h4 id="rappresentazione-del-sistema-e-della-richiesta">Rappresentazione del Sistema e della Richiesta</h4>
+<p>A differenza dei metodi tradizionali che richiedono valori numerici discreti (es. CPU=8 core), il nuovo approccio descrive il sistema e le performance in linguaggio naturale.</p>
+<ul>
+<li>Descrizione del Sistema (Input): Il sistema viene descritto come testo libero. Ad esempio: "Questo è un cluster Kubernetes con 5 nodi... che esegue un'applicazione di microservizi basata su Spring Boot e un database PostgreSQL..."</li>
+</ul>
+<p>Gli embeddings sono essenziali in questo processo. Un LLM trasforma queste descrizioni testuali complesse in vettori di embedding che catturano non solo i singoli componenti, ma anche le loro relazioni contestuali e l'architettura complessiva. Questo permette al modello di riconoscere concetti semanticamente correlati (come "Kubernetes" e "microservizi").</p>
+<ul>
+<li>Descrizione della Performance Richiesta (Output/Predizione): L'obiettivo non è solo prevedere un numero (es. "latenza = 200 ms"), ma generare una descrizione testuale sfaccettata della performance prevista. Ad esempio: "La latenza attesa per questa configurazione è di circa 200 millisecondi con un throughput di 1000 transazioni al secondo..."</li>
+</ul>
+<p>Questo approccio "text-to-text" sfrutta la capacità generativa degli LLM, consentendo al modello di fornire una descrizione complessa e dettagliata della performance, basandosi sulla sua "comprensione" della configurazione.</p>
+<h4 id="addestramento-e-flessibilita">Addestramento e Flessibilità</h4>
+<p>Il modello viene addestrato su coppie di dati: [Descrizione testuale del sistema] -&gt; [Descrizione testuale della sua performance misurata].</p>
+<ul>
+<li>
+<p>Apprendimento delle Relazioni Complesse: L'LLM apprende a mappare gli embeddings della descrizione del sistema a quelli della performance, cogliendo interazioni non lineari difficili da modellare con metodi tradizionali.</p>
+</li>
+<li>
+<p>Flessibilità e Generalizzazione: Similmente all'Esempio HR in cui si potevano descrivere candidati e posizioni in modo flessibile, questo approccio consente di descrivere le configurazioni del sistema usando linguaggio naturale, senza schemi di input rigidi. Il modello può generalizzare a nuove configurazioni basandosi sulla similarità semantica degli embeddings.</p>
+</li>
+</ul>
+<h3 id="utilita-degli-embeddings-nella-predizione">Utilità degli Embeddings nella Predizione</h3>
+<p>Gli embeddings fungono da ponte tra il linguaggio naturale e la capacità di calcolo del modello:</p>
+<ul>
+<li>
+<p>Cattura di Semantica e Contesto: Permettono al modello di comprendere che termini diversi possono avere lo stesso significato ("8 core" e "otto processori") e che concetti come "ridondanza del database" sono correlati alla "disponibilità del sistema".</p>
+</li>
+<li>
+<p>Gestione della Dimensionalità: Gli embeddings comprimono migliaia di variabili tradizionali in un vettore denso e a bassa dimensionalità, semplificando l'apprendimento per l'LLM.</p>
+</li>
+<li>
+<p>Spazio Continuo: La predizione avviene in uno spazio continuo di significato, consentendo previsioni più accurate e sfumate (es. "circa 200 ms") anziché classificazioni discrete.</p>
+</li>
+</ul>
+<p>L'articolo estende il concetto dell'esempio del Recruitment (dove gli embeddings trasformavano CV e job description in "punti" in uno spazio semantico) dimostrando come la predizione delle performance di sistemi complessi possa essere risolta attraverso un'analogia semantica nel contesto della regressione "text-to-text".</p></div>
             </div>
         </div>
 
@@ -602,5 +612,5 @@ L'esempio HR ha mostrato come gli embeddings trasformino CV e job description in
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-12 13:04:34.240063+00:00
+Build Date UTC : 2025-07-12 13:21:52.109395+00:00
 -->
