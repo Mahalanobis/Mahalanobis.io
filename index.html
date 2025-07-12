@@ -115,7 +115,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#embeddings-flessibilita" class="nav-link">Embeddings = Flessibilità</a>
+            <li class="nav-item" data-bs-level="2"><a href="#embeddings-non-solo-matematica" class="nav-link">Embeddings: non solo matematica</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -389,12 +389,30 @@ Per catturare questa relazione, gli LLM devono considerare sia il significato in
 Non erano in grado di gestire la <a href="https://en.wikipedia.org/wiki/Polysemy">polisemia</a>. Ogni token del vocabolario era rappresentato univocamente da un vettore.</p>
 <p>Quelli più recenti, invece, e penso a quelli strutturati nei Trasformer, sfruttano il meccanismo dell'<a href="https://en.wikipedia.org/wiki/Attention_Is_All_You_Need">attention</a> per pesare dinamicamente le parole circostanti, producendo rappresentazioni diverse a seconda del contesto.</p>
 <p>Gli embeddings contestuali si comportano come il cuoco che capisce che lo stesso "pomodoro" avrà un ruolo e un sapore leggermente diverso se usato in una "salsa per pasta" rispetto a una "zuppa fredda", adattando la sua preparazione di conseguenza. </p>
-<h2 id="embeddings-flessibilita">Embeddings = Flessibilità</h2>
+<h2 id="embeddings-non-solo-matematica">Embeddings: non solo matematica</h2>
+<p>Gli embeddings non sono semplicemente una soluzione matematica per semplificare la rappresentazione del linguaggio. Hanno un impatto concreto sulle applicazioni che li utilizzano, portando vantaggi reali, in primis una maggiore flessibilità:</p>
+<ul>
+<li>
+<p>Superano i limiti dei sistemi basati su regole rigide:
+In passato, per far "capire" un testo a un computer, si usavano dizionari fissi e regole grammaticali predefinite. Questo approccio era fragile: bastava una parola ambigua o un costrutto insolito per far fallire il sistema.
+Gli embeddings, invece, catturano automaticamente le sfumature del linguaggio, adattandosi a significati diversi in base al contesto.</p>
+</li>
+<li>
+<p>Abilitano maggiore flessibilità:
+Grazie agli embeddings, i modelli possono generalizzare meglio: riconoscono che "cane" e "golden retriever" sono concetti correlati, anche se non identici, senza bisogno di istruzioni esplicite.
+Questo permette a sistemi come motori di ricerca, chatbot o traduttori automatici di funzionare in modo più naturale, anche con testi mai visti prima.</p>
+</li>
+<li>
+<p>Supportano l’evoluzione del linguaggio:
+Le lingue cambiano nel tempo (pensa a parole come "tweet" o "streaming", che oggi hanno significati diversi rispetto al passato). Gli embeddings si aggiornano con l’uso, a differenza di regole scritte a mano che diventano rapidamente obsolete.</p>
+</li>
+</ul>
+<h3 id="un-caso-pratico-la-ricerca-del-personale">Un caso pratico, la ricerca del personale</h3>
 <p>Immaginiamo un’azienda che sta cercando di assumere un nuovo Sviluppatore Software Senior .</p>
 <p>Fino a poco tempo fa, il processo di selezione avveniva in modo piuttosto rigido: si utilizzavano criteri predefiniti e si assegnavano punteggi basati su regole stabilite a priori. Questo approccio, pur essendo strutturato, presenta dei limiti significativi quando si cerca di valutare profili complessi e dinamici come quelli richiesti nel mondo della tecnologia.</p>
-<h3 id="il-metodo-tradizionale-classi-predefinite-e-scoring-manuale">Il Metodo Tradizionale: Classi Predefinite e Scoring Manuale</h3>
+<h4 id="il-metodo-tradizionale-classi-predefinite-e-scoring-manuale">Il Metodo Tradizionale: Classi Predefinite e Scoring Manuale</h4>
 <p>Nel metodo tradizionale, il team HR utilizza software dedicati — spesso chiamati ATS (Applicant Tracking Systems ) — per gestire l’enorme quantità di candidature ricevute.</p>
-<h4 id="definizione-delle-competenze-richieste">Definizione delle Competenze Richieste</h4>
+<h5 id="definizione-delle-competenze-richieste">Definizione delle Competenze Richieste</h5>
 <p>Prima di tutto, viene definita in modo esplicito la figura professionale desiderata, ad esempio “Sviluppatore Software Senior”. A questa definizione seguono una serie di requisiti specifici:</p>
 <ul>
 <li>Esperienza : ad esempio, almeno 5 anni di lavoro nel settore.</li>
@@ -403,10 +421,10 @@ Non erano in grado di gestire la <a href="https://en.wikipedia.org/wiki/Polysemy
 <li>Soft skill : come problem-solving, capacità di lavorare in team.</li>
 <li>Formazione accademica : tipicamente una laurea in Informatica o discipline affini.</li>
 </ul>
-<h4 id="valutazione-basata-su-regole">Valutazione Basata su Regole</h4>
+<h5 id="valutazione-basata-su-regole">Valutazione Basata su Regole</h5>
 <p>Una volta ricevuti i CV, ciascuno viene analizzato confrontandolo con questi criteri. Viene assegnato un punteggio in base alla presenza (e qualità) delle competenze elencate. Si tratta spesso di un processo automatizzato, che ricerca parole chiave specifiche all’interno del testo: “Python”, “Django”, “Senior”.</p>
 <p>In alcuni casi, vengono applicate regole più sofisticate: ad esempio, “se ha esperienza con Python e Django, aggiungi X punti; se ha solo Python, aggiungi Y punti”.</p>
-<h4 id="limiti-del-metodo-tradizionale">Limiti del Metodo Tradizionale</h4>
+<h5 id="limiti-del-metodo-tradizionale">Limiti del Metodo Tradizionale</h5>
 <p>Nonostante la sua apparente precisione, questo approccio presenta diversi svantaggi:</p>
 <ul>
 <li><strong>Rigidità</strong> : Se un candidato ha lavorato con un framework simile a Django ma non esattamente Django (ad esempio Node.js), potrebbe essere penalizzato o addirittura ignorato, anche se possiede le competenze richieste in contesti leggermente diversi.</li>
@@ -421,18 +439,18 @@ Questo tipo di approccio è efficace per schematizzare, ma rischia di escludere 
 - 🕐 Alto costo in termini di tempo ed energie
 - 🎯 Scarsa flessibilità e comprensione semantica</p>
 </blockquote>
-<h3 id="il-metodo-moderno-la-flessibilita-e-utilita-degli-embeddings">Il Metodo Moderno: La Flessibilità e Utilità degli Embeddings</h3>
+<h4 id="il-metodo-moderno-la-flessibilita-e-utilita-degli-embeddings">Il Metodo Moderno: La Flessibilità e Utilità degli Embeddings</h4>
 <p>Gli embeddings rappresentano una svolta radicale rispetto al passato. Non si basano più su liste di parole chiave o regole rigide, ma sulla comprensione semantica del contenuto.</p>
-<h4 id="come-funzionano-gli-embeddings">Come Funzionano Gli Embeddings</h4>
+<h5 id="come-funzionano-gli-embeddings">Come Funzionano Gli Embeddings</h5>
 <p>Ogni CV inviato viene trasformato in un vettore di embedding , ovvero una rappresentazione matematica che cattura il significato complessivo del testo. In questo spazio vettoriale, parole e concetti simili si trovano vicine tra loro: ad esempio, “Python”, “programmazione orientata agli oggetti” e “sviluppo backend” saranno molto prossime a termini come “API REST” o “microservizi”.</p>
 <p>Questo processo è automatico e avviene grazie a modelli linguistici avanzati (come BERT o modelli fine-tuned ad hoc).</p>
-<h4 id="creazione-del-profilo-ideale-il-professionista-sintetico">Creazione del Profilo Ideale: Il “Professionista Sintetico”</h4>
+<h5 id="creazione-del-profilo-ideale-il-professionista-sintetico">Creazione del Profilo Ideale: Il “Professionista Sintetico”</h5>
 <p>Invece di definire una lista di requisiti, il team HR scrive una descrizione completa del candidato ideale. Ad esempio:</p>
 <p>“Cerchiamo uno sviluppatore software senior con almeno 5 anni di esperienza nel backend, una buona conoscenza di Python e dei framework web come Django o Flask. È importante che abbia familiarità con database relazionali e non relazionali, e che abbia già lavorato in ambienti DevOps e cloud computing. Cerchiamo una persona proattiva, capace di lavorare in team e con forti capacità di problem-solving.” </p>
 <p>Questa descrizione viene anch’essa trasformata in un vettore di embedding, diventando un vero e proprio professionista sintetico .</p>
-<h4 id="calcolo-della-similarita-semantica">Calcolo della Similarità Semantica</h4>
+<h5 id="calcolo-della-similarita-semantica">Calcolo della Similarità Semantica</h5>
 <p>A questo punto, il sistema calcola la distanza tra il vettore del professionista sintetico e quelli di tutti i CV ricevuti. I candidati con un embedding più vicino a quello ideale sono semanticamente i più rilevanti per la posizione.</p>
-<h4 id="vantaggi-del-nuovo-approccio">Vantaggi del Nuovo Approccio</h4>
+<h5 id="vantaggi-del-nuovo-approccio">Vantaggi del Nuovo Approccio</h5>
 <ul>
 <li>Flessibilità : Un candidato che ha lavorato con tecnologie simili a quelle richieste non viene penalizzato. Il sistema riconosce la similarità semantica, anche se non trova esattamente le stesse parole chiave.</li>
 <li>Aggiornamento Rapido : Se i requisiti cambiano leggermente, basta modificare la descrizione del professionista sintetico e ricalcolare le distanze.</li>
@@ -564,5 +582,5 @@ L'esempio HR ha mostrato come gli embeddings trasformino CV e job description in
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-12 10:00:44.595728+00:00
+Build Date UTC : 2025-07-12 10:22:15.735943+00:00
 -->
