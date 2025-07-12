@@ -438,28 +438,24 @@ Le lingue cambiano nel tempo (pensa a parole come "tweet" o "streaming", che ogg
 <h5 id="limiti-del-metodo-tradizionale">Limiti del Metodo Tradizionale</h5>
 <p>Nonostante la sua apparente precisione, questo approccio presenta diversi svantaggi:</p>
 <ul>
-<li><strong>Rigidità</strong> : Se un candidato ha lavorato con un framework simile a Django ma non esattamente Django (ad esempio Node.js), potrebbe essere penalizzato o addirittura ignorato, anche se possiede le competenze richieste in contesti leggermente diversi.</li>
-<li><strong>Costo e Tempo</strong> : Analizzare centinaia o migliaia di CV richiede ore di lavoro da parte del team HR e può comunque essere soggetto a errori o bias umani.</li>
-<li><strong>Dipendenza dalle Keywords</strong> : L’efficacia del sistema dipende interamente dalla corrispondenza tra le parole chiave definite a priori e quelle presenti nei CV.
+<li>
+<p><strong>Rigidità</strong> : Se un candidato ha lavorato con un framework simile a Django ma non esattamente Django (ad esempio Node.js), potrebbe essere penalizzato o addirittura ignorato, anche se possiede le competenze richieste in contesti leggermente diversi. L’efficacia del sistema dipende interamente dalla corrispondenza tra le parole chiave definite a priori e quelle presenti nei CV.
 Questo tipo di approccio è efficace per schematizzare, ma rischia di escludere figure interessanti solo perché non usano le "parole giuste" o non hanno seguito percorsi standard.<br />
-Ancor di più oggi dove con l'introduzione di strumenti a supporto della programmazione, come Cursor, le competenze diventano più funzionale che specifiche di quel tipo di linguaggio.  </li>
+Ancor di più oggi dove con l'introduzione di strumenti a supporto della programmazione come Cursor, le competenze diventano più funzionali e legate all'esperienza, che specifiche di quel tipo di linguaggio.  </p>
+</li>
+<li>
+<p><strong>Costo e Tempo</strong> : Analizzare centinaia o migliaia di CV richiede ore di lavoro da parte del team HR e può comunque essere soggetto a errori o bias umani.</p>
+</li>
 </ul>
-<blockquote>
-<p>📝 <strong>Metodo Tradizionale:</strong>
-- ✍️ Regole fisse e ricerca di parole chiave
-- ⛔ Rischio di escludere profili validi
-- 🕐 Alto costo in termini di tempo ed energie
-- 🎯 Scarsa flessibilità e comprensione semantica</p>
-</blockquote>
 <h4 id="il-metodo-moderno-la-flessibilita-e-utilita-degli-embeddings">Il Metodo Moderno: La Flessibilità e Utilità degli Embeddings</h4>
 <p>Gli embeddings rappresentano una svolta radicale rispetto al passato. Non si basano più su liste di parole chiave o regole rigide, ma sulla comprensione semantica del contenuto.</p>
 <h5 id="come-funzionano-gli-embeddings">Come Funzionano Gli Embeddings</h5>
-<p>Ogni CV inviato viene trasformato in un vettore di embedding , ovvero una rappresentazione matematica che cattura il significato complessivo del testo. In questo spazio vettoriale, parole e concetti simili si trovano vicine tra loro: ad esempio, “Python”, “programmazione orientata agli oggetti” e “sviluppo backend” saranno molto prossime a termini come “API REST” o “microservizi”.</p>
-<p>Questo processo è automatico e avviene grazie a modelli linguistici avanzati (come BERT o modelli fine-tuned ad hoc).</p>
+<p>Ogni CV inviato viene trasformato in un vettore di embedding, ovvero una rappresentazione matematica che cattura il significato complessivo del testo. In questo spazio vettoriale, parole e concetti simili si trovano vicine tra loro: ad esempio, “Python”, “programmazione orientata agli oggetti” e “sviluppo backend” saranno molto prossime a termini come “API REST” o “microservizi”.</p>
+<p>Questo processo è automatico e avviene grazie a modelli linguistici avanzati (come BERT, Embeddings di Trasformers o modelli ad hoc - fine-tuned ).</p>
 <h5 id="creazione-del-profilo-ideale-il-professionista-sintetico">Creazione del Profilo Ideale: Il “Professionista Sintetico”</h5>
 <p>Invece di definire una lista di requisiti, il team HR scrive una descrizione completa del candidato ideale. Ad esempio:</p>
 <p>“Cerchiamo uno sviluppatore software senior con almeno 5 anni di esperienza nel backend, una buona conoscenza di Python e dei framework web come Django o Flask. È importante che abbia familiarità con database relazionali e non relazionali, e che abbia già lavorato in ambienti DevOps e cloud computing. Cerchiamo una persona proattiva, capace di lavorare in team e con forti capacità di problem-solving.” </p>
-<p>Questa descrizione viene anch’essa trasformata in un vettore di embedding, diventando un vero e proprio professionista sintetico .</p>
+<p>Questa descrizione viene anch’essa trasformata in un vettore di embedding, diventando un vero e proprio profilo di un professionista "sintetico".</p>
 <h5 id="calcolo-della-similarita-semantica">Calcolo della Similarità Semantica</h5>
 <p>A questo punto, il sistema calcola la distanza tra il vettore del professionista sintetico e quelli di tutti i CV ricevuti. I candidati con un embedding più vicino a quello ideale sono semanticamente i più rilevanti per la posizione.</p>
 <h5 id="vantaggi-del-nuovo-approccio">Vantaggi del Nuovo Approccio</h5>
@@ -471,17 +467,6 @@ Ancor di più oggi dove con l'introduzione di strumenti a supporto della program
 <li>Scalabilità : Può processare migliaia di candidature senza perdita di qualità.</li>
 <li>Scoperta di Talenti Nascosti : Individua persone meritevoli anche se non usano le espressioni esatte attese.</li>
 </ul>
-<p>💡 Metodo Moderno:
-🧠 Comprensione semantica
-Esempio: “Sviluppo backend” ≈ “Creazione di API REST”
-🔁 Flessibilità
-Modificare i criteri è semplice come aggiornare una descrizione
-⚖️ Riduzione del bias umano
-Processo obiettivo e centrato sul significato
-📈 Scalabilità
-Migliaia di CV analizzati in pochi secondi
-💡 Scoperta di talenti nascosti
-Candidati con competenze rilevanti, anche con termini diversi </p>
 <h2 id="text-to-text-regression">Text-to-Text Regression</h2>
 <p>L'utilità e la flessibilità degli Embeddings è una delle tracce più seguite nella ricerca sull'AI Generativa.
 Poco tempo fa Google ha rilasciato questo paper: Performance Prediction for Large Systems via Text-to-Text Regression / https://arxiv.org/pdf/2506.21718</p>
@@ -594,5 +579,5 @@ L'esempio HR ha mostrato come gli embeddings trasformino CV e job description in
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-12 11:04:19.919353+00:00
+Build Date UTC : 2025-07-12 11:19:42.476566+00:00
 -->
