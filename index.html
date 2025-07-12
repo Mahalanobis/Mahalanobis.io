@@ -180,6 +180,16 @@ inglese (“Sentence”). La lunghezza media di queste frasi è di circa 14
 parole. A ogni frase è associata un’emozione (“Label”), per un totale di
 13 categorie/emozioni diverse, inclusa l’opzione “Neutral” per identificare
 l’assenza di emozioni specifiche.</p>
+<p>La discussione sull'appropriatezza di questa categorizzazione delle emozioni esula dagli scopi di questo tutorial, trattandosi di un tema di ricerca aperto.</p>
+<p>La scelta di questo dataset si basa su:</p>
+<ul>
+<li>
+<p><em>Complessità</em>: 13 categorie emotive coprono un ampio spettro e offrono una discreta complessità.</p>
+</li>
+<li>
+<p><em>Rilevanza normativa</em>: la classificazione delle emozioni è un tema che ha implicazioni a livello normativo (AI Act), rendendolo particolarmente utile per ricordare alcuni aspetti etici/normativi che hanno applicazione nei paesi dell'UE.</p>
+</li>
+</ul>
 <p>Un aspetto fondamentale di questo dataset è che la distribuzione delle
 emozioni è sbilanciata.<br />
 Ecco alcune delle categorie più frequenti:</p>
@@ -398,7 +408,7 @@ In passato, per far "capire" un testo a un computer, si usavano dizionari fissi 
 Gli embeddings, invece, catturano automaticamente le sfumature del linguaggio, adattandosi a significati diversi in base al contesto.</p>
 </li>
 <li>
-<p>Abilitano maggiore flessibilità:
+<p>Abilitano una maggiore flessibilità:
 Grazie agli embeddings, i modelli possono generalizzare meglio: riconoscono che "cane" e "golden retriever" sono concetti correlati, anche se non identici, senza bisogno di istruzioni esplicite.
 Questo permette a sistemi come motori di ricerca, chatbot o traduttori automatici di funzionare in modo più naturale, anche con testi mai visti prima.</p>
 </li>
@@ -408,29 +418,33 @@ Le lingue cambiano nel tempo (pensa a parole come "tweet" o "streaming", che ogg
 </li>
 </ul>
 <h3 id="un-caso-pratico-la-ricerca-del-personale">Un caso pratico, la ricerca del personale</h3>
-<p>Immaginiamo un’azienda che sta cercando di assumere un nuovo Sviluppatore Software Senior .</p>
-<p>Fino a poco tempo fa, il processo di selezione avveniva in modo piuttosto rigido: si utilizzavano criteri predefiniti e si assegnavano punteggi basati su regole stabilite a priori. Questo approccio, pur essendo strutturato, presenta dei limiti significativi quando si cerca di valutare profili complessi e dinamici come quelli richiesti nel mondo della tecnologia.</p>
+<p>Immaginiamo un’azienda che sta cercando di assumere un nuovo Sviluppatore Software Senior.</p>
+<p>Fino a poco tempo fa, il processo di selezione avveniva in modo piuttosto rigido: si utilizzavano criteri predefiniti e si assegnavano punteggi basati su regole stabilite a priori.  </p>
+<p>Questo approccio, pur essendo strutturato, presenta dei limiti significativi quando si cerca di valutare profili complessi e dinamici come quelli richiesti nel mondo della tecnologia.</p>
 <h4 id="il-metodo-tradizionale-classi-predefinite-e-scoring-manuale">Il Metodo Tradizionale: Classi Predefinite e Scoring Manuale</h4>
-<p>Nel metodo tradizionale, il team HR utilizza software dedicati — spesso chiamati ATS (Applicant Tracking Systems ) — per gestire l’enorme quantità di candidature ricevute.</p>
+<p>Nel metodo tradizionale, il team HR utilizza software dedicati — spesso chiamati ATS (Applicant Tracking Systems) — per gestire l’enorme quantità di candidature ricevute.</p>
 <h5 id="definizione-delle-competenze-richieste">Definizione delle Competenze Richieste</h5>
-<p>Prima di tutto, viene definita in modo esplicito la figura professionale desiderata, ad esempio “Sviluppatore Software Senior”. A questa definizione seguono una serie di requisiti specifici:</p>
+<p>Prima di tutto, viene definita in modo esplicito la figura professionale desiderata, ad esempio “Sviluppatore Software Senior”. </p>
+<p>A questa definizione seguono una serie di requisiti specifici:</p>
 <ul>
-<li>Esperienza : ad esempio, almeno 5 anni di lavoro nel settore.</li>
-<li>Linguaggi di programmazione : come Python, Java o JavaScript.</li>
-<li>Framework e librerie : ad esempio Django, Spring Boot o React.</li>
-<li>Soft skill : come problem-solving, capacità di lavorare in team.</li>
+<li>Esperienza : almeno 5 anni di lavoro nel settore.</li>
+<li>Linguaggi di programmazione : Python, Java o JavaScript.</li>
+<li>Framework e librerie : Django, Spring Boot o React.</li>
+<li>Soft skill : problem-solving, capacità di lavorare in team.</li>
 <li>Formazione accademica : tipicamente una laurea in Informatica o discipline affini.</li>
 </ul>
+<p>Sulla base di questi requisiti vengono raccolti i CV dei candidati.</p>
 <h5 id="valutazione-basata-su-regole">Valutazione Basata su Regole</h5>
-<p>Una volta ricevuti i CV, ciascuno viene analizzato confrontandolo con questi criteri. Viene assegnato un punteggio in base alla presenza (e qualità) delle competenze elencate. Si tratta spesso di un processo automatizzato, che ricerca parole chiave specifiche all’interno del testo: “Python”, “Django”, “Senior”.</p>
+<p>Una volta raccolti i CV, ciascuno viene analizzato confrontandolo con questi criteri. Viene assegnato un punteggio in base alla presenza (e qualità) delle competenze elencate. Si tratta spesso di un processo automatizzato, che ricerca parole chiave specifiche all’interno del testo: “Python”, “Django”, “Senior”.</p>
 <p>In alcuni casi, vengono applicate regole più sofisticate: ad esempio, “se ha esperienza con Python e Django, aggiungi X punti; se ha solo Python, aggiungi Y punti”.</p>
 <h5 id="limiti-del-metodo-tradizionale">Limiti del Metodo Tradizionale</h5>
 <p>Nonostante la sua apparente precisione, questo approccio presenta diversi svantaggi:</p>
 <ul>
 <li><strong>Rigidità</strong> : Se un candidato ha lavorato con un framework simile a Django ma non esattamente Django (ad esempio Node.js), potrebbe essere penalizzato o addirittura ignorato, anche se possiede le competenze richieste in contesti leggermente diversi.</li>
 <li><strong>Costo e Tempo</strong> : Analizzare centinaia o migliaia di CV richiede ore di lavoro da parte del team HR e può comunque essere soggetto a errori o bias umani.</li>
-<li><strong>Dipendenza dalle Etichette</strong> : L’efficacia del sistema dipende interamente dalla corrispondenza tra le parole chiave definite a priori e quelle presenti nei CV.
-Questo tipo di approccio è efficace per schematizzare, ma rischia di escludere figure interessanti solo perché non usano le "parole giuste" o non hanno seguito percorsi standard.</li>
+<li><strong>Dipendenza dalle Keywords</strong> : L’efficacia del sistema dipende interamente dalla corrispondenza tra le parole chiave definite a priori e quelle presenti nei CV.
+Questo tipo di approccio è efficace per schematizzare, ma rischia di escludere figure interessanti solo perché non usano le "parole giuste" o non hanno seguito percorsi standard.<br />
+Ancor di più oggi dove con l'introduzione di strumenti a supporto della programmazione, come Cursor, le competenze diventano più funzionale che specifiche di quel tipo di linguaggio.  </li>
 </ul>
 <blockquote>
 <p>📝 <strong>Metodo Tradizionale:</strong>
@@ -582,5 +596,5 @@ L'esempio HR ha mostrato come gli embeddings trasformino CV e job description in
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-12 10:35:34.948363+00:00
+Build Date UTC : 2025-07-12 11:01:29.164652+00:00
 -->
