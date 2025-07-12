@@ -111,6 +111,14 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#embeddings" class="nav-link">Embeddings</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#la-metafora-del-cuoco" class="nav-link">La metafora del cuoco</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#significato-e-contesto" class="nav-link">Significato e contesto</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#embeddings-flessibilita" class="nav-link">Embeddings = Flessibilità</a>
               <ul class="nav flex-column">
               </ul>
@@ -332,7 +340,7 @@ Si verifica più frequentemente (quasi 50 volte più frequentemente) in frasi ch
 Due volte più frequentemente in frasi che si caratterizzano per trattare di "Problemi Pratici, Necessità e Risorse (Finanziare/Team)" (Topic 9).</p>
 </li>
 <li>
-<p>L'emozione "Guilt" 3-4 volte più frequentemente in frasi che si caratterizzano per trattare di "Problemi Tecnici e App/Servizi Digitali" (Topic 10) o per "Sentimenti Profondi e Riflessioni su Esperienze" (Topic 4). </p>
+<p>L'emozione "Guilt" si verifica 3-4 volte più frequentemente in frasi che si caratterizzano per trattare di "Problemi Tecnici e App/Servizi Digitali" (Topic 10) o per "Sentimenti Profondi e Riflessioni su Esperienze" (Topic 4). </p>
 </li>
 <li>
 <p>L'emozione "Shame" ha pattern simili a "Guilt", tranne per le frasi che trattano "Discussioni, Opinioni e Interazioni Online" (Topic 2) dove si trova più spesso vergogna piuttosto che colpa.</p>
@@ -347,32 +355,46 @@ Due volte più frequentemente in frasi che si caratterizzano per trattare di "Pr
 Le Wordcloud qui illustrate, profilano le emozioni sulla base dei 100 lemmi più caratterizzanti (in termini di log odds):</p>
 <p><img alt="Emozioni" src="assets/images/emotion_wordclouds_animation.gif" /></p>
 <h1 id="embeddings">Embeddings</h1>
-<p>Nonostante l'LDA (Latent Dirichlet Allocation) rappresenti una tecnica robusta e interpretabile, gli <strong>Embeddings</strong> offrono una rappresentazione dei dati testuali molto più ricca e semanticamente consapevole. </p>
+<p>Nonostante l'LDA (Latent Dirichlet Allocation) rappresenti una tecnica robusta e interpretabile, 
+gli <a href="https://en.wikipedia.org/wiki/Word_embedding">Embeddings</a> offrono una rappresentazione dei dati testuali molto più ricca e semanticamente coerente. </p>
 <p><em>Ci soffermeremo un pò sul concetto di Embeddings perchè è qualcosa che va capito a fondo prima di ragionare sugli LLM ed il loro fine-tuning</em>.</p>
-<p><em>Gli embeddings sono rappresentazioni vettoriali di entità discrete, come parole, token, frasi, o persino immagini e audio.</em> 
+<p>L'Intelligenza Artificiale moderna si basa su una profonda comprensione del <strong>significato</strong> e del <strong>contesto</strong>. Significato e contesto sono due concetti strettamente interconnessi. 
+Gli <em>Embeddings</em> sono lo strumento che permette all'AI di rappresentare entità del mondo reale — come parole, immagini e suoni — in un formato numerico che cattura queste sfumature.
 Il loro scopo è catturare il significato semantico e le relazioni contestuali di queste entità in uno spazio vettoriale a bassa dimensionalità.
-Un embedding per una singola parola (o token) potrebbe essere un vettore di, ad esempio, 768, 1024, 2048 o 4096 dimensioni.</p>
+Un embedding per una singola parola (o token) potrebbe essere un vettore di, ad esempio, 768, 1024, 2048 o 4096 dimensioni.
+All'interno di questa mappatura, la distanza tra due vettori indica la loro somiglianza semantica. 
+Se due concetti sono simili, i loro vettori saranno vicini.</p>
 <p><img alt="Emozioni - LDA Topic" src="assets/images/input_embeddings.png" /></p>
-<p>Nel punto di ingresso di un LLM, c'è una "matrice di embedding" che mappa ogni token del vocabolario in un vettore di embedding. Il numero di parametri in questa matrice è dato da:  </p>
+<p>Nei Large Language Models (LLM), gli embeddings sono gestiti da una Matrice di Embedding. 
+Questa matrice funge da "ponte" tra l'input testuale e il modello stesso, fornendo una rappresentazione significativa per ogni token del vocabolario.</p>
+<p>Il numero di parametri in questa matrice è dato da:  </p>
 <div class="arithmatex">\[
 \text{Numero di parametri} = \text{Dimensione del Vocabolario} \times \text{Dimensionalità dell'Embedding}  
 \]</div>
-<p>Ad esempio, se un LLM ha un vocabolario di 50.000 token e la dimensionalità dell'embedding è 768, la matrice di embedding avrà 50.000×768=38.400.000 parametri.</p>
+<p>Ad esempio, se un LLM ha un vocabolario di 50.000 token e la dimensionalità dell'embedding è 768, 
+la matrice di embedding avrà 50.000 × 768 = 38.400.000 parametri.</p>
 <p>Non dobbiamo confondere gli <em>embeddings</em> con i <em>parametri</em> di un LLM.
 I parametri di un LLM (milioni, miliardi o trilioni) sono i pesi e i bias di tutte le connessioni neuronali all'interno della rete neurale. 
 Questi includono i parametri degli strati di embedding stessi, ma anche e soprattutto i parametri delle reti Transformer (strati di attenzione, feed-forward networks, normalization layers, etc.) che processano questi embeddings.</p>
-<p>Proviamo con una metafora. Immaginiamo un LLM come se fosse un cuoco esperto.
+<h2 id="la-metafora-del-cuoco">La metafora del cuoco</h2>
+<p>Immaginiamo un LLM come se fosse un cuoco.
 I <em>Parametri</em> dell'LLM sono tutte le ricette che il cuoco ha imparato, le sue tecniche di taglio, le sue conoscenze sugli ingredienti, come bilanciare i sapori, ecc. 
 Sono l'intera competenza del cuoco. Senza queste conoscenze (parametri), il cuoco non può cucinare nulla.
 Gli <em>Embeddings</em> sono gli ingredienti che il cuoco ha pre-processato e organizzato in modo significativo.
 Un "pomodoro" non è solo un "pomodoro" (una stringa di testo), ma è un "pomodoro" tagliato in cubetti, con una certa acidità, una certa consistenza, pronto per essere usato in una specifica ricetta.
 Gli embeddings trasformano il "pomodoro" da una semplice etichetta a una rappresentazione che il cuoco (i parametri dell'LLM) può capire e utilizzare immediatamente in una moltitudine di modi (come parte di una salsa, in un'insalata, ecc.).</p>
-<p>Relativamente ad embedding atti alla rappresentazione del testo, potremmo considerare:</p>
-<ul>
-<li>Embeddings statici (non contestuali): Word2Vec, GloVe, FastText. </li>
-<li>Embeddings contestuali (basati su Transformer): BERT, RoBERTa, Sentence-BERT, modelli basati su GPT (es. quelli di OpenAI).</li>
-</ul>
-<p>Gli embeddings contestuali si comportano come il cuoco che capisce che lo stesso "pomodoro" avrà un ruolo e un sapore leggermente diverso se usato in una "salsa per pasta" rispetto a una "zuppa fredda", adattando la sua preparazione di conseguenza. </p>
+<h2 id="significato-e-contesto">Significato e contesto</h2>
+<p>Nel linguaggio, il significato di una parola non è fisso, ma dipende dal contesto in cui viene utilizzata. 
+Prendiamo l'esempio della parola "banco":</p>
+<p>"Mi siedo sul <em>banco</em>", dicendolo potrei rappresentare una classica scena di me, studente, che mi siedo in un banco della mia classe a scuola.
+"Vado al <em>banco</em>", potrebbe significare situazioni molto diverse. Dal banco del bar, al banco salumi del supermercato, cosi come uno sportello bancario.
+"Un <em>banco</em> di pesci", indica invece un gruppo di animali.</p>
+<p>Questo dimostra che il contesto disambigua il significato, modellando l'interpretazione della parola. 
+Per catturare questa relazione, i modelli di rappresentazione del linguaggio devono considerare sia il significato intrinseco delle parole sia il contesto dinamico in cui appaiono.</p>
+<p>Inizialmente gli embeddings (Glove, Word2Vec) erano "statici", non tenevano conto del contesto.
+Non erano in grado di gestire la <a href="https://en.wikipedia.org/wiki/Polysemy">polisemia</a>. Ogni token del vocabolario era rappresentato univocamente da un vettore.</p>
+<p>Quelli più recenti, invece, e penso a quelli strutturati nei Trasformer, sfruttano il meccanismo dell'<a href="https://en.wikipedia.org/wiki/Attention_Is_All_You_Need">attention</a> per pesare dinamicamente le parole circostanti, producendo rappresentazioni diverse a seconda del contesto.
+Gli embeddings contestuali si comportano come il cuoco che capisce che lo stesso "pomodoro" avrà un ruolo e un sapore leggermente diverso se usato in una "salsa per pasta" rispetto a una "zuppa fredda", adattando la sua preparazione di conseguenza. </p>
 <h2 id="embeddings-flessibilita">Embeddings = Flessibilità</h2>
 <p>Immaginiamo un’azienda che sta cercando di assumere un nuovo Sviluppatore Software Senior .</p>
 <p>Fino a poco tempo fa, il processo di selezione avveniva in modo piuttosto rigido: si utilizzavano criteri predefiniti e si assegnavano punteggi basati su regole stabilite a priori. Questo approccio, pur essendo strutturato, presenta dei limiti significativi quando si cerca di valutare profili complessi e dinamici come quelli richiesti nel mondo della tecnologia.</p>
@@ -548,5 +570,5 @@ L'esempio HR ha mostrato come gli embeddings trasformino CV e job description in
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-06 22:21:09.109931+00:00
+Build Date UTC : 2025-07-12 09:35:57.224752+00:00
 -->
