@@ -541,8 +541,7 @@ Una transizione che viene efficacemente riassunta da Andrej Karpathy in questa c
 <p><a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ&amp;ab_channel=YCombinator">Andrej Karpathy's keynote on June 17, 2025 at AI Startup School in San Francisco</a></p>
 <h2 id="come-scegliere-gli-embeddings-piu-adeguati-al-proprio-use-case">Come scegliere gli Embeddings più adeguati al proprio use case</h2>
 <p>Torniamo al nostro use-case. Dobbiamo scegliere un sistema di embeddings che rappresenti i nostri dati.  </p>
-<p>La classificazione delle emozioni a partire da una frase è un problema complesso nel NLP, poiché le emozioni sono spesso espresse in modo implicito, dipendono dal contesto e possono variare a seconda del dominio (es. social media vs. testi formali). </p>
-<p>La scelta degli embeddings gioca un ruolo cruciale, poiché influisce sulla capacità del modello di catturare sfumature semantiche ed emotive.</p>
+<p>La classificazione delle emozioni a partire da una frase è un problema complesso nel NLP, poiché le emozioni sono spesso espresse in modo implicito, dipendono dal contesto e possono variare a seconda del dominio (es. social media vs. testi formali). La scelta degli embeddings gioca un ruolo cruciale, poiché influisce sulla capacità del modello di catturare sfumature semantiche ed emotive.</p>
 <p>Un punto di partenza è il <a href="https://huggingface.co/spaces/mteb/leaderboard">MTEB</a> (Massive Text Embedding Benchmark), un framework standardizzato per valutare e confrontare la qualità degli embedding testuali su una vasta gamma di task di NLP, verificandone le performance su oltre 100 dataset in lingue diverse.
 Poichè diversi embedding (es. BERT, Word2Vec, OpenAI text-embedding-ada-002, ...) performano in modo variabile a seconda del task, MTEB fornisce un punto di riferimento oggettivo basato su esperimenti su larga scala.
 È stato introdotto per rispondere a una domanda critica: "<em>Qual è il miglior modello di embedding per il mio use case?</em>"</p>
@@ -557,7 +556,7 @@ Poichè diversi embedding (es. BERT, Word2Vec, OpenAI text-embedding-ada-002, ..
 <p>Relatiamente a questo tutorial prenderemo in considerazione due sistemi di embeddings. Li compareremo a titolo esemplificativo focalizzandoci su soluzioni per architetture GPU. Verranno sperimentati questi due modelli:</p>
 <ul>
 <li>
-<p><a href="https://huggingface.co/BAAI/bge-m3">BGE-m3</a>, sviluppato da BAAI (Beijing Academy of Artificial Intelligence). Questo modello supporta oltre 100 lingue, gestisce input fino a 8192 token (Può processare contesti estremamente lunghi (~6-8k parole, contro i 512 token standard di BERT) ed è uno dei rimi modelli a supportare la multi-funzionalità nel retrievial (unificazione di retrieval denso, lessicale e multi-vec/colbert). Quest'ultimo aspetto è meno importante per il nostro scopo, poichè è una funzionalià pù appropriata per sistemi RAG.</p>
+<p><a href="https://huggingface.co/BAAI/bge-m3">BGE-m3</a>, sviluppato da BAAI (Beijing Academy of Artificial Intelligence). Questo modello supporta oltre 100 lingue, gestisce input fino a 8192 token (Può processare contesti estremamente lunghi (~6-8k parole, contro i 512 token standard di BERT) ed è uno dei rimi modelli a supportare la multi-funzionalità nel retrievial (unificazione di retrieval denso, lessicale e multi-vec/colbert). Quest'ultimo aspetto è meno importante per il nostro scopo, poichè è una funzionalià pù appropriata per sistemi RAG. BGE-3m è un modello di embeddings utilizzabile attraverso la libreria <a href="https://github.com/FlagOpen/FlagEmbedding">FlagEmbedding</a>.</p>
 </li>
 <li>
 <p>XXX</p>
@@ -646,5 +645,5 @@ Poichè diversi embedding (es. BERT, Word2Vec, OpenAI text-embedding-ada-002, ..
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-12 15:41:52.050012+00:00
+Build Date UTC : 2025-07-12 16:42:14.967025+00:00
 -->
