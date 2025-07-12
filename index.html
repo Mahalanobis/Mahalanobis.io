@@ -115,10 +115,6 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#significato-e-contesto" class="nav-link">Significato e contesto</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
             <li class="nav-item" data-bs-level="2"><a href="#embeddings-flessibilita" class="nav-link">Embeddings = Flessibilità</a>
               <ul class="nav flex-column">
               </ul>
@@ -382,12 +378,20 @@ Sono l'intera competenza del cuoco. Senza queste conoscenze (parametri), il cuoc
 Gli <em>Embeddings</em> sono gli ingredienti che il cuoco ha pre-processato e organizzato in modo significativo.
 Un "pomodoro" non è solo un "pomodoro" (una stringa di testo), ma è un "pomodoro" tagliato in cubetti, con una certa acidità, una certa consistenza, pronto per essere usato in una specifica ricetta.
 Gli embeddings trasformano il "pomodoro" da una semplice etichetta a una rappresentazione che il cuoco (i parametri dell'LLM) può capire e utilizzare immediatamente in una moltitudine di modi (come parte di una salsa, in un'insalata, ecc.).</p>
-<h2 id="significato-e-contesto">Significato e contesto</h2>
+<h3 id="significato-e-contesto">Significato e contesto</h3>
 <p>Nel linguaggio, il significato di una parola non è fisso, ma dipende dal contesto in cui viene utilizzata. 
 Prendiamo l'esempio della parola "banco":</p>
-<p>"Mi siedo sul <em>banco</em>", dicendolo potrei rappresentare una classica scena di me, studente, che mi siedo in un banco della mia classe a scuola.
-"Vado al <em>banco</em>", potrebbe significare situazioni molto diverse. Dal banco del bar, al banco salumi del supermercato, cosi come uno sportello bancario.
-"Un <em>banco</em> di pesci", indica invece un gruppo di animali.</p>
+<ul>
+<li>
+<p>"Mi siedo sul <em>banco</em>", dicendolo potrei rappresentare la classica scena di uno studente che si siede al suo posto, in un banco della classe a scuola.</p>
+</li>
+<li>
+<p>"Vado al <em>banco</em>", potrebbe significare situazioni molto diverse. Dal banco del bar, al banco salumi del supermercato, cosi come uno sportello bancario.</p>
+</li>
+<li>
+<p>"Un <em>banco</em> di pesci", indica invece un gruppo di animali.</p>
+</li>
+</ul>
 <p>Questo dimostra che il contesto disambigua il significato, modellando l'interpretazione della parola. 
 Per catturare questa relazione, i modelli di rappresentazione del linguaggio devono considerare sia il significato intrinseco delle parole sia il contesto dinamico in cui appaiono.</p>
 <p>Inizialmente gli embeddings (Glove, Word2Vec) erano "statici", non tenevano conto del contesto.
@@ -569,5 +573,5 @@ L'esempio HR ha mostrato come gli embeddings trasformino CV e job description in
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-12 09:38:42.939325+00:00
+Build Date UTC : 2025-07-12 09:43:26.523440+00:00
 -->
