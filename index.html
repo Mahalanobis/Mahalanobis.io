@@ -362,11 +362,8 @@ All'interno di questa mappatura, la distanza tra due vettori indica la somiglian
 <p><img alt="Emozioni - LDA Topic" src="assets/images/input_embeddings.png" /></p>
 <p>Nei Large Language Models (LLM), gli embeddings sono gestiti da una Matrice di Embedding. 
 Questa matrice funge da "ponte" tra l'input testuale e il modello stesso, fornendo una rappresentazione per ogni token del vocabolario.</p>
-<p>Il numero di parametri in questa matrice è dato da:  </p>
-<ul>
-<li>{Dimensione del Vocabolario} x {Dimensionalità dell'Embedding}  </li>
-</ul>
-<p>Ad esempio, se un LLM ha un vocabolario di 50.000 token e la dimensionalità dell'embedding è 768, 
+<p>Il numero di parametri in questa matrice è dato da: {Dimensione del Vocabolario} x {Dimensionalità dell'Embedding}. <br />
+Ad esempio, se un LLM ha un vocabolario di 50.000 token e la dimensionalità dell'embedding è 768, 
 la matrice di embedding avrà 50.000 × 768 = 38.400.000 parametri.</p>
 <p>Non dobbiamo confondere gli <em>embeddings</em> con i <em>parametri</em> di un LLM.</p>
 <p>I parametri di un LLM (milioni, miliardi o trilioni) sono i pesi e i bias di tutte le connessioni neuronali all'interno della rete neurale. 
@@ -573,5 +570,5 @@ L'esempio HR ha mostrato come gli embeddings trasformino CV e job description in
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-12 09:52:38.341214+00:00
+Build Date UTC : 2025-07-12 09:55:17.573124+00:00
 -->
