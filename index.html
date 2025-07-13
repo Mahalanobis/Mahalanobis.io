@@ -135,6 +135,7 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="introduzione">Introduzione</h1>
+<p><img alt="Map" src="assets/images/Objectives.png" /></p>
 <p>Recentemente ho avuto il piacere di tenere una conferenza didattica
 nell’ambito del corso “<em>Analisi dei dati (data mining)</em>”, tenuto dal
 prof. <a href="https://homes.stat.unipd.it/brunoscarpa/">Bruno Scarpa</a>, presso
@@ -591,11 +592,17 @@ Poichè diversi embedding (es. BERT, Word2Vec, OpenAI text-embedding-ada-002, ..
 </tbody>
 </table>
 <p>I risultati dimostrano che gli embeddings BGE offrono una rappresentazione vettoriale leggermente più efficace per questo specifico dataset di classificazione delle emozioni. 
-BGE ha garantito un'accuratezza media superiore rispetto a E5, confermando la sua capacità di catturare meglio le sfumature semantiche rilevanti per il compito.</p>
+BGE ha garantito un'accuratezza media superiore rispetto a E5, confermando la sua capacità di catturare meglio le sfumature semantiche rilevanti.</p>
 <p>Un F1-score medio attorno a 0.51, indica che l'accuratezza non è "elevata".</p>
+<ul>
+<li>
 <p>Se il modello prevedesse sempre la classe più frequente ("happiness", 23.8%) la percentuale di corretta classificazione sarebbe del 23.8% e l'F1-score del 0.0296.</p>
+</li>
+<li>
 <p>Se il modello prevedesse un emozione a caso, la percentuale di corretta classificazione sarebbe del 7.69% e l'F1-score del 0.0769.</p>
-<p>Il modello, pur non eccellendo, sta apprendendo pattern significativi dagli embeddings.
+</li>
+</ul>
+<p>Il modello, pur non eccellendo, sta apprendendo pattern significativi dagli Embeddings.
 Una delle criticità risiede anche nella formulazione del problema. Le emozioni sono per loro natura soggettive. Due esseri umani davanti alla stessa esperienza possono provare emozioni diverse. Per come è stato formulato questo problema di classificazione, stiamo imponendo che, data una certa frase, ognuno di noi esprima la stessa emozione.  </p></div>
             </div>
         </div>
@@ -680,5 +687,5 @@ Una delle criticità risiede anche nella formulazione del problema. Le emozioni 
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-13 13:15:58.675027+00:00
+Build Date UTC : 2025-07-13 19:15:54.132244+00:00
 -->
