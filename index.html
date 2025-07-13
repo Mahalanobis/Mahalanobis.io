@@ -553,7 +553,48 @@ Poichè diversi embedding (es. BERT, Word2Vec, OpenAI text-embedding-ada-002, ..
 <li>
 <p><a href="https://huggingface.co/intfloat/e5-large-v2">E5-large-v2</a>, sviluppato da un gruppo di ricerca di Microsoft. Il modello supporta la lingua inglese e gestisce fino a 512 token.</p>
 </li>
-</ul></div>
+</ul>
+<p>Il nostro obiettivo è determinare quale modello di embeddings offre una migliore rappresentazione delle frasi di testo, consentendo a un modello di classificazione di predire con maggiore accuratezza le etichette delle emozioni associate.</p>
+<h3 id="metodologia">Metodologia</h3>
+<ul>
+<li>
+<p>Embeddings: Sono stati confrontati gli embeddings generati da BGE e da E5, estratti dallo stesso dataset di frasi e etichette.</p>
+</li>
+<li>
+<p>Classification: E' stato utilizzato un classificatore XGBoost (XGBClassifier). </p>
+</li>
+<li>
+<p>Valutazione: L'addestramento e la valutazione sono stati eseguiti tramite 5-fold Stratified Cross Validation. L'uso della stratificazione ha garantito che ciascun fold mantenesse la stessa distribuzione di etichette delle emozioni del dataset originale, assicurando un confronto robusto e imparziale.</p>
+</li>
+<li>
+<p>Metriche: L'accuracy viene misurata utilizzando la percentuale di Corretta Classificazione ed il Weighted F1-score.</p>
+</li>
+</ul>
+<h3 id="risultati">Risultati</h3>
+<p>L'esecuzione di questo <a href="">codice</a> ha mostrato che entrambi i sistemi di embeddings consentono a XGBoost di classificare le emozioni con prestazioni simili, ma BGE ha superato leggermente E5 su entrambe le metriche chiave.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Embedding</th>
+<th style="text-align: right;">True Classification %</th>
+<th style="text-align: right;">Wgt.F1-score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">BGE</td>
+<td style="text-align: right;">51.32%</td>
+<td style="text-align: right;">0.5246</td>
+</tr>
+<tr>
+<td style="text-align: left;">E5</td>
+<td style="text-align: right;">50.31%</td>
+<td style="text-align: right;">0.5152</td>
+</tr>
+</tbody>
+</table>
+<p>I risultati dimostrano che gli embeddings BGE offrono una rappresentazione vettoriale leggermente più efficace per questo specifico dataset di classificazione delle emozioni. 
+Utilizzando XGBoost come classificatore, BGE ha garantito un'accuratezza media superiore rispetto a E5, confermando la sua capacità di catturare meglio le sfumature semantiche rilevanti per il compito.</p></div>
             </div>
         </div>
 
@@ -637,5 +678,5 @@ Poichè diversi embedding (es. BERT, Word2Vec, OpenAI text-embedding-ada-002, ..
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-13 06:25:38.938375+00:00
+Build Date UTC : 2025-07-13 07:21:50.056880+00:00
 -->
