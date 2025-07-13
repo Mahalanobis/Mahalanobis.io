@@ -521,7 +521,7 @@ La complessità delle sfumature che ci possono essere nelle emozioni espresse at
 
 ![Map](assets/images/UmapEmbeddings2D.png)
 
-Per costruire questa rapprentazione, a livello di [codice](), è stato utilizzato il framework __RAPIDS__ di _Nvidia_ che sfrutta la velocità di elaborazione della GPU.
+Per costruire questa rapprentazione, a livello di [codice](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/plot_Dataset_Embeddings_UMAP2D.py), è stato utilizzato il framework __RAPIDS__ di _Nvidia_ che sfrutta la velocità di elaborazione della GPU.
 
 Nello specifico sono state utilizzate le librerie:
 
