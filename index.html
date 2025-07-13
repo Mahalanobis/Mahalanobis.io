@@ -555,10 +555,10 @@ Poichè diversi embedding (es. BERT, Word2Vec, OpenAI text-embedding-ada-002, ..
 <p>Relatiamente a questo tutorial prenderemo in considerazione due sistemi di embeddings. Li compareremo a titolo esemplificativo focalizzandoci su soluzioni per architetture GPU. Verranno sperimentati questi due modelli:</p>
 <ul>
 <li>
-<p><a href="https://huggingface.co/BAAI/bge-m3">BGE-m3</a>, sviluppato da BAAI (Beijing Academy of Artificial Intelligence). Questo modello supporta oltre 100 lingue, gestisce input fino a 8192 token (Può processare contesti estremamente lunghi (~6-8k parole, contro i 512 token standard di BERT) ed è uno dei rimi modelli a supportare la multi-funzionalità nel retrievial (unificazione di retrieval denso, lessicale e multi-vec/colbert). Quest'ultimo aspetto è meno importante per il nostro scopo, poichè è una funzionalià pù appropriata per sistemi RAG. BGE-3m è un modello di embeddings utilizzabile attraverso la libreria <a href="https://github.com/FlagOpen/FlagEmbedding">FlagEmbedding</a>.</p>
+<p><a href="https://huggingface.co/BAAI/bge-m3">BGE-m3</a>, sviluppato da BAAI (Beijing Academy of Artificial Intelligence). Questo modello supporta oltre 100 lingue, gestisce input fino a 8192 token (Può processare contesti estremamente lunghi (~6-8k parole, contro i 512 token standard di BERT) ed è uno dei rimi modelli a supportare la multi-funzionalità nel retrievial (unificazione di retrieval denso, lessicale e multi-vec/colbert). Quest'ultimo aspetto è meno importante per il nostro scopo, poichè è una funzionalià pù appropriata per sistemi RAG. BGE-3m è un modello di embeddings utilizzabile attraverso la libreria <a href="https://github.com/FlagOpen/FlagEmbedding">FlagEmbedding</a>. <a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/process_Dataset_Embeddings_BGE.py">code</a></p>
 </li>
 <li>
-<p><a href="https://huggingface.co/intfloat/e5-large-v2">E5-large-v2</a>, sviluppato da un gruppo di ricerca di Microsoft. Il modello supporta la lingua inglese e gestisce fino a 512 token.</p>
+<p><a href="https://huggingface.co/intfloat/e5-large-v2">E5-large-v2</a>, sviluppato da un gruppo di ricerca di Microsoft. Il modello supporta la lingua inglese e gestisce fino a 512 token. <a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/process_Dataset_Embeddings_E5.py">code</a></p>
 </li>
 </ul>
 <p>Il nostro obiettivo è determinare quale modello di embeddings offre una migliore rappresentazione delle frasi di testo, consentendo a un modello di classificazione di predire con maggiore accuratezza le emozioni associate alle frasi a partire dagli embeddings.</p>
@@ -711,5 +711,5 @@ Una delle criticità risiede anche nella formulazione del problema. Le emozioni 
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-13 23:08:10.193443+00:00
+Build Date UTC : 2025-07-13 23:10:41.953013+00:00
 -->
