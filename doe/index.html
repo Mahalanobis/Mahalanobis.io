@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://mahalanobis.github.io/Mahalanobis.io/Intro/">
+        <link rel="canonical" href="https://mahalanobis.github.io/Mahalanobis.io/doe/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Intro - Fine-Tuning a small LLM (4Stats)</title>
+        <title>EDA - Fine-Tuning a small LLM (4Stats)</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -38,11 +38,11 @@
                                 <a href=".." class="nav-link">Intro</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">DoE</a>
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">DoE</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../T01_02/" class="dropdown-item">EDA</a>
+    <a href="./" class="dropdown-item active" aria-current="page">EDA</a>
 </li>
                                 </ul>
                             </li>
@@ -54,6 +54,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -71,48 +81,21 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#eda" class="nav-link">EDA</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p>Recentemente ho avuto il piacere di tenere una conferenza didattica
-nell’ambito del corso “<em>Analisi dei dati (data mining)</em>”, tenuto dal
-prof. <a href="https://homes.stat.unipd.it/brunoscarpa/">Bruno Scarpa</a>, presso
-il <a href="https://www.stat.unipd.it/">Dipartimento di Scienze Statistiche</a> a
-Padova.</p>
-<p>L’intervento verteva sull’evoluzione che negli ultimi anni ha avuto
-l’<strong>Intelligenza Artificiale (AI)</strong> nell’ambito del
-<a href="https://en.wikipedia.org/wiki/Natural_language_processing">NLP</a>, <em>un
-percorso affascinante che ci ha portato dalle rappresentazioni lessicali
-come il Bag of Words alle architetture neurali avanzate basate sui
-Transformer</em>.</p>
-<p>Trattandosi di una discussione ad alto livello, ho sentito il desiderio
-di integrare quell’intervento con esempi più pratici e più vicini
-all’esperienza di chi, come me, proviene da quello stesso percorso
-formativo. Questo ha portato alla nascita di questa serie di tutorial,
-pensata per costruire un ponte tra l’<em>AI Generativa</em> e l’<em>AI
-Tradizionale</em>.</p>
-<p>L’architrave di questo ponte è costituita dai problemi di <em>Supervised
-Classification</em>. Vedremo come, nel contesto dell’AI Generativa, questi
-problemi possano essere affrontati con il fine-tuning di un Large
-Language Model (LLM). Un’occasione unica per mettere a confronto i due
-mondi.</p>
-<p>Un aspetto rilevante di questa comparazione sarà la misurazione
-dell’incertezza e dell’errore. Nel mondo dell’AI tradizionale siamo
-abituati a quantificare l’errore attraverso probabilità, intervalli di
-confidenza e metriche derivate dai logit. Vedremo che anche nel contesto
-degli LLM possiamo accedere ai logit e quindi trattare l’errore con la
-stessa familiarità e precisione a cui siamo abituati.</p>
-<p>L’aspetto pratico che guiderà lo sviluppo del codice utilizzato in
-questi tutorial sarà il focus sull’elaborazione su GPU, essenziale per
-la gestione efficiente di modelli complessi che richiedono un hardware
-specifico. L’invito è sperimentare. Al di là delle complessità degli
-aspetti tecnici e metodologici è un mondo più accessibile di quanto uno
-possa pensare.</p>
-<p>Ringrazio i colleghi Guglielmo Strumia e Marco Cozzolino per gli spunti
-e il supporto; questa serie è il frutto del lavoro di tutti noi. Grazie
-ancora.</p></div>
+<ul>
+<li><a href="#eda">EDA</a></li>
+</ul>
+<h1 id="eda">EDA</h1>
+<p>Analisi esplorativa attraverso LDA.</p></div>
             </div>
         </div>
 
