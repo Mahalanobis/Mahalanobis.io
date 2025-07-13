@@ -1,0 +1,19 @@
+# Python virtual environment
+venv/
+
+# MkDocs generated site
+site/
+.cache/
+
+# R/RStudio specific files
+.Rproj.user/
+.Rhistory
+.Rdata
+.Rprofile
+
+# macOS specific
+.DS_Store
+
+# Other common ignore patterns
+*.log
+*.swp
