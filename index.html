@@ -608,7 +608,17 @@ BGE ha garantito un'accuratezza media superiore rispetto a E5, confermando la su
 <p>Il modello, pur non eccellendo, sta apprendendo pattern significativi dagli Embeddings.
 Una delle criticità risiede anche nella formulazione del problema. Le emozioni sono per loro natura soggettive. Due esseri umani davanti alla stessa esperienza possono provare emozioni diverse. Per come è stato formulato questo problema di classificazione, stiamo imponendo che, data una certa frase, ognuno di noi esprima la stessa emozione.  </p>
 <h3 id="umap-2d-bge-embeddings-projection">UMAP 2D BGE-Embeddings Projection</h3>
-<p>La complessità delle sfumature che ci possono essere nelle emozioni espresse attraverso delle semplici frasi è confermata anche da questa rappresentazione 2D degli Embeddings BCE ottenuta attraverso UMAPS (Uniform Manifold Approximation and Projection). Tranne che per l'emozione <em>"Sarcasm"</em> non si rilevano patten evidenti.    </p>
+<p>La complessità delle sfumature che ci possono essere nelle emozioni espresse attraverso delle semplici frasi è confermata anche da questa rappresentazione 2D degli Embeddings BCE ottenuta attraverso UMAPS (Uniform Manifold Approximation and Projection). Tranne che per l'emozione <em>"Sarcasm"</em> non si rilevano patten particolarmente evidenti. </p>
+<p>Per costruire questa rapprentazione, a livello di <a href="">codice</a> è stato utilizzato il framework <strong>RAPIDS</strong> di Nvidia che sfrutta la velocità di elaborazione della GPU.</p>
+<p>Nello specifico sono state utilizzate le librerie:</p>
+<ul>
+<li>
+<p><strong>cuDF (CUDA DataFrame)</strong>: Una libreria che replica l'API di pandas ma esegue le operazioni su GPU VRAM. Questo permette di caricare, manipolare e preparare i dati direttamente sulla GPU, minimizzando il trasferimento dati tra CPU e GPU, che è spesso un collo di bottiglia.</p>
+</li>
+<li>
+<p><strong>cuML (CUDA Machine Learning)</strong>: Una libreria che fornisce implementazioni ottimizzate per GPU di algoritmi di machine learning, simili a scikit-learn.</p>
+</li>
+</ul>
 <p><img alt="Map" src="assets/images/UmapEmbeddings2D.png" /></p></div>
             </div>
         </div>
@@ -693,5 +703,5 @@ Una delle criticità risiede anche nella formulazione del problema. Le emozioni 
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-13 21:22:51.871372+00:00
+Build Date UTC : 2025-07-13 21:29:07.241424+00:00
 -->
