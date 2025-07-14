@@ -104,7 +104,7 @@ Di conseguenza, dovremo tenere a mente due punti chiave:
 * _Specificità del Dataset_: La distribuzione delle classi è una caratteristica intrinseca di questo dataset, non una rappresentazione universale della probabilità che ad una data frase sia associata una determinata emozione;
 * _Gestione dello Sbilanciamento_: Sarà cruciale gestire attivamente questo sbilanciamento delle classi. Il nostro obiettivo non è "correggere" una distribuzione reale sconosciuta, ma assicurarci che i modelli imparino efficacemente a riconoscere anche le categorie meno rappresentate, garantendo una buona capacità di generalizzazione in inferenza.
 
-Il codice python che recupera il dataset da Hugging Face è disponibile a questo [link](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/get_Dataset_fromHF.py).
+<span style="background-color: red;">Il codice python che recupera il dataset da Hugging Face è disponibile a questo [link](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/get_Dataset_fromHF.py).</span>
 
 ## AI Act 
 
@@ -138,7 +138,7 @@ Per limitare questa perdita di informazioni, prima di applicarla, trasformeremo 
 
 Attraverso il topic modelling sono stati identificati 10 topics.  
 
-Il numero ottimale di topic è stato individuato sulla base della _Topic Coherence_ ([code](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/eda_Dataset_lda_find_n_topic.py)).
+Il numero ottimale di topic è stato individuato sulla base della _Topic Coherence_  <span style="background-color: red;">([code](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/eda_Dataset_lda_find_n_topic.py))</span>.
 
 ![Topic Coherence](assets/images/lda_coherence_scores.png)
 
@@ -236,7 +236,8 @@ Le Wordcloud qui illustrate, profilano le emozioni sulla base dei 100 lemmi più
 ![Emozioni](assets/images/emotion_wordclouds_animation.gif)
 
 
-L'intero codice per questa EDA si trova [qua](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/eda_Dataset_lda.py).
+ <span style="background-color: red;">L'intero codice per questa EDA si trova [qua](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/eda_Dataset_lda.py)</span>.
+
 
 
 # Embeddings
@@ -450,7 +451,8 @@ Il concetto è sempre quello di introdurre più flessibilità, adattabilità, e 
 Questi sono i punti cardine di quello che si prospetterà nei prossimi anni grazie all'innovazione data dall'AI Generativa.
 Una transizione che viene efficacemente riassunta da Andrej Karpathy in questa conferenza. Lui parla proprio di una _transizione al Software 3.0_, qualcosa che immpatterà il modo di intendere e sviluppare il codice e le applicazioni che ne derivano. Lasciamo a lui la parola per chiudere questa lunga digressione.  
 
-[Andrej Karpathy's keynote on June 17, 2025 at AI Startup School in San Francisco](https://www.youtube.com/watch?v=LCEmiRjPEtQ&ab_channel=YCombinator)
+<span style="background-color: cyan;">[Andrej Karpathy's keynote on June 17, 2025 at AI Startup School in San Francisco](https://www.youtube.com/watch?v=LCEmiRjPEtQ&ab_channel=YCombinator)
+</span>
 
 ![Map](assets/images/AK.png)
 
@@ -479,9 +481,9 @@ Nel nostro caso, per esempio, si potrebbe consultare la leaderboard per identifi
 
 Relatiamente a questo tutorial prenderemo in considerazione due sistemi di embeddings. Li compareremo a titolo esemplificativo focalizzandoci su soluzioni per architetture GPU. Verranno sperimentati questi due modelli:
 
-* [BGE-m3](https://huggingface.co/BAAI/bge-m3), sviluppato da BAAI (Beijing Academy of Artificial Intelligence). Questo modello supporta oltre 100 lingue, gestisce input fino a 8192 token (Può processare contesti estremamente lunghi (~6-8k parole, contro i 512 token standard di BERT) ed è uno dei rimi modelli a supportare la multi-funzionalità nel retrievial (unificazione di retrieval denso, lessicale e multi-vec/colbert). Quest'ultimo aspetto è meno importante per il nostro scopo, poichè è una funzionalià pù appropriata per sistemi RAG. BGE-3m è un modello di embeddings utilizzabile attraverso la libreria [FlagEmbedding](https://github.com/FlagOpen/FlagEmbedding). [code](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/process_Dataset_Embeddings_BGE.py)
+* [BGE-m3](https://huggingface.co/BAAI/bge-m3), sviluppato da BAAI (Beijing Academy of Artificial Intelligence). Questo modello supporta oltre 100 lingue, gestisce input fino a 8192 token (Può processare contesti estremamente lunghi (~6-8k parole, contro i 512 token standard di BERT) ed è uno dei rimi modelli a supportare la multi-funzionalità nel retrievial (unificazione di retrieval denso, lessicale e multi-vec/colbert). Quest'ultimo aspetto è meno importante per il nostro scopo, poichè è una funzionalià pù appropriata per sistemi RAG. BGE-3m è un modello di embeddings utilizzabile attraverso la libreria [FlagEmbedding](https://github.com/FlagOpen/FlagEmbedding).  <span style="background-color: red;">([code](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/process_Dataset_Embeddings_BGE.py))</span>   
 
-* [E5-large-v2](https://huggingface.co/intfloat/e5-large-v2), sviluppato da un gruppo di ricerca di Microsoft. Il modello supporta la lingua inglese e gestisce fino a 512 token. [code](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/process_Dataset_Embeddings_E5.py)
+* [E5-large-v2](https://huggingface.co/intfloat/e5-large-v2), sviluppato da un gruppo di ricerca di Microsoft. Il modello supporta la lingua inglese e gestisce fino a 512 token.   <span style="background-color: red;">([code](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/process_Dataset_Embeddings_E5.py))</span>
 
 
 Il nostro obiettivo è determinare quale modello di embeddings offre una migliore rappresentazione delle frasi di testo, consentendo a un modello di classificazione di predire con maggiore accuratezza le emozioni associate alle frasi a partire dagli embeddings.
@@ -495,15 +497,15 @@ Il nostro obiettivo è determinare quale modello di embeddings offre una miglior
 * Cross Validation: Il training e la validation sono stati eseguiti attraverso una Cross Validation annidata che si articola in due cicli principali. [Ciclo Esterno] I dati vengono divisi in 3 fold stratificati. Per ogni fold, il modello viene addestrato sulla corrispettiva porzione di dati di training. Il modello XGBoost viene inizializzato con i parametri ottimali trovati da Optuna nel ciclo interno. I risultati di questo processo vengono valutati sul test set del ciclo esterno. utilizzando la percentuale di corretta classificazione e la media aritmetica degli F1 di ogni classe (F1-Macro). [Ciclo Interno] Tuning dei parametri con Optuna. Si basa su una StratifiedKFold a 2 fold assicurandosi che anche nel ciclo di tuning le proporzioni delle classi siano mantenute. Durante il ciclo interno, la pipeline che combina SMOTE (Synthetic Minority Over-sampling Technique) e XGBoost viene addestrata. Questo garantisce che l'oversampling sia applicato solo sui dati di training del fold interno, evitando data leakage. 
 
 ### Risultati
-L'esecuzione di questo [codice](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/analysis_EvaluateEmbeddings_xgboost.py) ha mostrato che entrambi i sistemi di embeddings consentono a XGBoost di classificare le emozioni con prestazioni simili, ma BGE ha superato leggermente E5 su entrambe le metriche chiave.
+L'esecuzione di questo <span style="background-color: red;">([codice](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/analysis_EvaluateEmbeddings_xgboost.py))</span> dimostra che entrambi i sistemi di embeddings consentono a XGBoost di classificare le emozioni con prestazioni simili, ma BGE ha superato leggermente E5 su entrambe le metriche chiave.
 
 | Embedding | True Classification % |             F1-score |
 |:----------|----------------------:|---------------------:|
 | BGE       | 51.00% (±0.23)        |  0.5180 (±0.0015)    |
 | E5        | 49.77% (±0.25)        |  0.5097 (±0.0029)    |
 
-I risultati dimostrano che gli embeddings BGE offrono una rappresentazione vettoriale leggermente più efficace per questo specifico dataset di classificazione delle emozioni. 
-BGE ha garantito un'accuratezza media superiore rispetto a E5, confermando la sua capacità di catturare meglio le sfumature semantiche rilevanti.
+Gli embeddings BGE offrono una rappresentazione vettoriale leggermente più efficace per questo specifico dataset di classificazione delle emozioni. 
+Garantiscono un'accuratezza media superiore rispetto a E5, confermando la sua capacità di catturare meglio le sfumature semantiche rilevanti.
 
 Un F1-score medio attorno a 0.51, indica che l'accuratezza non è "elevata".
 
@@ -521,7 +523,7 @@ La complessità delle sfumature che ci possono essere nelle emozioni espresse at
 
 ![Map](assets/images/UmapEmbeddings2D.png)
 
-Per costruire questa rapprentazione, a livello di [codice](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/plot_Dataset_Embeddings_UMAP2D.py), è stato utilizzato il framework __RAPIDS__ di _Nvidia_ che sfrutta la velocità di elaborazione della GPU.
+Per costruire questa rapprentazione, a livello di <span style="background-color: red;">([codice](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/plot_Dataset_Embeddings_UMAP2D.py))</span>, è stato utilizzato il framework __RAPIDS__ di _Nvidia_ che sfrutta la velocità di elaborazione della GPU.
 
 Nello specifico sono state utilizzate le librerie:
 

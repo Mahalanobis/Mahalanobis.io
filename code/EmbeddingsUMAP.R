@@ -47,3 +47,6 @@ ggplot2::ggplot(data=tmp, aes(x=umap_plot_dim1, y=umap_plot_dim2, colour=Label))
   xlab("\nUMAP Dim 1") + ylab("\nUMAP Dim 2")
 
 
+doe = tmp[,.N,by=.(Label,cluster_kmeans_umap10d)]
+doe1 = tmp[,.N,by=.(Label)]
+doe2 = tmp[,.N,by=.(cluster_kmeans_umap10d)]
