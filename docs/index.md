@@ -44,9 +44,8 @@ __L’invito è sperimentare__. Al di là delle complessità degli
 aspetti tecnici e metodologici è un mondo più accessibile di quanto uno
 possa pensare.
 
-Ringrazio i colleghi [Guglielmo Strumia](https://www.linkedin.com/in/guglielmo-strumia-70091215/)
-e [Marco Cozzolino](https://www.linkedin.com/in/marcocozzolino0/) per gli spunti
-e il supporto; questa serie è il frutto del lavoro di tutti noi. 
+Ringrazio i colleghi [Guglielmo Strumia](https://www.linkedin.com/in/guglielmo-strumia-70091215/), [Marco Cozzolino](https://www.linkedin.com/in/marcocozzolino0/) e [Franco Paron](https://www.linkedin.com/in/francoparon/) per gli spunti
+ed il supporto; questa serie è il frutto del lavoro di tutti noi. 
 Grazie ancora.
 
 
@@ -535,8 +534,8 @@ RAPIDS è un framework all'avanguardia, in termini di efficienza, relativamente 
 
 # Conclusione
 
-Riconosciamo che la nostra introduzione, al di là della descrizione del dataset, potrebbe averci portato temporaneamente lontano dagli obiettivi preposti. Ciononostante, confidiamo che questa rassegna sugli embeddings — cosa sono e che vantaggi portano —, o gli spunti per comprendere la transizione al software 3.0, abbiano offerto utili spunti di riflessione.
+E' indubbio che la nostra introduzione ci ha temporaneamente allontanato dagli obiettivi principali, il fine tuning di un LLM. Per ora abbiamo descritto solamente il dataset su cui verrà effettuata questa sperimentazione. Confidiamo, tuttavia, che questa rassegna sugli embeddings (cosa sono e i loro vantaggi) e gli esempi sulla transizione al Software 3.0 abbiano offerto spunti di riflessione utili.
 
-Quando parliamo di Transformer, prendiamo in considerazione sistemi molto complessi, non facili da comprendere. Non è banale immaginarsi una regressione "text to text", basata su dati non strutturati. Tuttavia la corsa è verso sistemi sempre più complessi che andranno a semplificare e modellare la complessità dei fenomeni che analizziamo e tentiamo di gestire.
+I Transformer sono sistemi estremamente complessi e non facili da comprendere. Non è semplice visualizzare una regressione "text to text" basata su dati non strutturati. Nonostante ciò, l'AI si sta muovendo verso sistemi sempre più sofisticati, capaci di modellare e semplificare la complessità dei fenomeni che analizziamo e gestiamo. Rimane importante provare a comprendere le logiche con cui funziona.
 
-Ora possiamo tornare ai nostri obiettivi principali.
+Ora possiamo tornare ai nostri obiettivi principali. nel prossimo episodio affronteremo il DoE (Design of Experiment) e finalmene procederemo al fine-tuning di Gemma 3 1B.

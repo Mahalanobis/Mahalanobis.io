@@ -50,3 +50,8 @@ ggplot2::ggplot(data=tmp, aes(x=umap_plot_dim1, y=umap_plot_dim2, colour=Label))
 doe = tmp[,.N,by=.(Label,cluster_kmeans_umap10d)]
 doe1 = tmp[,.N,by=.(Label)]
 doe2 = tmp[,.N,by=.(cluster_kmeans_umap10d)]
+
+file_path_emb <- "/home/dario/Downloads/LLMFT4STATS/emotions_dataset_with_embeddings_BGE.parquet"
+ee <- as.data.table(read_parquet(file_path_emb))
+
+
