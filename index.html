@@ -535,7 +535,8 @@ L'idea di fondo è quella di sostituire un vocabolario aprioristico di token, ch
 Il concetto è sempre quello di introdurre più flessibilità, adattabilità, e capacità di riutilizzo. </p>
 <p>Questi sono i punti cardine di quello che si prospetterà nei prossimi anni grazie all'innovazione data dall'AI Generativa.
 Una transizione che viene efficacemente riassunta da Andrej Karpathy in questa conferenza. Lui parla proprio di una <em>transizione al Software 3.0</em>, qualcosa che immpatterà il modo di intendere e sviluppare il codice e le applicazioni che ne derivano. Lasciamo a lui la parola per chiudere questa lunga digressione.  </p>
-<p><a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ&amp;ab_channel=YCombinator">Andrej Karpathy's keynote on June 17, 2025 at AI Startup School in San Francisco</a></p>
+<p><span style="background-color: cyan;"><a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ&amp;ab_channel=YCombinator">Andrej Karpathy's keynote on June 17, 2025 at AI Startup School in San Francisco</a>
+</span></p>
 <p><img alt="Map" src="assets/images/AK.png" /></p>
 <h2 id="come-scegliere-gli-embeddings-piu-adeguati-al-proprio-use-case">Come scegliere gli Embeddings più adeguati al proprio use case</h2>
 <p>Torniamo al nostro use-case. Dobbiamo scegliere un sistema di embeddings che rappresenti i nostri dati.  </p>
@@ -575,7 +576,7 @@ Poichè diversi embedding (es. BERT, Word2Vec, OpenAI text-embedding-ada-002, ..
 </li>
 </ul>
 <h3 id="risultati">Risultati</h3>
-<p>L'esecuzione di questo <a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/analysis_EvaluateEmbeddings_xgboost.py">codice</a> ha mostrato che entrambi i sistemi di embeddings consentono a XGBoost di classificare le emozioni con prestazioni simili, ma BGE ha superato leggermente E5 su entrambe le metriche chiave.</p>
+<p>L'esecuzione di questo <span style="background-color: red;">(<a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/analysis_EvaluateEmbeddings_xgboost.py">codice</a>)</span> dimostra che entrambi i sistemi di embeddings consentono a XGBoost di classificare le emozioni con prestazioni simili, ma BGE ha superato leggermente E5 su entrambe le metriche chiave.</p>
 <table>
 <thead>
 <tr>
@@ -597,8 +598,8 @@ Poichè diversi embedding (es. BERT, Word2Vec, OpenAI text-embedding-ada-002, ..
 </tr>
 </tbody>
 </table>
-<p>I risultati dimostrano che gli embeddings BGE offrono una rappresentazione vettoriale leggermente più efficace per questo specifico dataset di classificazione delle emozioni. 
-BGE ha garantito un'accuratezza media superiore rispetto a E5, confermando la sua capacità di catturare meglio le sfumature semantiche rilevanti.</p>
+<p>Gli embeddings BGE offrono una rappresentazione vettoriale leggermente più efficace per questo specifico dataset di classificazione delle emozioni. 
+Garantiscono un'accuratezza media superiore rispetto a E5, confermando la sua capacità di catturare meglio le sfumature semantiche rilevanti.</p>
 <p>Un F1-score medio attorno a 0.51, indica che l'accuratezza non è "elevata".</p>
 <ul>
 <li>
@@ -613,7 +614,7 @@ Una delle criticità risiede anche nella formulazione del problema. Le emozioni 
 <h3 id="umap-2d-bge-embeddings-projection">UMAP 2D BGE-Embeddings Projection</h3>
 <p>La complessità delle sfumature che ci possono essere nelle emozioni espresse attraverso delle semplici frasi è confermata anche da questa rappresentazione 2D degli Embeddings BCE ottenuta attraverso UMAPS (Uniform Manifold Approximation and Projection). Tranne che per l'emozione <em>"Sarcasm"</em> non si rilevano patten particolarmente evidenti. </p>
 <p><img alt="Map" src="assets/images/UmapEmbeddings2D.png" /></p>
-<p>Per costruire questa rapprentazione, a livello di <a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/plot_Dataset_Embeddings_UMAP2D.py">codice</a>, è stato utilizzato il framework <strong>RAPIDS</strong> di <em>Nvidia</em> che sfrutta la velocità di elaborazione della GPU.</p>
+<p>Per costruire questa rapprentazione, a livello di <span style="background-color: red;">(<a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/plot_Dataset_Embeddings_UMAP2D.py">codice</a>)</span>, è stato utilizzato il framework <strong>RAPIDS</strong> di <em>Nvidia</em> che sfrutta la velocità di elaborazione della GPU.</p>
 <p>Nello specifico sono state utilizzate le librerie:</p>
 <ul>
 <li>
@@ -711,5 +712,5 @@ Una delle criticità risiede anche nella formulazione del problema. Le emozioni 
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-14 05:24:36.125333+00:00
+Build Date UTC : 2025-07-14 06:01:56.919617+00:00
 -->
