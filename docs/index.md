@@ -530,7 +530,9 @@ Nello specifico sono state utilizzate le librerie:
 
 * __cuML (CUDA Machine Learning)__: Una libreria che fornisce implementazioni ottimizzate per GPU di algoritmi di machine learning, simili a scikit-learn.
 
-RAPIDS è un framework all'avanguardia, in termini di efficienza, relativamente alle pipeline per data science e machine learning tradizionale su GPU.
+![Map](assets/images/RAPIDS.png)
+
+[RAPIDS](https://developer.nvidia.com/rapids) è un framework all'avanguardia, in termini di efficienza, relativamente alle pipeline per data science e machine learning tradizionale su GPU.
 
 # Conclusione
 
