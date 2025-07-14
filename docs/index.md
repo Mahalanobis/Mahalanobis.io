@@ -538,4 +538,4 @@ E' indubbio che la nostra introduzione ci ha temporaneamente allontanato dagli o
 
 I Transformer sono sistemi estremamente complessi e non facili da comprendere. Non è semplice visualizzare una regressione "text to text" basata su dati non strutturati. Nonostante ciò, l'AI si sta muovendo verso sistemi sempre più sofisticati, capaci di modellare e semplificare la complessità dei fenomeni che analizziamo e gestiamo. Rimane importante provare a comprendere le logiche con cui funziona.
 
-Ora possiamo tornare ai nostri obiettivi principali. nel prossimo episodio affronteremo il DoE (Design of Experiment) e finalmene procederemo al fine-tuning di Gemma 3 1B.
+Ora possiamo tornare ai nostri obiettivi principali. Nel prossimo episodio svilupperemo il DoE (Design of Experiment) e finalmene procederemo al fine-tuning di Gemma 3 1B.
