@@ -138,7 +138,7 @@ Le soluzioni principali utilizzate per rendere questo processo efficiente, sopra
 <li>load_in_4bit=True: Questo parametro attiva la tecnica QLoRA (Quantized Low-Rank Adaptation). Invece di caricare l'intero modello in precisione floating point completa (es. FP16 o FP32), che richiederebbe molta VRAM, QLoRA lo quantizza a 4 bit. Questo riduce drasticamente l'impronta di memoria del modello base.</li>
 <li>model = FastLanguageModel.get_peft_model(model, **LORA_CONFIG): Questo applica la tecnica LoRA (Low-Rank Adaptation). Invece di addestrare tutti i milioni o miliardi di parametri del modello, LoRA "congela" il modello base quantizzato e aggiunge solo un piccolo numero di "adattatori" (matrici a basso rango) che vengono addestrati. Questi adattatori sono molto più piccoli del modello completo, riducendo enormemente il numero di parametri addestrabili e quindi la VRAM e il tempo di calcolo necessari. La configurazione (LORA_CONFIG) definisce i parametri di LoRA, come r (rango delle matrici) e target_modules (quali parti del modello modificare).</li>
 <li>optim="paged_adamw_8bit": Questo specifica un ottimizzatore "paginato" che gestisce meglio la memoria. Parti dello stato dell'ottimizzatore possono essere spostate dalla VRAM alla RAM di sistema quando non sono immediatamente necessarie, liberando così preziosa VRAM per le operazioni di calcolo.</li>
-<li>use_gradient_checkpointing=True: Questa tecnica sacrifica leggermente la velocità di addestramento per un notevole risparmio di VRAM. Durante il forward pass (calcolo delle predizioni), non tutte le attivazioni intermedie vengono memorizzate. Durante il backward pass (calcolo dei gradienti), le attivazioni necessarie vengono ricalcolate al volo, riducendo la memoria occupata.</li>
+<li>use_gradient_checkpointing=True: Questa tecnica sacrifica leggermente la velocità di addestramento per un notevole risparmio di VRAM. Durante il forward pass (calcolo delle predizioni), non tutte le attivazioni intermedie vengono memorizzate. Durante il backward pass (calcolo dei gradienti), le attivazioni necessarie vengono ricalcolate al volo, riducendo la memoria occupata.  </li>
 </ul>
 </li>
 <li>
@@ -147,7 +147,7 @@ Le soluzioni principali utilizzate per rendere questo processo efficiente, sopra
 <li>TrainingArguments: Definisce tutti i parametri dell'addestramento, come la dimensione del batch (per_device_train_batch_size), i passi di accumulo del gradiente (gradient_accumulation_steps), il learning rate, il numero massimo di passi, e il salvataggio dei log.</li>
 <li>SFTTrainer: È la classe del trainer fornita da TRL specificamente progettata per il Supervised Fine-tuning. Gestisce il ciclo di addestramento, l'applicazione del tokenizer, l'invio dei dati al modello e il calcolo dei gradienti. Semplifica notevolmente il codice necessario per l'addestramento.</li>
 <li>tokenizer: Il tokenizer è essenziale per convertire il testo (le frasi e le etichette delle emozioni) in un formato numerico che il modello può comprendere e viceversa. Il codice lo carica insieme al modello.</li>
-<li>dataset_text_field="text": Indica al SFTTrainer quale campo del dataset formattato contiene il testo da utilizzare per l'addestramento.</li>
+<li>dataset_text_field="text": Indica al SFTTrainer quale campo del dataset formattato contiene il testo da utilizzare per l'addestramento.  </li>
 </ul>
 </li>
 <li>
@@ -156,7 +156,7 @@ Le soluzioni principali utilizzate per rendere questo processo efficiente, sopra
 <li>load_dataset("parquet", data_files={"train": DATASET_PATH}): Carica il dataset da un file Parquet, che è un formato di file colonnare efficiente per i dati tabellari.</li>
 <li>.filter(lambda x: x["Trainset"] == 1): Permette di selezionare solo i campioni desiderati dal dataset in modo efficiente.</li>
 <li>.train_test_split(test_size=0.1, seed=42): Suddivide il dataset in set di addestramento e validazione, essenziale per valutare le prestazioni del modello su dati non visti.</li>
-<li>.map(formatting_func, batched=True): Applica una funzione di formattazione a tutti i campioni del dataset in modo "batchizzato" (elaborando più campioni alla volta), ottimizzando la velocità di pre-elaborazione.</li>
+<li>.map(formatting_func, batched=True): Applica una funzione di formattazione a tutti i campioni del dataset in modo "batchizzato" (elaborando più campioni alla volta), ottimizzando la velocità di pre-elaborazione.  </li>
 </ul>
 </li>
 <li>
@@ -164,7 +164,7 @@ Le soluzioni principali utilizzate per rendere questo processo efficiente, sopra
 <ul>
 <li>threading.Thread: Viene creato un thread separato (vram_monitor_thread) che si occupa esclusivamente di campionare periodicamente l'utilizzo della VRAM (get_vram_usage()) e di salvare i dati in una coda (queue).</li>
 <li>torch.cuda.memory_allocated() e torch.cuda.memory_reserved(): Funzioni di PyTorch che restituiscono rispettivamente la memoria effettivamente allocata dal codice e la memoria totale riservata da PyTorch sulla GPU.</li>
-<li>La visualizzazione finale con matplotlib.pyplot crea un grafico dell'andamento della VRAM nel tempo.</li>
+<li>La visualizzazione finale con matplotlib.pyplot crea un grafico dell'andamento della VRAM nel tempo.  </li>
 </ul>
 </li>
 <li>
