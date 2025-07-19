@@ -92,6 +92,14 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#fine-tuning-a-small-llm" class="nav-link">Fine-tuning a small LLM</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#vram" class="nav-link">VRAM</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#training" class="nav-link">Training</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -174,7 +182,11 @@ Le soluzioni principali utilizzate per rendere questo processo efficiente, sopra
 <li>on_step_end: Questo metodo viene chiamato alla fine di ogni passo di addestramento. Il callback monitora la "loss" (perdita) dell'addestramento. Se la loss non diminuisce per un numero prestabilito di passi consecutivi (patience), il callback imposta un flag (control.should_training_stop = True) che segnala al Trainer di interrompere l'addestramento.</li>
 </ul>
 </li>
-</ul></div>
+</ul>
+<h2 id="vram">VRAM</h2>
+<p><img alt="Map" src="../assets/images/ft_vram_usage.png" /></p>
+<h2 id="training">Training</h2>
+<p><img alt="Map" src="../assets/images/ft_training_loss.png" /></p></div>
             </div>
         </div>
 
