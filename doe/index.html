@@ -78,6 +78,10 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#doe" class="nav-link">DoE</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#perche-la-scelta-del-trainset-e-cruciale" class="nav-link">Perché la scelta del Trainset è cruciale?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -86,16 +90,32 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="doe">DoE</h1>
-<p>Quando si parla di <em>Design of Experiment (DoE)</em>, di solito pensiamo a un metodo statistico per pianificare esperimenti. L'idea è semplice: vogliamo capire come diverse <em>variabili (o fattori)</em> influenzano un certo <em>risultato (o risposta)</em>, cercando di ottenere il massimo delle informazioni con il minor numero di prove e garantendo che i nostri risultati siano validi ed efficienti.</p>
+<p>Quando si parla di <strong>Design of Experiment (DoE)</strong>, di solito pensiamo a un metodo statistico per pianificare esperimenti. L'idea è semplice: vogliamo capire come diverse <em>variabili (o fattori)</em> influenzano un certo <em>risultato (o risposta)</em>, cercando di ottenere il massimo delle informazioni con il minor numero di prove e garantendo che i nostri risultati siano validi ed efficienti.</p>
 <p>Tuttavia, nel contesto di questo tutorial, <em>il DoE assume una sfumatura un po' diversa</em>. Non stiamo progettando un esperimento per testare direttamente l'impatto di alcune variabili su un modello. Invece, stiamo applicando i principi del DoE per <em>definire con cura il dataset (il "trainset")</em> che useremo. Questo trainset sarà fondamentale per due scopi:</p>
 <ul>
 <li>
-<p>Addestrare i modelli di AI tradizionale.</p>
+<p><strong>Addestrare i modelli di AI tradizionale.</strong></p>
 </li>
 <li>
-<p>Predisporre il fine-tuning di un Large Language Model (LLM).</p>
+<p><strong>Predisporre il fine-tuning di un Large Language Model (LLM).</strong></p>
 </li>
-</ul></div>
+</ul>
+<p>Il nostro obiettivo qui è chiaro: selezionare un sottoinsieme di osservazioni che sia il più rappresentativo, bilanciato e informato possibile, massimizzando l'efficacia del fine-tuning.</p>
+<h2 id="perche-la-scelta-del-trainset-e-cruciale">Perché la scelta del Trainset è cruciale?</h2>
+<p>Il codice seleziona un trainset relativamente piccolo, appena 50.000 frasi. Questa non è una scelta casuale! Vogliamo esplorare un aspetto fondamentale della recente letteratura sugli LLM, che suggerisce come il fine-tuning di un modello pre-addestrato possa essere incredibilmente efficace anche con un numero limitato di casi. Vogliamo verificare questa ipotesi, testando la capacità di generalizzazione di un LLM anche con un trainset più contenuto.</p>
+<p>Ma c'è di più. La scelta di un dataset bilanciato è di importanza critica. Immaginate di voler insegnare a un bambino il mondo animale. Se gli mostraste solo gatti, il bambino imparerebbe a riconoscere i gatti benissimo, ma avrebbe difficoltà con i cani o gli uccelli. Allo stesso modo, un dataset sbilanciato, dove alcune categorie (per esempio, certe emozioni o topic) sono sovra-rappresentate, porterebbe l'LLM a:</p>
+<ul>
+<li>
+<p>Sovra-apprendere le categorie più frequenti, diventando un "esperto" solo su quelle.</p>
+</li>
+<li>
+<p>Sotto-stimare o addirittura ignorare le categorie meno comuni, ma magari altrettanto importanti per il nostro scopo.</p>
+</li>
+</ul>
+<p>Un trainset bilanciato assicura che il modello sia esposto a tutte le sfumature e varietà presenti nei dati, rendendolo più robusto e capace di generalizzare bene anche su osservazioni che non rientrano nelle categorie più comuni.</p>
+<p>Vogliamo che il trainset rappresenti al meglio la ricchezza e la varietà del dataset completo, specialmente quando si tratta di emozioni (Label) e di varietà degli Embeddings (Umap10KMeans). Qui entra in gioco la logica di stratificazione.</p>
+<p>Immaginate il vostro dataset come un grande cesto di frutta mista. Ci sono mele rosse, mele verdi, banane e magari qualche frutto esotico raro. Se prendessimo a caso 50 frutti, potremmo ritrovarci con tantissime mele rosse e nessuna banana o frutto esotico. Questo è ciò che succede con un campionamento puramente casuale: le categorie più abbondanti tendono a dominare, mentre quelle meno comuni vengono trascurate.</p>
+<p>La nostra logica di stratificazione evita proprio questo squilibrio. Dividiamo il nostro "cesto di frutta" in tanti piccoli "scomparti", dove ogni scomparto è una combinazione unica di Label e di Embeddings (Umap10KMeans). Ognuno di questi scomparti costituisce un nostro strato di campionamento.</p></div>
             </div>
         </div>
 
