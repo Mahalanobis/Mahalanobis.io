@@ -131,10 +131,9 @@
 <p>Il codice implementa un processo di fine-tuning di un LLM, nello specifico Gemma-3-1B-IT, per un compito di classificazione delle emozioni. 
 Le soluzioni principali utilizzate per rendere questo processo efficiente, soprattutto in termini di utilizzo della memoria (VRAM) e velocità, sono le seguenti:</p>
 <ul>
-<li>Unsloth (e tecniche di Efficient Fine-tuning come QLoRA e LoRA): Unsloth è una libreria che ottimizza il processo di fine-tuning degli LLM, rendendolo significativamente più veloce e meno esigente in termini di memoria rispetto alle implementazioni standard. Lo fa attraverso varie ottimizzazioni a basso livello.</li>
-</ul>
-<p>Come funziona nel codice:</p>
-<ul>
+<li>
+<p>Unsloth (e tecniche di Efficient Fine-tuning come QLoRA e LoRA): Unsloth è una libreria che ottimizza il processo di fine-tuning degli LLM, rendendolo significativamente più veloce e meno esigente in termini di memoria rispetto alle implementazioni standard. Lo fa attraverso varie ottimizzazioni a basso livello. Come funziona nel codice:</p>
+</li>
 <li>
 <p>from unsloth import FastLanguageModel: Importa la classe FastLanguageModel che è la versione ottimizzata di Unsloth per caricare e gestire i modelli.</p>
 </li>
