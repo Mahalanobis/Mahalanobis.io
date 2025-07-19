@@ -138,7 +138,7 @@
 <p>blabla blabla </p>
 <p><img alt="Map" src="../assets/images/gemma3.png" /></p>
 <h1 id="fine-tuning-a-small-llm">Fine-tuning a small LLM</h1>
-<p>Il <span style="background-color: red;"><a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/FineTuning_Gemma3_1B_v0.py">codice</a></span> implementa un processo di fine-tuning di un LLM, nello specifico <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>, per un compito di classificazione delle emozioni. 
+<p>Il <span style="background-color: red;"><a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/FineTuning_Gemma3_1B_v0.py">codice</a></span> implementa un processo di fine-tuning di un LLM, nello specifico <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>, specializzandosi nella classificazione delle emozioni. 
 Le soluzioni principali utilizzate per rendere questo processo efficiente, soprattutto in termini di utilizzo della memoria (VRAM) e velocità, sono le seguenti:</p>
 <p><img alt="Map" src="../assets/images/unsloth.png" /></p>
 <ul>
@@ -146,7 +146,7 @@ Le soluzioni principali utilizzate per rendere questo processo efficiente, sopra
 <li>from unsloth import FastLanguageModel: Importa la classe FastLanguageModel che è la versione ottimizzata di Unsloth per caricare e gestire i modelli.</li>
 <li>load_in_4bit=True: Questo parametro attiva la tecnica <a href="https://arxiv.org/abs/2305.14314">QLoRA (Quantized Low-Rank Adaptation)</a>. Invece di caricare l'intero modello in precisione floating point completa (es. FP16 o FP32), che richiederebbe molta VRAM, QLoRA lo quantizza a 4 bit. Questo riduce drasticamente l'impronta di memoria del modello base.</li>
 <li>model = FastLanguageModel.get_peft_model(model, **LORA_CONFIG): Questo applica la tecnica <a href="https://arxiv.org/abs/2106.09685">LoRA (Low-Rank Adaptation)</a>. Invece di addestrare tutti i milioni o miliardi di parametri del modello, LoRA "congela" il modello base quantizzato e aggiunge solo un piccolo numero di "adattatori" (matrici a basso rango) che vengono addestrati. Questi adattatori sono molto più piccoli del modello completo, riducendo enormemente il numero di parametri addestrabili e quindi la VRAM e il tempo di calcolo necessari. La configurazione (LORA_CONFIG) definisce i parametri di LoRA, come r (rango delle matrici) e target_modules (quali parti del modello modificare).</li>
-<li>optim="paged_adamw_8bit": Questo specifica un ottimizzatore "paginato" che gestisce meglio la memoria. Parti dello stato dell'ottimizzatore possono essere spostate dalla VRAM alla RAM di sistema quando non sono immediatamente necessarie, liberando così preziosa VRAM per le operazioni di calcolo.</li>
+<li>optim="paged_adamw_8bit": Questo specifica un ottimizzatore "<em>paged</em>" che gestisce meglio la memoria. Parti dello stato dell'ottimizzatore possono essere spostate dalla VRAM alla RAM di sistema quando non sono immediatamente necessarie, liberando così preziosa VRAM per le operazioni di calcolo.</li>
 <li>use_gradient_checkpointing=True: Questa tecnica sacrifica leggermente la velocità di addestramento per un notevole risparmio di VRAM. Durante il forward pass (calcolo delle predizioni), non tutte le attivazioni intermedie vengono memorizzate. Durante il backward pass (calcolo dei gradienti), le attivazioni necessarie vengono ricalcolate al volo, riducendo la memoria occupata.  </li>
 </ul>
 </li>
@@ -188,6 +188,8 @@ Le soluzioni principali utilizzate per rendere questo processo efficiente, sopra
 </ul>
 </li>
 </ul>
+<p><img alt="Map" src="../assets/images/ft_unsloth.png" /></p>
+<p>L'intero processo di fine-tuning, a partire dalle 50K frasi e le rispettive emozioni che costituiscono il <em>trainset</em>, impiega poco più di 1000 secondi, ~15 minuti.</p>
 <h2 id="vram">VRAM</h2>
 <p><img alt="Map" src="../assets/images/ft_vram_usage.png" /></p>
 <h2 id="training">Training</h2>
