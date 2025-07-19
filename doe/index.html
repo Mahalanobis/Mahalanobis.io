@@ -163,26 +163,26 @@ Le soluzioni principali utilizzate per rendere questo processo efficiente, sopra
 </ul>
 <p><img alt="Map" src="../assets/images/hf_datasets.png" /></p>
 <ul>
-<li>
-<p><strong>Hugging Face Datasets</strong>: È una libreria efficiente per caricare, elaborare e gestire grandi dataset in modo performante, anche quando non stanno completamente in RAM. Come funziona nel codice:</p>
-<ul>
+<li><strong>Hugging Face Datasets</strong>: È una libreria efficiente per caricare, elaborare e gestire grandi dataset in modo performante, anche quando non stanno completamente in RAM. Come funziona nel codice:<ul>
 <li>load_dataset("parquet", data_files={"train": DATASET_PATH}): Carica il dataset da un file Parquet, che è un formato di file colonnare efficiente per i dati tabellari.</li>
 <li>.filter(lambda x: x["Trainset"] == 1): Permette di selezionare solo i campioni desiderati dal dataset in modo efficiente.</li>
 <li>.train_test_split(test_size=0.1, seed=42): Suddivide il dataset in set di addestramento e validazione, essenziale per valutare le prestazioni del modello su dati non visti.</li>
 <li>.map(formatting_func, batched=True): Applica una funzione di formattazione a tutti i campioni del dataset in modo "batchizzato" (elaborando più campioni alla volta), ottimizzando la velocità di pre-elaborazione.  </li>
 </ul>
 </li>
-<li>
-<p><strong>Monitoraggio VRAM Multi-thread</strong>: Permette di tenere traccia dell'utilizzo della memoria della GPU (VRAM) in tempo reale durante l'esecuzione dello script, inclusi i momenti di caricamento del modello e di addestramento. Questo è cruciale per diagnosticare problemi di "Out Of Memory" (OOM) o per capire come le ottimizzazioni influenzano il consumo di memoria. Come funziona nel codice:</p>
+</ul>
+<p><img alt="Map" src="../assets/images/VRAM.png" /></p>
 <ul>
+<li><strong>Monitoraggio VRAM Multi-thread</strong>: Permette di tenere traccia dell'utilizzo della memoria della GPU (VRAM) in tempo reale durante l'esecuzione dello script, inclusi i momenti di caricamento del modello e di addestramento. Questo è cruciale per diagnosticare problemi di "Out Of Memory" (OOM) o per capire come le ottimizzazioni influenzano il consumo di memoria. Come funziona nel codice:<ul>
 <li>threading.Thread: Viene creato un thread separato (vram_monitor_thread) che si occupa esclusivamente di campionare periodicamente l'utilizzo della VRAM (get_vram_usage()) e di salvare i dati in una coda (queue).</li>
 <li>torch.cuda.memory_allocated() e torch.cuda.memory_reserved(): Funzioni di PyTorch che restituiscono rispettivamente la memoria effettivamente allocata dal codice e la memoria totale riservata da PyTorch sulla GPU.</li>
 <li>La visualizzazione finale con matplotlib.pyplot crea un grafico dell'andamento della VRAM nel tempo.  </li>
 </ul>
 </li>
-<li>
-<p><strong>Callback Personalizzato per Early Stopping</strong>: L'addestramento di modelli di deep learning può essere costoso. L'Early Stopping è una tecnica per fermare l'addestramento quando il modello smette di migliorare (o inizia a peggiorare) su una metrica specifica (in questo caso, la training loss). Questo previene l'overfitting e risparmia risorse computazionali. Come funziona nel codice:</p>
+</ul>
+<p><img alt="Map" src="../assets/images/earlystopping.png" /></p>
 <ul>
+<li><strong>Callback Personalizzato per Early Stopping</strong>: L'addestramento di modelli di deeplearning può essere costoso. L'Early Stopping è una tecnica per fermare l'addestramento quando il modello smette di migliorare (o inizia a peggiorare) su una metrica specifica (in questo caso, la training loss). Questo previene l'overfitting e risparmia risorse computazionali. Come funziona nel codice:<ul>
 <li>CustomEarlyStoppingCallback(TrainerCallback): Viene definita una classe che eredita da TrainerCallback di Hugging Face. Questo permette di "agganciarsi" a specifici eventi durante il ciclo di addestramento.</li>
 <li>on_step_end: Questo metodo viene chiamato alla fine di ogni passo di addestramento. Il callback monitora la "loss" (perdita) dell'addestramento. Se la loss non diminuisce per un numero prestabilito di passi consecutivi (patience), il callback imposta un flag (control.should_training_stop = True) che segnala al Trainer di interrompere l'addestramento.</li>
 </ul>
