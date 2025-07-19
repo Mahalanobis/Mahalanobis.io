@@ -84,6 +84,16 @@
             </li>
               </ul>
             </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#perche-gemma3" class="nav-link">Perchè Gemma3</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fine-tuning-a-small-llm" class="nav-link">Fine-tuning a small LLM</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
@@ -115,7 +125,9 @@
 <p>Un trainset bilanciato assicura che il modello sia esposto a tutte le sfumature e varietà presenti nei dati, rendendolo più robusto e capace di generalizzare bene anche su osservazioni che non rientrano nelle categorie più comuni.</p>
 <p>Vogliamo che il trainset rappresenti al meglio la ricchezza e la varietà del dataset completo, specialmente quando si tratta di emozioni (Label) e di varietà degli Embeddings (Umap10KMeans). Qui entra in gioco la logica di stratificazione.</p>
 <p>Immaginate il vostro dataset come un grande cesto di frutta mista. Ci sono mele rosse, mele verdi, banane e magari qualche frutto esotico raro. Se prendessimo a caso 50 frutti, potremmo ritrovarci con tantissime mele rosse e nessuna banana o frutto esotico. Questo è ciò che succede con un campionamento puramente casuale: le categorie più abbondanti tendono a dominare, mentre quelle meno comuni vengono trascurate.</p>
-<p>La nostra logica di stratificazione evita proprio questo squilibrio. Dividiamo il nostro "cesto di frutta" in tanti piccoli "scomparti", dove ogni scomparto è una combinazione unica di Label e di Embeddings (Umap10KMeans). Ognuno di questi scomparti costituisce un nostro strato di campionamento.</p></div>
+<p>La nostra logica di stratificazione evita proprio questo squilibrio. Dividiamo il nostro "cesto di frutta" in tanti piccoli "scomparti", dove ogni scomparto è una combinazione unica di Label e di Embeddings (Umap10KMeans). Ognuno di questi scomparti costituisce un nostro strato di campionamento.</p>
+<h1 id="perche-gemma3">Perchè Gemma3</h1>
+<h1 id="fine-tuning-a-small-llm">Fine-tuning a small LLM</h1></div>
             </div>
         </div>
 
