@@ -120,7 +120,7 @@
 </ul>
 <p>Il nostro obiettivo qui è chiaro: selezionare un sottoinsieme di osservazioni che sia il più rappresentativo, bilanciato e informato possibile, massimizzando l'efficacia del fine-tuning.</p>
 <h2 id="perche-la-scelta-del-trainset-e-cruciale">Perché la scelta del Trainset è cruciale?</h2>
-<p>Il &lt;span style="background-color: red;"<a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/FT_Emotions_Dataset_DOE.py">codice</a></span> seleziona un trainset relativamente piccolo, appena 50.000 frasi. Questa non è una scelta casuale! Vogliamo esplorare un aspetto fondamentale della recente letteratura sugli LLM, che suggerisce come il fine-tuning di un modello pre-addestrato possa essere incredibilmente efficace anche con un numero limitato di casi. Vogliamo verificare questa ipotesi, testando la capacità di generalizzazione di un LLM anche con un trainset più contenuto.</p>
+<p>Il <span style="background-color: red;"><a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/FT_Emotions_Dataset_DOE.py">codice</a></span> seleziona un trainset relativamente piccolo, appena 50.000 frasi. Questa non è una scelta casuale! Vogliamo esplorare un aspetto fondamentale della recente letteratura sugli LLM, che suggerisce come il fine-tuning di un modello pre-addestrato possa essere incredibilmente efficace anche con un numero limitato di casi. Vogliamo verificare questa ipotesi, testando la capacità di generalizzazione di un LLM anche con un trainset più contenuto.</p>
 <p>Ma c'è di più. La scelta di un dataset bilanciato è di importanza critica. Immaginate di voler insegnare a un bambino il mondo animale. Se gli mostraste solo gatti, il bambino imparerebbe a riconoscere i gatti benissimo, ma avrebbe difficoltà con i cani o gli uccelli. Allo stesso modo, un dataset sbilanciato, dove alcune categorie (per esempio, certe emozioni o topic) sono sovra-rappresentate, porterebbe l'LLM a:</p>
 <ul>
 <li>
@@ -138,7 +138,7 @@
 <p>blabla blabla </p>
 <p><img alt="Map" src="../assets/images/gemma3.png" /></p>
 <h1 id="fine-tuning-a-small-llm">Fine-tuning a small LLM</h1>
-<p>Il &lt;span style="background-color: red;"<a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/FineTuning_Gemma3_1B_v0.py">codice</a></span> implementa un processo di fine-tuning di un LLM, nello specifico <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>, per un compito di classificazione delle emozioni. 
+<p>Il <span style="background-color: red;"><a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/FineTuning_Gemma3_1B_v0.py">codice</a></span> implementa un processo di fine-tuning di un LLM, nello specifico <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>, per un compito di classificazione delle emozioni. 
 Le soluzioni principali utilizzate per rendere questo processo efficiente, soprattutto in termini di utilizzo della memoria (VRAM) e velocità, sono le seguenti:</p>
 <p><img alt="Map" src="../assets/images/unsloth.png" /></p>
 <ul>
