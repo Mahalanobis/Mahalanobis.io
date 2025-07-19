@@ -153,15 +153,16 @@ Le soluzioni principali utilizzate per rendere questo processo efficiente, sopra
 </ul>
 <p><img alt="Map" src="../assets/images/hf_transformers.png" /></p>
 <ul>
-<li>
-<p><strong>Hugging Face Transformers e TRL (Transformer Reinforcement Learning)</strong>: Librerie fondamentali nell'ecosistema di Hugging Face per lavorare con LLM. Transformers fornisce la struttura per caricare modelli, tokenizer e definire gli argomenti di addestramento (TrainingArguments). TRL è una libreria costruita su Transformers che fornisce strumenti specifici per il fine-tuning di LLM, in particolare per compiti come il Supervised Fine-tuning (SFT) e il Reinforcement Learning from Human Feedback (RLHF). Come funziona nel codice:</p>
-<ul>
+<li><strong>Hugging Face Transformers e TRL (Transformer Reinforcement Learning)</strong>: Librerie fondamentali nell'ecosistema di Hugging Face per lavorare con LLM. Transformers fornisce la struttura per caricare modelli, tokenizer e definire gli argomenti di addestramento (TrainingArguments). TRL è una libreria costruita su Transformers che fornisce strumenti specifici per il fine-tuning di LLM, in particolare per compiti come il Supervised Fine-tuning (SFT) e il Reinforcement Learning from Human Feedback (RLHF). Come funziona nel codice:<ul>
 <li>TrainingArguments: Definisce tutti i parametri dell'addestramento, come la dimensione del batch (per_device_train_batch_size), i passi di accumulo del gradiente (gradient_accumulation_steps), il learning rate, il numero massimo di passi, e il salvataggio dei log.</li>
 <li>SFTTrainer: È la classe del trainer fornita da TRL specificamente progettata per il Supervised Fine-tuning. Gestisce il ciclo di addestramento, l'applicazione del tokenizer, l'invio dei dati al modello e il calcolo dei gradienti. Semplifica notevolmente il codice necessario per l'addestramento.</li>
 <li>tokenizer: Il tokenizer è essenziale per convertire il testo (le frasi e le etichette delle emozioni) in un formato numerico che il modello può comprendere e viceversa. Il codice lo carica insieme al modello.</li>
 <li>dataset_text_field="text": Indica al SFTTrainer quale campo del dataset formattato contiene il testo da utilizzare per l'addestramento.  </li>
 </ul>
 </li>
+</ul>
+<p><img alt="Map" src="../assets/images/hf_datasets.png" /></p>
+<ul>
 <li>
 <p><strong>Hugging Face Datasets</strong>: È una libreria efficiente per caricare, elaborare e gestire grandi dataset in modo performante, anche quando non stanno completamente in RAM. Come funziona nel codice:</p>
 <ul>
