@@ -127,7 +127,93 @@
 <p>Immaginate il vostro dataset come un grande cesto di frutta mista. Ci sono mele rosse, mele verdi, banane e magari qualche frutto esotico raro. Se prendessimo a caso 50 frutti, potremmo ritrovarci con tantissime mele rosse e nessuna banana o frutto esotico. Questo è ciò che succede con un campionamento puramente casuale: le categorie più abbondanti tendono a dominare, mentre quelle meno comuni vengono trascurate.</p>
 <p>La nostra logica di stratificazione evita proprio questo squilibrio. Dividiamo il nostro "cesto di frutta" in tanti piccoli "scomparti", dove ogni scomparto è una combinazione unica di Label e di Embeddings (Umap10KMeans). Ognuno di questi scomparti costituisce un nostro strato di campionamento.</p>
 <h1 id="perche-gemma3">Perchè Gemma3</h1>
-<h1 id="fine-tuning-a-small-llm">Fine-tuning a small LLM</h1></div>
+<h1 id="fine-tuning-a-small-llm">Fine-tuning a small LLM</h1>
+<p>Il codice implementa un processo di fine-tuning di un LLM, nello specifico Gemma-3-1B-IT, per un compito di classificazione delle emozioni. 
+Le soluzioni principali utilizzate per rendere questo processo efficiente, soprattutto in termini di utilizzo della memoria (VRAM) e velocità, sono le seguenti:</p>
+<ul>
+<li>Unsloth (e tecniche di Efficient Fine-tuning come QLoRA e LoRA): Unsloth è una libreria che ottimizza il processo di fine-tuning degli LLM, rendendolo significativamente più veloce e meno esigente in termini di memoria rispetto alle implementazioni standard. Lo fa attraverso varie ottimizzazioni a basso livello.</li>
+</ul>
+<p>Come funziona nel codice:</p>
+<ul>
+<li>
+<p>from unsloth import FastLanguageModel: Importa la classe FastLanguageModel che è la versione ottimizzata di Unsloth per caricare e gestire i modelli.</p>
+</li>
+<li>
+<p>load_in_4bit=True: Questo parametro attiva la tecnica QLoRA (Quantized Low-Rank Adaptation). Invece di caricare l'intero modello in precisione floating point completa (es. FP16 o FP32), che richiederebbe molta VRAM, QLoRA lo quantizza a 4 bit. Questo riduce drasticamente l'impronta di memoria del modello base.</p>
+</li>
+<li>
+<p>model = FastLanguageModel.get_peft_model(model, **LORA_CONFIG): Questo applica la tecnica LoRA (Low-Rank Adaptation). Invece di addestrare tutti i milioni o miliardi di parametri del modello, LoRA "congela" il modello base quantizzato e aggiunge solo un piccolo numero di "adattatori" (matrici a basso rango) che vengono addestrati. Questi adattatori sono molto più piccoli del modello completo, riducendo enormemente il numero di parametri addestrabili e quindi la VRAM e il tempo di calcolo necessari. La configurazione (LORA_CONFIG) definisce i parametri di LoRA, come r (rango delle matrici) e target_modules (quali parti del modello modificare).</p>
+</li>
+<li>
+<p>optim="paged_adamw_8bit": Questo specifica un ottimizzatore "paginato" che gestisce meglio la memoria. Parti dello stato dell'ottimizzatore possono essere spostate dalla VRAM alla RAM di sistema quando non sono immediatamente necessarie, liberando così preziosa VRAM per le operazioni di calcolo.</p>
+</li>
+<li>
+<p>use_gradient_checkpointing=True: Questa tecnica sacrifica leggermente la velocità di addestramento per un notevole risparmio di VRAM. Durante il forward pass (calcolo delle predizioni), non tutte le attivazioni intermedie vengono memorizzate. Durante il backward pass (calcolo dei gradienti), le attivazioni necessarie vengono ricalcolate al volo, riducendo la memoria occupata.</p>
+</li>
+<li>
+<p>Hugging Face Transformers e TRL (Transformer Reinforcement Learning): Librerie fondamentali nell'ecosistema di Hugging Face per lavorare con LLM. Transformers fornisce la struttura per caricare modelli, tokenizer e definire gli argomenti di addestramento (TrainingArguments). TRL è una libreria costruita su Transformers che fornisce strumenti specifici per il fine-tuning di LLM, in particolare per compiti come il Supervised Fine-tuning (SFT) e il Reinforcement Learning from Human Feedback (RLHF).</p>
+</li>
+</ul>
+<p>Come funziona nel codice:</p>
+<ul>
+<li>
+<p>TrainingArguments: Definisce tutti i parametri dell'addestramento, come la dimensione del batch (per_device_train_batch_size), i passi di accumulo del gradiente (gradient_accumulation_steps), il learning rate, il numero massimo di passi, e il salvataggio dei log.</p>
+</li>
+<li>
+<p>SFTTrainer: È la classe del trainer fornita da TRL specificamente progettata per il Supervised Fine-tuning. Gestisce il ciclo di addestramento, l'applicazione del tokenizer, l'invio dei dati al modello e il calcolo dei gradienti. Semplifica notevolmente il codice necessario per l'addestramento.</p>
+</li>
+<li>
+<p>tokenizer: Il tokenizer è essenziale per convertire il testo (le frasi e le etichette delle emozioni) in un formato numerico che il modello può comprendere e viceversa. Il codice lo carica insieme al modello.</p>
+</li>
+<li>
+<p>dataset_text_field="text": Indica al SFTTrainer quale campo del dataset formattato contiene il testo da utilizzare per l'addestramento.</p>
+</li>
+<li>
+<p>Hugging Face Datasets: È una libreria efficiente per caricare, elaborare e gestire grandi dataset in modo performante, anche quando non stanno completamente in RAM.</p>
+</li>
+</ul>
+<p>Come funziona nel codice:</p>
+<ul>
+<li>
+<p>load_dataset("parquet", data_files={"train": DATASET_PATH}): Carica il dataset da un file Parquet, che è un formato di file colonnare efficiente per i dati tabellari.</p>
+</li>
+<li>
+<p>.filter(lambda x: x["Trainset"] == 1): Permette di selezionare solo i campioni desiderati dal dataset in modo efficiente.</p>
+</li>
+<li>
+<p>.train_test_split(test_size=0.1, seed=42): Suddivide il dataset in set di addestramento e validazione, essenziale per valutare le prestazioni del modello su dati non visti.</p>
+</li>
+<li>
+<p>.map(formatting_func, batched=True): Applica una funzione di formattazione a tutti i campioni del dataset in modo "batchizzato" (elaborando più campioni alla volta), ottimizzando la velocità di pre-elaborazione.</p>
+</li>
+<li>
+<p>Monitoraggio VRAM Multi-thread: Permette di tenere traccia dell'utilizzo della memoria della GPU (VRAM) in tempo reale durante l'esecuzione dello script, inclusi i momenti di caricamento del modello e di addestramento. Questo è cruciale per diagnosticare problemi di "Out Of Memory" (OOM) o per capire come le ottimizzazioni influenzano il consumo di memoria.</p>
+</li>
+</ul>
+<p>Come funziona nel codice:</p>
+<ul>
+<li>
+<p>threading.Thread: Viene creato un thread separato (vram_monitor_thread) che si occupa esclusivamente di campionare periodicamente l'utilizzo della VRAM (get_vram_usage()) e di salvare i dati in una coda (queue).</p>
+</li>
+<li>
+<p>torch.cuda.memory_allocated() e torch.cuda.memory_reserved(): Funzioni di PyTorch che restituiscono rispettivamente la memoria effettivamente allocata dal codice e la memoria totale riservata da PyTorch sulla GPU.</p>
+</li>
+<li>
+<p>La visualizzazione finale con matplotlib.pyplot crea un grafico dell'andamento della VRAM nel tempo.</p>
+</li>
+<li>
+<p>Callback Personalizzato per Early Stopping: L'addestramento di modelli di deep learning può essere costoso. L'Early Stopping è una tecnica per fermare l'addestramento quando il modello smette di migliorare (o inizia a peggiorare) su una metrica specifica (in questo caso, la training loss). Questo previene l'overfitting e risparmia risorse computazionali.</p>
+</li>
+</ul>
+<p>Come funziona nel codice:</p>
+<ul>
+<li>
+<p>CustomEarlyStoppingCallback(TrainerCallback): Viene definita una classe che eredita da TrainerCallback di Hugging Face. Questo permette di "agganciarsi" a specifici eventi durante il ciclo di addestramento.</p>
+</li>
+<li>
+<p>on_step_end: Questo metodo viene chiamato alla fine di ogni passo di addestramento. Il callback monitora la "loss" (perdita) dell'addestramento. Se la loss non diminuisce per un numero prestabilito di passi consecutivi (patience), il callback imposta un flag (control.should_training_stop = True) che segnala al Trainer di interrompere l'addestramento.</p>
+</li>
+</ul></div>
             </div>
         </div>
 
