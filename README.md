@@ -1,5 +1,5 @@
 # LLMFT4STATS
-Fine Tuning small LLM (using a statistical approach) 
+Fine Tuning small LLM (using a statistical approach)                                                 
 https://Mahalanobis.github.io/Mahalanobis.io
 
 
