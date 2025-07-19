@@ -133,21 +133,13 @@ Le soluzioni principali utilizzate per rendere questo processo efficiente, sopra
 <ul>
 <li>
 <p>Unsloth (e tecniche di Efficient Fine-tuning come QLoRA e LoRA): Unsloth è una libreria che ottimizza il processo di fine-tuning degli LLM, rendendolo significativamente più veloce e meno esigente in termini di memoria rispetto alle implementazioni standard. Lo fa attraverso varie ottimizzazioni a basso livello. Come funziona nel codice:</p>
-</li>
-<li>
-<p>from unsloth import FastLanguageModel: Importa la classe FastLanguageModel che è la versione ottimizzata di Unsloth per caricare e gestire i modelli.</p>
-</li>
-<li>
-<p>load_in_4bit=True: Questo parametro attiva la tecnica QLoRA (Quantized Low-Rank Adaptation). Invece di caricare l'intero modello in precisione floating point completa (es. FP16 o FP32), che richiederebbe molta VRAM, QLoRA lo quantizza a 4 bit. Questo riduce drasticamente l'impronta di memoria del modello base.</p>
-</li>
-<li>
-<p>model = FastLanguageModel.get_peft_model(model, **LORA_CONFIG): Questo applica la tecnica LoRA (Low-Rank Adaptation). Invece di addestrare tutti i milioni o miliardi di parametri del modello, LoRA "congela" il modello base quantizzato e aggiunge solo un piccolo numero di "adattatori" (matrici a basso rango) che vengono addestrati. Questi adattatori sono molto più piccoli del modello completo, riducendo enormemente il numero di parametri addestrabili e quindi la VRAM e il tempo di calcolo necessari. La configurazione (LORA_CONFIG) definisce i parametri di LoRA, come r (rango delle matrici) e target_modules (quali parti del modello modificare).</p>
-</li>
-<li>
-<p>optim="paged_adamw_8bit": Questo specifica un ottimizzatore "paginato" che gestisce meglio la memoria. Parti dello stato dell'ottimizzatore possono essere spostate dalla VRAM alla RAM di sistema quando non sono immediatamente necessarie, liberando così preziosa VRAM per le operazioni di calcolo.</p>
-</li>
-<li>
-<p>use_gradient_checkpointing=True: Questa tecnica sacrifica leggermente la velocità di addestramento per un notevole risparmio di VRAM. Durante il forward pass (calcolo delle predizioni), non tutte le attivazioni intermedie vengono memorizzate. Durante il backward pass (calcolo dei gradienti), le attivazioni necessarie vengono ricalcolate al volo, riducendo la memoria occupata.</p>
+<ul>
+<li>from unsloth import FastLanguageModel: Importa la classe FastLanguageModel che è la versione ottimizzata di Unsloth per caricare e gestire i modelli.</li>
+<li>load_in_4bit=True: Questo parametro attiva la tecnica QLoRA (Quantized Low-Rank Adaptation). Invece di caricare l'intero modello in precisione floating point completa (es. FP16 o FP32), che richiederebbe molta VRAM, QLoRA lo quantizza a 4 bit. Questo riduce drasticamente l'impronta di memoria del modello base.</li>
+<li>model = FastLanguageModel.get_peft_model(model, **LORA_CONFIG): Questo applica la tecnica LoRA (Low-Rank Adaptation). Invece di addestrare tutti i milioni o miliardi di parametri del modello, LoRA "congela" il modello base quantizzato e aggiunge solo un piccolo numero di "adattatori" (matrici a basso rango) che vengono addestrati. Questi adattatori sono molto più piccoli del modello completo, riducendo enormemente il numero di parametri addestrabili e quindi la VRAM e il tempo di calcolo necessari. La configurazione (LORA_CONFIG) definisce i parametri di LoRA, come r (rango delle matrici) e target_modules (quali parti del modello modificare).</li>
+<li>optim="paged_adamw_8bit": Questo specifica un ottimizzatore "paginato" che gestisce meglio la memoria. Parti dello stato dell'ottimizzatore possono essere spostate dalla VRAM alla RAM di sistema quando non sono immediatamente necessarie, liberando così preziosa VRAM per le operazioni di calcolo.</li>
+<li>use_gradient_checkpointing=True: Questa tecnica sacrifica leggermente la velocità di addestramento per un notevole risparmio di VRAM. Durante il forward pass (calcolo delle predizioni), non tutte le attivazioni intermedie vengono memorizzate. Durante il backward pass (calcolo dei gradienti), le attivazioni necessarie vengono ricalcolate al volo, riducendo la memoria occupata.</li>
+</ul>
 </li>
 <li>
 <p>Hugging Face Transformers e TRL (Transformer Reinforcement Learning): Librerie fondamentali nell'ecosistema di Hugging Face per lavorare con LLM. Transformers fornisce la struttura per caricare modelli, tokenizer e definire gli argomenti di addestramento (TrainingArguments). TRL è una libreria costruita su Transformers che fornisce strumenti specifici per il fine-tuning di LLM, in particolare per compiti come il Supervised Fine-tuning (SFT) e il Reinforcement Learning from Human Feedback (RLHF).</p>
