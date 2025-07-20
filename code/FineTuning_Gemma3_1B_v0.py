@@ -30,8 +30,7 @@ import numpy as np
 # CONFIGURAZIONE UTENTE
 # =====================
 
-# Hugging Face Token
-hf_token = "REDACTED_HUGGINGFACE_TOKEN"
+# Hugging Face Token: da gestire come variabile d'ambiente!!!
 
 # Nome modello base
 MODEL_NAME = "google/gemma-3-1b-it"
