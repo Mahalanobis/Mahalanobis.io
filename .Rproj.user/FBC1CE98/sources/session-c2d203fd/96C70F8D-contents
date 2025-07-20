@@ -1,0 +1,16 @@
+---
+title: "Tutorial 1"
+output:
+  md_document:
+    variant: markdown_github
+    toc: true
+    pandoc_args: ["--extract-media", "docs/assets/images"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# EDA
+
+Analisi esplorativa attraverso LDA. 

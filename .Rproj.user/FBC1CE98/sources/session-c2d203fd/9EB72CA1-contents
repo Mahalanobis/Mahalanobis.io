@@ -1,0 +1,45 @@
+
+rm(list=ls())
+options(scipen = 10, digits = 10)
+Sys.setenv(TZ='GMT')
+Sys.setlocale("LC_ALL", "en_US.UTF-8")
+
+require(data.table)
+require(arrow)
+require(stringi)
+require(text2vec)
+
+wdir <- "/home/dario/Downloads/DREAMBOARD/DB/Data/"
+setwd( wdir )
+
+
+file_path <- "/home/dario/Downloads/DREAMBOARD/DB/Data/dreamboard_dream_clusters_hdbscan.parquet"
+tmp <- read_parquet(file_path)
+tmp <- as.data.table(tmp)
+table(tmp$cluster_id)
+
+file_path <- "/home/dario/Downloads/DREAMBOARD/DB/Data/dreamboard_dream_content.parquet"
+dd <- read_parquet(file_path)
+dd <- as.data.table(dd)
+
+
+length(unique(tmp$cluster_id))
+tail( sort(table(tmp$cluster_id)) , 10)
+
+c = sample(unique(tmp$cluster_id),1)
+#c = -1
+
+c.dreams = tmp[cluster_id==c,"dream_id",with=F][[1]]
+d1 = sample(c.dreams,1)
+d1 = dd[dream_id==d1,"dreamcnt",with=F][[1]]
+d2 = sample(c.dreams,1)
+d2 = dd[dream_id==d2,"dreamcnt",with=F][[1]]
+d3 = sample(c.dreams,1)
+d3 = dd[dream_id==d3,"dreamcnt",with=F][[1]]
+d4 = sample(c.dreams,1)
+d4 = dd[dream_id==d4,"dreamcnt",with=F][[1]]
+d1
+d2
+d3
+d4
+
