@@ -113,7 +113,7 @@ Le principali soluzioni utilizzate per rendere questo processo efficiente, sopra
 
 ![Map](assets/images/ft_unsloth.png)
 
-L'intero processo di fine-tuning, a partire dalle 50K frasi e le rispettive emozioni che costituiscono il _trainset_, impiega poco più di 1000 secondi, ~15 minuti.
+L'intero processo di fine-tuning, a partire dalle 50K frasi e le rispettive emozioni che costituiscono il _trainset_, impiega poco meno di 900 secondi, ~15 minuti.
 
 
 ## VRAM
