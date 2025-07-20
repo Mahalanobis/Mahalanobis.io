@@ -58,9 +58,11 @@ Da un punto di vista funzionale, questo esperimento ci pare estremamente utile:
 
 Il <span style="background-color: red;">[codice](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/FineTuning_Gemma3_1B_v0.py)</span> implementa un processo di fine-tuning di un LLM, nello specifico [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it), specializzandosi nella classificazione delle emozioni. 
 
-Il [fine-tuning](https://en.wikipedia.org/wiki/Fine-tuning_(deep_learning)) è una tecnica fondamentale nell'ambito dell'intelligenza artificiale e del Machine Learning, in particolare nel campo dell'elaborazione del linguaggio naturale (NLP) e della visione artificiale. In sostanza, si tratta di prendere un modello di intelligenza artificiale già addestrato su un vasto corpus di dati (un "modello pretrained", detto a volte anche ["foundation model"](https://en.wikipedia.org/wiki/Foundation_model) ) e adattarlo per eseguire un compito specifico o su un set di dati più ristretto e mirato. Questo processo permette di sfruttare la conoscenza generale acquisita dal modello durante il suo pre-addestramento, che spesso è avvenuto su miliardi di parametri e grandi quantità di testo o immagini, per risolvere problemi più specifici con una quantità minore di dati e risorse computazionali.
+Il [fine-tuning](https://en.wikipedia.org/wiki/Fine-tuning_(deep_learning)) rappresenta una metodologia fondamentale nell'ambito dell'apprendimento automatico, in particolare per i Large Language Models (LLM). Si tratta del processo di adattamento di un modello pre-addestrato (_pre-trained_), che ha già acquisito una vasta comprensione del linguaggio su un corpus di dati generale e di grandi dimensioni, a un dataset più piccolo e specifico per un determinato dominio o compito. Questo approccio consente al modello di specializzarsi e migliorare significativamente le sue prestazioni su quel compito specifico, capitalizzando la conoscenza generale precedentemente acquisita.
 
-Il fine-tuning non solo migliora le prestazioni del modello sul nuovo compito, ma permette anche di specializzare le sue capacità, rendendolo più accurato e pertinente per l'applicazione desiderata, come ad esempio, nel nostro caso, la classificazione delle emozioni a partire da una frase.
+La rilevanza del fine-tuning deriva dalla sua capacità di bilanciare l'efficienza computazionale con la specificità del compito. Addestrare un modello di grandi dimensioni da zero è un'impresa che richiede risorse computazionali ingenti e tempi prolungati, spesso proibitivi per la maggior parte delle organizzazioni e dei singoli ricercatori. Partendo da una base solida fornita da un modello pre-addestrato, il fine-tuning accelera notevolmente il processo di sviluppo e consente di ottenere prestazioni superiori su dati di nicchia. I modelli pre-addestrati offrono una comprensione universale del linguaggio, e il fine-tuning colma il divario adattando questa conoscenza generale a dataset specifici, spesso di dimensioni ridotte. Questo rende l'elaborazione del linguaggio naturale accessibile e pratica per applicazioni specializzate, massimizzando l'utilità dei [foundation models](https://en.wikipedia.org/wiki/Foundation_model).
+
+Nel nostro caso il fine-tuning specializzerà e migliorerà le prestazioni di [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it) relativamenta alla classificazione delle emozioni a partire da una frase in input.
 
 Esistono diverse strategie per eseguire il fine-tuning, che si differenziano principalmente per la quantità di parametri del modello che vengono aggiornati durante l'addestramento: 
 
@@ -124,3 +126,7 @@ L'intero processo di fine-tuning, a partire dalle 50K frasi e le rispettive emoz
 ## Training
 
 ![Map](assets/images/ft_training_loss.png)
+
+## GGUF
+
+# Conclusioni
