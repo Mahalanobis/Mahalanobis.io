@@ -140,25 +140,22 @@
 Il peso, o la probabilità di selezione di una frase è fatta in modo da bilanciare la combinazione {Tipo di Emozione ; Tipo/Cluster di Embeddings} in modo che ognuna di queste sia equamente rappresentata.</p>
 <p>Selezionate così 50.000 frasi che costituiscono il nostro <em>trainset</em>, le restanti 81.306 frasi saranno utilizzate per misurare l'<em>accuracy</em> degli algoritmi di Gen-AI o "tradizionali" che andremo a sviluppare.</p>
 <h1 id="perche-gemma3">Perchè Gemma3</h1>
-<p>In questo tutorial faremo il fine-tuning a partire dal modello pretrained <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>. Perchè questa scelta?</p>
-<p>Quando abbiamo deciso di creare un tutorial accessibile a tutti, abbiamo subito pensato agli <strong>Small Large Language Model (LLM)</strong>, che si contraddistinguono per il numero ridotto di parametri, sono progettati per essere efficienti e performanti in compiti specifici, pur mantenendo un'elevata coerenza nella generazione di testo. </p>
-<p>Ne abbiamo sperimentati diversi, limitatamente a quelli disponibili con licenza open source. La famiglia Gemma 3 sviluppata da Google si è costantemente distinta come una tra le più promettenti in termini di capacità di seguire le istruzioni in modo coerente.
-Ben sappiamo che gli LLM sono soggetti ad "allucinazioni", o possono non comprendere nell'interezza le istruzioni che gli poniamo. Limiti ancor più evidenti negli Small LLM.</p>
-<p>Facciamo una piccola digressione su un esperimento che a nostro avviso è molto funzionale.</p>
-<p><em>L'esperimento prevedeva di chiedere ad un LLM di sintetizzare una frase o un documento di testo in una singola parola</em>. </p>
-<p>Potrebbe sembrare un compito semplice, ma è non è così semplice per un LLM "disciplinarsi" e portarlo a termine correttamente in una sequenza di tentativi. </p>
-<p>Da un punto di vista funzionale, questo esperimento ci pare estremamente utile: </p>
+<p>In questo tutorial, il <strong>fine-tuning</strong> verrà eseguito utilizzando il modello pre-trained <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>. La nostra decisione di adottare questo modello si basa su una serie di considerazioni strategiche, focalizzate sull'equilibrio tra <em>accessibilità</em>, <em>efficienza</em> e <em>prestazioni</em>.</p>
+<p>Quando abbiamo concepito un tutorial che fosse fruibile da un vasto pubblico, la nostra attenzione si è subito rivolta agli <strong>Small Large Language Model (SLLM)</strong>. Questi modelli, caratterizzati da un numero ridotto di parametri, sono progettati per essere altamente efficienti e performanti in compiti specifici, mantenendo al contempo un'elevata coerenza nella generazione del testo. Dopo aver sperimentato diverse opzioni open source disponibili, la famiglia <em>Gemma 3</em> di <em>Google</em> si è costantemente distinta come una delle più promettenti per la sua notevole capacità di seguire le istruzioni in modo coerente.</p>
+<p>Siamo consapevoli che gli LLM, e in particolare gli SLLM, possono essere soggetti a <a href="https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)">"allucinazioni"</a> o mostrare difficoltà nel comprendere appieno le istruzioni impartite. Per esplorare e mitigare questi limiti, abbiamo condotto un esperimento specifico: abbiamo chiesto a un LLM di sintetizzare una frase o un documento di testo in una singola parola. Sebbene possa apparire un compito semplice, si è rivelato una sfida significativa per l'LLM mantenere la "disciplina" e completarlo correttamente in una sequenza di tentativi.</p>
+<p>Questo esperimento si è rivelato estremamente funzionale per diverse ragioni:</p>
 <ul>
 <li>
-<p>ci aiuta a valutare l'affidabilità di un LLM quando si tratta di sintetizzare informazioni verbali complesse in rappresentazioni concise, siano esse grafici o altre forme di espressione;</p>
+<p>Ci ha permesso di valutare l'affidabilità di un LLM nella sintesi di informazioni verbali complesse in rappresentazioni concise, che possono essere utilizzate per rappresentazioni di sintesi, come grafici o altre forme di espressione.</p>
 </li>
 <li>
-<p>sintetizzare una frase con una parola, per quanto questo sia possibile, ci permette di aprirci (e di poter sfruttare) quelle ontologie sviluppate sui vocabolari, che mirano a strutturare e organizzare la complessità semantica;</p>
+<p>La capacità di sintetizzare una frase con una singola parola, quando possibile, apre la strada all'utilizzo e allo sfruttamento di ontologie basate sui vocabolari, che mirano a strutturare e organizzare la complessità semantica.</p>
 </li>
 <li>
-<p>ci permette di riutilizzare modelli non contestualizzati di Embeddings, come Word2Vec o FastText.</p>
+<p>Ci consente di riutilizzare modelli di Embeddings non contestualizzati, come Word2Vec o FastText.</p>
 </li>
 </ul>
+<p>Nonostante i vantaggi in termini di efficienza e costi computazionali, è importante riconoscere che gli SLLM come Gemma 3 1b it potrebbero non possedere la stessa profondità di conoscenza o la medesima capacità di gestire compiti estremamente complessi o ambigui rispetto a modelli con un numero di parametri significativamente maggiore. Tuttavia, per il contesto specifico di questo tutorial, focalizzato sulla classificazione delle emozioni, i benefici derivanti dall'efficienza e dall'accessibilità di Gemma 3 1b it superano ampiamente questi compromessi, rendendolo la scelta ottimale per dimostrare l'efficacia del fine-tuning con risorse limitate.  Un ulteriore elemento cruciale nella scelta di Gemma 3 1b it è la sua natura di modello "instruction tuned" (indicato dal suffisso "it" nel nome). Questo significa che il modello è stato pre-addestrato non solo su un vasto corpus di testo, ma anche specificamente ottimizzato per seguire istruzioni e formati di prompt. Questa caratteristica lo rende particolarmente adatto al fine-tuning per compiti specifici come la classificazione, in quanto è già predisposto a interpretare e rispondere a istruzioni ben definite, facilitando il processo di adattamento e migliorando le prestazioni sul dataset target.</p>
 <p><img alt="Map" src="../assets/images/gemma3.png" /></p>
 <h1 id="fine-tuning">Fine-tuning</h1>
 <p>Il <span style="background-color: red;"><a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/FineTuning_Gemma3_1B_v0.py">codice</a></span> implementa un processo di fine-tuning di un LLM, nello specifico <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>, specializzandosi nella classificazione delle emozioni. </p>
