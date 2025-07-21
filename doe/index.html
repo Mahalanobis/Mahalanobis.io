@@ -99,6 +99,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#framework" class="nav-link">Framework</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#vram" class="nav-link">VRAM</a>
               <ul class="nav flex-column">
               </ul>
@@ -183,6 +187,34 @@ Il peso, o la probabilità di selezione di una frase è fatta in modo da bilanci
 <p>'### Frase: \n{testo_della_frase}\n### Emozione: \n{etichetta_dell_emozione}&lt;|endoftext|&gt;'
 Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare."</p>
 <p>Questa integrazione renderebbe la sezione ancora più completa e chiara, coprendo un aspetto cruciale del fine-tuning degli LLM che attualmente è implicito ma non esplicitamente discusso.</p>
+<p>Perché questo formato funziona bene:</p>
+<ul>
+<li>
+<p>Chiara separazione tra input e output: L'uso dei tag <start_of_turn>user e <start_of_turn>model replica un formato di conversazione che molti LLM moderni sono abituati a processare. Questo aiuta il modello a capire chiaramente cosa è l'input (la frase da classificare) e cosa è l'output atteso (l'emozione).</p>
+</li>
+<li>
+<p>Identificazione del compito: La frase "Identify emotion:" è una istruzione esplicita che guida il modello verso il compito specifico che deve eseguire. Questo è fondamentale per il fine-tuning.</p>
+</li>
+<li>
+<p>Token di fine sequenza (tokenizer.eos_token): L'aggiunta del tokenizer.eos_token alla fine di ogni esempio è cruciale. Indica al modello che la sequenza corrente è terminata, il che è vitale per l'addestramento e la generazione.</p>
+</li>
+<li>
+<p>Batching: L'uso di batched=True nella funzione .map() è efficiente perché elabora più esempi contemporaneamente, velocizzando la preparazione del dataset.</p>
+</li>
+</ul>
+<p>Consigli aggiuntivi:</p>
+<ul>
+<li>
+<p>Coerenza delle etichette: Assicurati che le etichette nel tuo campo "Label" siano esattamente le stesse per ogni categoria di emozione (es. sempre "Gioia", mai "gioia" o "felicità" se "Gioia" è la tua etichetta canonica). La coerenza è fondamentale per il modello.</p>
+</li>
+<li>
+<p>Bilanciamento del dataset: Se possibile, cerca di avere un numero di esempi più o meno equilibrato per ciascuna delle 13 emozioni. Se alcune classi sono sovra-rappresentate e altre sotto-rappresentate, il modello potrebbe diventare bravo a predire le classi più comuni e meno bravo con quelle rare.</p>
+</li>
+<li>
+<p>Varietà nelle frasi: Come discusso in precedenza, assicurati che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione.</p>
+</li>
+</ul>
+<h2 id="framework">Framework</h2>
 <p>Le principali soluzioni utilizzate per rendere questo processo efficiente, soprattutto in termini di tempi di elaborazione e utilizzo della memoria (VRAM), sono le seguenti:</p>
 <p><img alt="Map" src="../assets/images/unsloth.png" /></p>
 <ul>
