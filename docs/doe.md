@@ -24,6 +24,8 @@ Un trainset bilanciato, al contrario, assicura che il modello sia esposto a tutt
 A questo scopo abbiamo deciso di selezionarlo con un campionamento casuale pesato, dove ogni frase riceve una probabilità di essere selezionata in funzione delle tipologie di emozioni (Label) e della varietà degli Embeddings (Umap10KMeans, una procedura di clustering che avevamo prodotto in fase di EDA).
 Il peso, o la probabilità di selezione di una frase è fatta in modo da bilanciare la combinazione {Tipo di Emozione ; Tipo/Cluster di Embeddings} in modo che ognuna di queste sia equamente rappresentata.
 
+Selezionate così 50.000 frasi che costituiscono il nostro _trainset_, le restanti 81.306 frasi saranno utilizzate per misurare l'_accuracy_ degli algoritmi di Gen-AI o "tradizionali" che andremo a sviluppare.
+
 # Perchè Gemma3
 
 In questo tutorial faremo il fine-tuning a partire dal modello pretrained [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it). Perchè questa scelta?
