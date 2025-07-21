@@ -22,7 +22,8 @@ extra_javascript:
 
 nav:
   - Intro: index.md
-  - DoE: doe.md 
+  - DoE: doe.md
+  - Accuracy: accuracy.md 
 
 plugins:
   - search
