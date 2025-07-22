@@ -99,6 +99,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#training" class="nav-link">Training</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#framework" class="nav-link">Framework</a>
               <ul class="nav flex-column">
               </ul>
@@ -213,6 +217,53 @@ Identify emotion: {Sentence}<end_of_turn>
 <p>Varietà nelle frasi: E' preferibile che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione. Questo è il motivo che ci ha portato a rappresentare il training set non solo per tipologia di emozione, ma anche per cluster di Embeddings.</p>
 </li>
 </ul>
+<h2 id="training">Training</h2>
+<p>Il processo di training per batch in questo codice Python, utilizzando transformers.Trainer (o nello specifico trl.SFTTrainer che lo estende) e le ottimizzazioni di Unsloth, funziona in modo dettagliato come segue:</p>
+<h3 id="1-preparazione-del-dataset-e-formattazione">1. Preparazione del Dataset e Formattazione</h3>
+<p>Caricamento e Suddivisione: Il codice carica un dataset da un file Parquet (emotions_dataset_doe.parquet), lo filtra per includere solo le righe dove "Trainset" è 1, e poi lo suddivide in un set di training e un set di validazione (90% training, 10% validation).</p>
+<p>Funzione di Formattazione (formatting_func): Ogni esempio del dataset (coppia "Sentence" e "Label") viene trasformato in un formato specifico adatto per il fine-tuning di un LLM per compiti di tipo "instruction-following". Questo formato è:</p>
+<p><start_of_turn>user
+Identify emotion: {Sentence}<end_of_turn>
+<start_of_turn>model
+{Label}<end_of_turn>{tokenizer.eos_token}
+Questo rende esplicito al modello il ruolo dell'utente e del modello, e tokenizer.eos_token segnala la fine di una sequenza di training valida.</p>
+<p>Tokenizzazione Implicita: Sebbene non ci sia una fase esplicita di tokenizer() nel codice dopo formatting_func, SFTTrainer si occupa internamente di tokenizzare il campo dataset_text_field="text" (che contiene le stringhe generate da formatting_func). Il tokenizer divide queste stringhe in ID numerici che il modello può elaborare, aggiungendo anche i token speciali come [CLS], [SEP], [PAD] (se necessari) e gestendo la massima lunghezza della sequenza (MAX_SEQ_LENGTH).</p>
+<h3 id="2-concetto-di-batch-nel-sfttrainer">2. Concetto di Batch nel SFTTrainer</h3>
+<p>Il SFTTrainer è progettato per il fine-tuning di modelli di linguaggio per compiti di "Supervised Fine-Tuning" (SFT). Quando si parla di "training per batch", significa che il modello non elabora un singolo esempio alla volta, ma un gruppo di esempi (un "batch").</p>
+<p>per_device_train_batch_size=4: Questa impostazione nei TrainingArguments definisce la dimensione del batch che verrà elaborato da ciascuna GPU (o CPU) disponibile. Nel tuo caso, ogni GPU elaborerà 4 esempi alla volta.</p>
+<h3 id="3-gradiente-accumulation-gradient_accumulation_steps1">3. Gradiente Accumulation (gradient_accumulation_steps=1)</h3>
+<p>gradient_accumulation_steps=1: Questa è una configurazione cruciale. Indica quante "mini-batch" devono essere accumulate prima di eseguire un'effettiva retropropagazione e un aggiornamento dei pesi del modello.</p>
+<p>Se fosse &gt; 1 (es. 4): Il trainer elaborerebbe 4 batch consecutivi, calcolerebbe i gradienti per ciascuno, li sommerebbe (accumulerebbe), e solo dopo il quarto batch eseguirebbe la retropropagazione e l'aggiornamento dei pesi. Questo permette di simulare una dimensione del batch più grande (batch effettivo = per_device_train_batch_size * gradient_accumulation_steps) senza richiedere più VRAM di quanto non serva per un singolo mini-batch.</p>
+<p>Nel tuo caso (= 1): Non c'è accumulazione. Ogni batch da 4 esempi genererà i suoi gradienti, che verranno immediatamente usati per l'aggiornamento dei pesi del modello. Questo significa che il batch effettivo è semplicemente per_device_train_batch_size * numero_di_GPU. Se hai una singola GPU, il batch effettivo è 4.</p>
+<h3 id="4-il-ciclo-di-training-per-batch-iterazione">4. Il Ciclo di Training per Batch (Iterazione)</h3>
+<p>Il processo si svolge in un ciclo di training, passo dopo passo (step), fino a raggiungere max_steps o fino a quando l'early stopping non viene attivato.</p>
+<p>Per ogni "step" di training:</p>
+<p>Selezione del Batch: Il SFTTrainer estrae un batch di per_device_train_batch_size (4 nel tuo caso) esempi dal formatted_train_dataset.</p>
+<p>Preparazione del Batch:</p>
+<p>Questi esempi formattati (stringhe) vengono tokenizzati dal tokenizer associato al modello.</p>
+<p>Vengono creati gli input_ids (gli ID numerici dei token), l'attention_mask (per ignorare i token di padding) e, implicitamente, le labels (che sono gli stessi input_ids, ma con un meccanismo di mascheramento per calcolare la loss solo sulle risposte del modello, non sul prompt dell'utente).</p>
+<p>Il batch viene spostato sulla GPU (o dispositivo appropriato) per l'elaborazione.</p>
+<p>Forward Pass:</p>
+<p>Il batch di input viene passato attraverso il modello (model).</p>
+<p>Il modello genera le sue predizioni (logits).</p>
+<p>Contemporaneamente, viene calcolata la loss (probabilmente Cross-Entropy Loss) confrontando le predizioni del modello con le labels. La loss viene calcolata solo sui token che il modello dovrebbe generare (la parte <start_of_turn>model...<end_of_turn>).</p>
+<p>Backward Pass e Calcolo dei Gradienti:</p>
+<p>La loss viene retropropagato attraverso il modello. Questo calcola i gradienti per tutti i pesi addestrabili del modello (che, grazie a LoRA, sono solo i pesi degli adapter LoRA).</p>
+<p>Grazie a use_gradient_checkpointing=True in LORA_CONFIG, il processo di retropropagazione è ottimizzato per la VRAM. Non tutti gli stati intermedi del forward pass vengono memorizzati, riducendo l'uso di memoria a scapito di un leggero aumento del tempo di calcolo.</p>
+<p>Aggiornamento dei Pesi (optim="paged_adamw_8bit"):</p>
+<p>Poiché gradient_accumulation_steps è 1, i gradienti vengono utilizzati immediatamente.</p>
+<p>L'ottimizzatore paged_adamw_8bit (fornito da bitsandbytes e integrato da Unsloth) prende questi gradienti e aggiorna i pesi LoRA del modello. L'ottimizzatore a 8-bit è un'altra ottimizzazione chiave per ridurre l'uso della VRAM, specialmente con modelli grandi.</p>
+<p>La learning_rate (2e-5) e la warmup_ratio (0.1) influenzano come la learning rate si evolve durante il training, con un periodo iniziale di "warmup" in cui la learning rate aumenta gradualmente.</p>
+<p>Logging (logging_steps=5):</p>
+<p>Ogni 5 step di training, il trainer registra informazioni come la training loss corrente. Queste informazioni vengono visualizzate nella console e salvate nei log di TensorBoard.</p>
+<p>Valutazione (eval_strategy="steps", eval_steps=20):</p>
+<p>Ogni 20 step di training, il trainer sospende brevemente il training, prende un batch dal formatted_eval_dataset e calcola la validation loss su di esso.</p>
+<p>Questa eval_loss è cruciale per la callback di early stopping.</p>
+<h3 id="5-early-stopping">5. Early Stopping</h3>
+<p>La CustomEarlyStoppingCallback entra in gioco dopo ogni valutazione.</p>
+<p>Monitora la eval_loss. Se la eval_loss corrente è inferiore alla best_loss registrata finora, la best_loss viene aggiornata e il contatore bad_steps viene azzerato.</p>
+<p>Se la eval_loss non migliora, bad_steps viene incrementato.</p>
+<p>Quando bad_steps raggiunge EARLY_STOPPING_PATIENCE (50 in questo caso), il training viene interrotto prematuramente, salvando il modello che ha prodotto la best_loss.</p>
 <h2 id="framework">Framework</h2>
 <p>Le principali soluzioni utilizzate per rendere questo processo efficiente, soprattutto in termini di tempi di elaborazione e utilizzo della memoria (VRAM), sono le seguenti:</p>
 <p><img alt="Map" src="../assets/images/unsloth.png" /></p>
