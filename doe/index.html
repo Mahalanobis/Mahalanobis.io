@@ -184,8 +184,11 @@
 <h2 id="prompting">Prompting</h2>
 <p>Per addestrare efficacemente un LLM su un compito specifico come la classificazione delle emozioni, è essenziale presentare i dati al modello in un formato strutturato e coerente. Questa formattazione, spesso definita 'prompt' o 'template', guida il modello su come interpretare l'input e generare l'output desiderato. La funzione <strong>formatting_func</strong> nel nostro codice è responsabile di trasformare ogni riga del dataset in questo formato specifico.</p>
 <p>Una frase e la sua corrispettiva emozione possono essere convertite in un <strong>prompt</strong> come questo:</p>
-<p>'### Frase: \n{testo_della_frase}\n### Emozione: \n{etichetta_dell_emozione}&lt;|endoftext|&gt;'</p>
-<p>Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare.</p>
+<p><em><start_of_turn>user
+Identify emotion: {Sentence}<end_of_turn>
+<start_of_turn>model
+{Label}<end_of_turn>{tokenizer.eos_token}</em></p>
+<p>Questa struttura indica chiaramente al modello quale parte è l'input (Frase/Sentence) e quale l'output atteso (Emozione/Label). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare.</p>
 <p>Vantaggi di questo approccio:</p>
 <ul>
 <li>
