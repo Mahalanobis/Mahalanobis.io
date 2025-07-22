@@ -103,15 +103,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#vram" class="nav-link">VRAM</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#training" class="nav-link">Training</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#gguf" class="nav-link">GGUF</a>
+            <li class="nav-item" data-bs-level="2"><a href="#esecuzione" class="nav-link">Esecuzione</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -148,7 +140,7 @@
 Il peso, o la probabilità di selezione di una frase è fatta in modo da bilanciare la combinazione {Tipo di Emozione ; Tipo/Cluster di Embeddings} in modo che ognuna di queste sia equamente rappresentata.</p>
 <p>Selezionate così 50.000 frasi che costituiscono il nostro <em>trainset</em>, le restanti 81.306 frasi saranno utilizzate per misurare l'<em>accuracy</em> degli algoritmi di Gen-AI o "tradizionali" che andremo a sviluppare.</p>
 <h1 id="perche-gemma3">Perchè Gemma3</h1>
-<p>In questo tutorial, il <strong>fine-tuning</strong> verrà eseguito utilizzando il modello pre-trained <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>. La nostra decisione di adottare questo modello si basa su una serie di considerazioni strategiche, focalizzate sull'equilibrio tra <em>accessibilità</em>, <em>efficienza</em> e <em>prestazioni</em>.</p>
+<p>In questo tutorial, il <strong>fine-tuning</strong> verrà eseguito utilizzando il modello pre-trained <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>, un LLM messo a disposizione da Google e caratterizzato da "solo" un miliardo di parametri (1b). Per fare una comparazione si stima che ChatGPT 4, sviluppato da OpenAI, abbia tra 1000 e 2000 miliardi di parametri. La nostra decisione di adottare questo modello si basa su una serie di considerazioni strategiche, focalizzate sull'equilibrio tra <em>accessibilità</em>, <em>efficienza</em> e <em>prestazioni</em>.</p>
 <p>Quando abbiamo concepito un tutorial che fosse fruibile da un vasto pubblico, la nostra attenzione si è subito rivolta agli <strong>Small Large Language Model (SLLM)</strong>. Questi modelli, caratterizzati da un numero ridotto di parametri, sono progettati per essere altamente efficienti e performanti in compiti specifici, mantenendo al contempo un'elevata coerenza nella generazione del testo. Dopo aver sperimentato diverse opzioni open source disponibili, la famiglia <em>Gemma 3</em> di <em>Google</em> si è costantemente distinta come una delle più promettenti per la sua notevole capacità di seguire le istruzioni in modo coerente.</p>
 <p>Siamo consapevoli che gli LLM, e in particolare gli SLLM, possono essere soggetti a <a href="https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)">"allucinazioni"</a> o mostrare difficoltà nel comprendere appieno le istruzioni impartite. Per esplorare e mitigare questi limiti, abbiamo condotto un esperimento specifico: abbiamo chiesto a un LLM di sintetizzare una frase o un documento di testo in una singola parola. Sebbene possa apparire un compito semplice, si è rivelato una sfida significativa per l'LLM mantenere la "disciplina" e completarlo correttamente in una sequenza di tentativi.</p>
 <p>Questo esperimento si è rivelato estremamente funzionale per diverse ragioni:</p>
@@ -166,7 +158,7 @@ Il peso, o la probabilità di selezione di una frase è fatta in modo da bilanci
 <p>Nonostante i vantaggi in termini di efficienza e costi computazionali, è importante riconoscere che gli SLLM come <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a> potrebbero non possedere la stessa profondità di conoscenza o la medesima capacità di gestire compiti estremamente complessi o ambigui rispetto a modelli con un numero di parametri significativamente maggiore. Tuttavia, per il contesto specifico di questo tutorial, focalizzato sulla classificazione delle emozioni, i benefici derivanti dall'efficienza e dall'accessibilità di <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a> superano ampiamente questi compromessi, rendendolo la scelta ottimale per dimostrare l'efficacia del fine-tuning con risorse limitate.</p>
 <p>Un ulteriore elemento cruciale nella scelta di <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a> è la sua natura di modello "instruction tuned" (indicato dal suffisso "it" nel nome). Questo significa che il modello è stato pre-addestrato non solo su un vasto corpus di testo, ma anche specificamente ottimizzato per seguire istruzioni e formati di prompt. Questa caratteristica lo rende particolarmente adatto al fine-tuning per compiti specifici come la classificazione, in quanto è già predisposto a interpretare e rispondere a istruzioni ben definite, facilitando il processo di adattamento e migliorando le prestazioni sul dataset target.</p>
 <p><img alt="Map" src="../assets/images/gemma3.png" /></p>
-<p>Una <a href="https://ai.google.dev/gemma/docs/core/model_card_3?hl=it">panoramica</a> su questo modello è messo a disposizione da Google stessa. Qui il <a href="https://arxiv.org/abs/2503.19786">Technical Report</a>.</p>
+<p>Una <a href="https://ai.google.dev/gemma/docs/core/model_card_3?hl=it">panoramica</a> su questo modello è stata messa a disposizione da Google stessa. Qui il <a href="https://arxiv.org/abs/2503.19786">Technical Report</a>.</p>
 <h1 id="fine-tuning">Fine-tuning</h1>
 <p>Il <span style="background-color: red;"><a href="https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/FineTuning_Gemma3_1B_v0.py">codice</a></span> implementa un processo di fine-tuning di un LLM, nello specifico <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>, specializzandosi nella classificazione delle emozioni. </p>
 <p>Il <a href="https://en.wikipedia.org/wiki/Fine-tuning_(deep_learning)">fine-tuning</a> rappresenta una metodologia fondamentale nell'ambito dell'apprendimento automatico, in particolare per i Large Language Models (LLM). Si tratta del processo di adattamento di un modello pre-addestrato (<em>pre-trained</em>), che ha già acquisito una vasta comprensione del linguaggio su un corpus di dati generale e di grandi dimensioni, a un dataset più piccolo e specifico per un determinato dominio o compito. Questo approccio consente al modello di specializzarsi e migliorare significativamente le sue prestazioni su quel compito specifico, capitalizzando la conoscenza generale precedentemente acquisita ("<em>Transfer Learning</em>").</p>
@@ -183,12 +175,11 @@ Il peso, o la probabilità di selezione di una frase è fatta in modo da bilanci
 </ul>
 <p>Il codice utilizza LoRA per adattare un modello <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>, focalizzandosi sull'addestramento di matrici di basso rango che vengono "iniettate" nel modello, consentendo un adattamento efficace senza la necessità di modificare l'intero modello.</p>
 <h2 id="prompting">Prompting</h2>
-<p>Per addestrare efficacemente un LLM su un compito specifico come la classificazione delle emozioni, è essenziale presentare i dati al modello in un formato strutturato e coerente. Questa formattazione, spesso definita 'prompt' o 'template', guida il modello su come interpretare l'input e generare l'output desiderato. La funzione formatting_func nel nostro codice è responsabile di trasformare ogni riga del dataset in questo formato specifico.</p>
-<p>Ad esempio, una frase e la sua etichetta emotiva potrebbero essere convertite in un template come questo per il fine-tuning:</p>
-<p>'### Frase: \n{testo_della_frase}\n### Emozione: \n{etichetta_dell_emozione}&lt;|endoftext|&gt;'
-Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare."</p>
-<p>Questa integrazione renderebbe la sezione ancora più completa e chiara, coprendo un aspetto cruciale del fine-tuning degli LLM che attualmente è implicito ma non esplicitamente discusso.</p>
-<p>Perché questo formato funziona bene:</p>
+<p>Per addestrare efficacemente un LLM su un compito specifico come la classificazione delle emozioni, è essenziale presentare i dati al modello in un formato strutturato e coerente. Questa formattazione, spesso definita 'prompt' o 'template', guida il modello su come interpretare l'input e generare l'output desiderato. La funzione <strong>formatting_func</strong> nel nostro codice è responsabile di trasformare ogni riga del dataset in questo formato specifico.</p>
+<p>Una frase e la sua corrispettiva emozione possono essere convertite in un <strong>prompt</strong> come questo:</p>
+<p>'### Frase: \n{testo_della_frase}\n### Emozione: \n{etichetta_dell_emozione}&lt;|endoftext|&gt;'</p>
+<p>Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare.</p>
+<p>Vantaggi di questo approccio:</p>
 <ul>
 <li>
 <p>Chiara separazione tra input e output: L'uso dei tag <start_of_turn>user e <start_of_turn>model replica un formato di conversazione che molti LLM moderni sono abituati a processare. Questo aiuta il modello a capire chiaramente cosa è l'input (la frase da classificare) e cosa è l'output atteso (l'emozione).</p>
@@ -202,17 +193,14 @@ Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e
 <li>
 <p>Batching: L'uso di batched=True nella funzione .map() è efficiente perché elabora più esempi contemporaneamente, velocizzando la preparazione del dataset.</p>
 </li>
-</ul>
-<p>Consigli aggiuntivi:</p>
-<ul>
 <li>
-<p>Coerenza delle etichette: Assicurati che le etichette nel tuo campo "Label" siano esattamente le stesse per ogni categoria di emozione (es. sempre "Gioia", mai "gioia" o "felicità" se "Gioia" è la tua etichetta canonica). La coerenza è fondamentale per il modello.</p>
+<p>Coerenza delle etichette: Durante l'EDA del dataset ci siamo assicurati che le emozioni categorizzate nella variabile "Label" siano esattamente le stesse (es. sempre "Gioia", mai "gioia" o "felicità" se "Gioia" è la tua etichetta canonica). La coerenza è fondamentale per il modello.</p>
 </li>
 <li>
-<p>Bilanciamento del dataset: Se possibile, cerca di avere un numero di esempi più o meno equilibrato per ciascuna delle 13 emozioni. Se alcune classi sono sovra-rappresentate e altre sotto-rappresentate, il modello potrebbe diventare bravo a predire le classi più comuni e meno bravo con quelle rare.</p>
+<p>Bilanciamento del dataset: Se possibile, è preferibile avere un numero di esempi più o meno equilibrato per ciascuna delle 13 emozioni. Se alcune classi sono sovra-rappresentate e altre sotto-rappresentate, il modello potrebbe diventare bravo a predire le classi più comuni e meno bravo con quelle rare.</p>
 </li>
 <li>
-<p>Varietà nelle frasi: Come discusso in precedenza, assicurati che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione.</p>
+<p>Varietà nelle frasi: E' preferibile che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione. Questo è il motivo che ci ha portato a rappresentare il training set non solo per tipologia di emozione, ma anche per cluster di Embeddings.</p>
 </li>
 </ul>
 <h2 id="framework">Framework</h2>
@@ -265,13 +253,14 @@ Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e
 </ul>
 </li>
 </ul>
+<h2 id="esecuzione">Esecuzione</h2>
 <p><img alt="Map" src="../assets/images/ft_unsloth.png" /></p>
 <p>L'intero processo di fine-tuning, a partire dalle 50K frasi e le rispettive emozioni che costituiscono il <em>trainset</em>, impiega poco meno di 900 secondi, ~15 minuti.</p>
-<h2 id="vram">VRAM</h2>
+<h3 id="vram">VRAM</h3>
 <p><img alt="Map" src="../assets/images/ft_vram_usage.png" /></p>
-<h2 id="training">Training</h2>
+<h3 id="training-loss">Training Loss</h3>
 <p><img alt="Map" src="../assets/images/ft_training_loss.png" /></p>
-<h2 id="gguf">GGUF</h2>
+<h3 id="gguf">GGUF</h3>
 <h1 id="conclusioni">Conclusioni</h1></div>
             </div>
         </div>

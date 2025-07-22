@@ -28,7 +28,7 @@ Selezionate così 50.000 frasi che costituiscono il nostro _trainset_, le restan
 
 # Perchè Gemma3
 
-In questo tutorial, il __fine-tuning__ verrà eseguito utilizzando il modello pre-trained [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it). La nostra decisione di adottare questo modello si basa su una serie di considerazioni strategiche, focalizzate sull'equilibrio tra _accessibilità_, _efficienza_ e _prestazioni_.
+In questo tutorial, il __fine-tuning__ verrà eseguito utilizzando il modello pre-trained [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it), un LLM messo a disposizione da Google e caratterizzato da "solo" un miliardo di parametri (1b). Per fare una comparazione si stima che ChatGPT 4, sviluppato da OpenAI, abbia tra 1000 e 2000 miliardi di parametri. La nostra decisione di adottare questo modello si basa su una serie di considerazioni strategiche, focalizzate sull'equilibrio tra _accessibilità_, _efficienza_ e _prestazioni_.
 
 Quando abbiamo concepito un tutorial che fosse fruibile da un vasto pubblico, la nostra attenzione si è subito rivolta agli __Small Large Language Model (SLLM)__. Questi modelli, caratterizzati da un numero ridotto di parametri, sono progettati per essere altamente efficienti e performanti in compiti specifici, mantenendo al contempo un'elevata coerenza nella generazione del testo. Dopo aver sperimentato diverse opzioni open source disponibili, la famiglia _Gemma 3_ di _Google_ si è costantemente distinta come una delle più promettenti per la sua notevole capacità di seguire le istruzioni in modo coerente.
 
@@ -48,7 +48,7 @@ Un ulteriore elemento cruciale nella scelta di [Gemma 3 1b it](https://huggingfa
 
 ![Map](assets/images/gemma3.png)
 
-Una [panoramica](https://ai.google.dev/gemma/docs/core/model_card_3?hl=it) su questo modello è messo a disposizione da Google stessa. Qui il [Technical Report](https://arxiv.org/abs/2503.19786).
+Una [panoramica](https://ai.google.dev/gemma/docs/core/model_card_3?hl=it) su questo modello è stata messa a disposizione da Google stessa. Qui il [Technical Report](https://arxiv.org/abs/2503.19786).
  
 
 
@@ -73,16 +73,15 @@ Il codice utilizza LoRA per adattare un modello [Gemma 3 1b it](https://huggingf
 
 ## Prompting
 
-Per addestrare efficacemente un LLM su un compito specifico come la classificazione delle emozioni, è essenziale presentare i dati al modello in un formato strutturato e coerente. Questa formattazione, spesso definita 'prompt' o 'template', guida il modello su come interpretare l'input e generare l'output desiderato. La funzione formatting_func nel nostro codice è responsabile di trasformare ogni riga del dataset in questo formato specifico.
+Per addestrare efficacemente un LLM su un compito specifico come la classificazione delle emozioni, è essenziale presentare i dati al modello in un formato strutturato e coerente. Questa formattazione, spesso definita 'prompt' o 'template', guida il modello su come interpretare l'input e generare l'output desiderato. La funzione __formatting_func__ nel nostro codice è responsabile di trasformare ogni riga del dataset in questo formato specifico.
 
-Ad esempio, una frase e la sua etichetta emotiva potrebbero essere convertite in un template come questo per il fine-tuning:
+Una frase e la sua corrispettiva emozione possono essere convertite in un __prompt__ come questo:
 
 '### Frase: \n{testo_della_frase}\n### Emozione: \n{etichetta_dell_emozione}<|endoftext|>'
-Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare."
 
-Questa integrazione renderebbe la sezione ancora più completa e chiara, coprendo un aspetto cruciale del fine-tuning degli LLM che attualmente è implicito ma non esplicitamente discusso.
+Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare.
 
-Perché questo formato funziona bene:
+Vantaggi di questo approccio:
 
 * Chiara separazione tra input e output: L'uso dei tag <start_of_turn>user e <start_of_turn>model replica un formato di conversazione che molti LLM moderni sono abituati a processare. Questo aiuta il modello a capire chiaramente cosa è l'input (la frase da classificare) e cosa è l'output atteso (l'emozione).
 
@@ -92,13 +91,11 @@ Perché questo formato funziona bene:
 
 * Batching: L'uso di batched=True nella funzione .map() è efficiente perché elabora più esempi contemporaneamente, velocizzando la preparazione del dataset.
 
-Consigli aggiuntivi:
+* Coerenza delle etichette: Durante l'EDA del dataset ci siamo assicurati che le emozioni categorizzate nella variabile "Label" siano esattamente le stesse (es. sempre "Gioia", mai "gioia" o "felicità" se "Gioia" è la tua etichetta canonica). La coerenza è fondamentale per il modello.
 
-* Coerenza delle etichette: Assicurati che le etichette nel tuo campo "Label" siano esattamente le stesse per ogni categoria di emozione (es. sempre "Gioia", mai "gioia" o "felicità" se "Gioia" è la tua etichetta canonica). La coerenza è fondamentale per il modello.
+* Bilanciamento del dataset: Se possibile, è preferibile avere un numero di esempi più o meno equilibrato per ciascuna delle 13 emozioni. Se alcune classi sono sovra-rappresentate e altre sotto-rappresentate, il modello potrebbe diventare bravo a predire le classi più comuni e meno bravo con quelle rare.
 
-* Bilanciamento del dataset: Se possibile, cerca di avere un numero di esempi più o meno equilibrato per ciascuna delle 13 emozioni. Se alcune classi sono sovra-rappresentate e altre sotto-rappresentate, il modello potrebbe diventare bravo a predire le classi più comuni e meno bravo con quelle rare.
-
-* Varietà nelle frasi: Come discusso in precedenza, assicurati che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione.
+* Varietà nelle frasi: E' preferibile che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione. Questo è il motivo che ci ha portato a rappresentare il training set non solo per tipologia di emozione, ma anche per cluster di Embeddings.
 
 
 
@@ -146,20 +143,22 @@ Le principali soluzioni utilizzate per rendere questo processo efficiente, sopra
     - _on_step_end_: Questo metodo viene chiamato alla fine di ogni passo di addestramento. Il callback monitora la "loss" (perdita) dell'addestramento. Se la loss non diminuisce per un numero prestabilito di passi consecutivi (patience), il callback imposta un flag (control.should_training_stop = True) che segnala al Trainer di interrompere l'addestramento.
 
 
+## Esecuzione
+
 ![Map](assets/images/ft_unsloth.png)
 
 L'intero processo di fine-tuning, a partire dalle 50K frasi e le rispettive emozioni che costituiscono il _trainset_, impiega poco meno di 900 secondi, ~15 minuti.
 
 
-## VRAM
+### VRAM
 
 ![Map](assets/images/ft_vram_usage.png)
 
 
-## Training
+### Training Loss
 
 ![Map](assets/images/ft_training_loss.png)
 
-## GGUF
+### GGUF
 
 # Conclusioni
