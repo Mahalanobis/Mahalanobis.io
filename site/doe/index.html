@@ -120,6 +120,7 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="doe">DoE</h1>
+<p>[[!!!ALL IN WORK!!!]]</p>
 <p>Quando si parla di <strong>Design of Experiment (DoE)</strong>, di solito pensiamo a un metodo statistico per pianificare esperimenti. L'idea è semplice: vogliamo capire come diverse <em>variabili (o fattori)</em> influenzano un certo <em>risultato (o risposta)</em>, cercando di ottenere il massimo delle informazioni con il minor numero di prove e garantendo che i nostri risultati siano validi ed efficienti.</p>
 <p>Tuttavia, nel contesto di questo tutorial, <em>il DoE assume una sfumatura un po' diversa</em>. Non stiamo progettando un esperimento per testare direttamente l'impatto di alcune variabili su un modello. Invece, stiamo applicando i principi del DoE per <em>definire con cura il dataset (il "trainset")</em> che useremo. Questo trainset sarà fondamentale per due scopi:</p>
 <ul>
@@ -183,8 +184,11 @@
 <h2 id="prompting">Prompting</h2>
 <p>Per addestrare efficacemente un LLM su un compito specifico come la classificazione delle emozioni, è essenziale presentare i dati al modello in un formato strutturato e coerente. Questa formattazione, spesso definita 'prompt' o 'template', guida il modello su come interpretare l'input e generare l'output desiderato. La funzione <strong>formatting_func</strong> nel nostro codice è responsabile di trasformare ogni riga del dataset in questo formato specifico.</p>
 <p>Una frase e la sua corrispettiva emozione possono essere convertite in un <strong>prompt</strong> come questo:</p>
-<p>'### Frase: \n{testo_della_frase}\n### Emozione: \n{etichetta_dell_emozione}&lt;|endoftext|&gt;'</p>
-<p>Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare.</p>
+<p><em><start_of_turn>user
+Identify emotion: {Sentence}<end_of_turn>
+<start_of_turn>model
+{Label}<end_of_turn>{tokenizer.eos_token}</em></p>
+<p>Questa struttura indica chiaramente al modello quale parte è l'input (Frase/Sentence) e quale l'output atteso (Emozione/Label). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare.</p>
 <p>Vantaggi di questo approccio:</p>
 <ul>
 <li>

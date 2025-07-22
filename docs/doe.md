@@ -1,5 +1,7 @@
 # DoE
 
+[[!!!ALL IN WORK!!!]]
+
 Quando si parla di __Design of Experiment (DoE)__, di solito pensiamo a un metodo statistico per pianificare esperimenti. L'idea è semplice: vogliamo capire come diverse _variabili (o fattori)_ influenzano un certo _risultato (o risposta)_, cercando di ottenere il massimo delle informazioni con il minor numero di prove e garantendo che i nostri risultati siano validi ed efficienti.
 
 Tuttavia, nel contesto di questo tutorial, _il DoE assume una sfumatura un po' diversa_. Non stiamo progettando un esperimento per testare direttamente l'impatto di alcune variabili su un modello. Invece, stiamo applicando i principi del DoE per _definire con cura il dataset (il "trainset")_ che useremo. Questo trainset sarà fondamentale per due scopi:
@@ -89,9 +91,12 @@ Per addestrare efficacemente un LLM su un compito specifico come la classificazi
 
 Una frase e la sua corrispettiva emozione possono essere convertite in un __prompt__ come questo:
 
-'### Frase: \n{testo_della_frase}\n### Emozione: \n{etichetta_dell_emozione}<|endoftext|>'
+_<start_of_turn>user
+Identify emotion: {Sentence}<end_of_turn>
+<start_of_turn>model
+{Label}<end_of_turn>{tokenizer.eos_token}_
 
-Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare.
+Questa struttura indica chiaramente al modello quale parte è l'input (Frase/Sentence) e quale l'output atteso (Emozione/Label). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare.
 
 Vantaggi di questo approccio:
 
