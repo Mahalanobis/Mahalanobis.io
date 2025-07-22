@@ -184,7 +184,7 @@ Il peso, o la probabilità di selezione di una frase è fatta in modo da bilanci
 <p>Il codice utilizza LoRA per adattare un modello <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>, focalizzandosi sull'addestramento di matrici di basso rango che vengono "iniettate" nel modello, consentendo un adattamento efficace senza la necessità di modificare l'intero modello.</p>
 <h2 id="prompting">Prompting</h2>
 <p>Per addestrare efficacemente un LLM su un compito specifico come la classificazione delle emozioni, è essenziale presentare i dati al modello in un formato strutturato e coerente. Questa formattazione, spesso definita 'prompt' o 'template', guida il modello su come interpretare l'input e generare l'output desiderato. La funzione <strong>formatting_func</strong> nel nostro codice è responsabile di trasformare ogni riga del dataset in questo formato specifico.</p>
-<p>Ad esempio, una frase e la sua etichetta emotiva potrebbero essere convertite in un template come questo per il fine-tuning:</p>
+<p>Una frase e la sua corrispettiva emozione possono essere convertite in un <strong>prompt</strong> come questo:</p>
 <p>'### Frase: \n{testo_della_frase}\n### Emozione: \n{etichetta_dell_emozione}&lt;|endoftext|&gt;'</p>
 <p>Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare.</p>
 <p>Vantaggi di questo approccio:</p>
@@ -201,17 +201,14 @@ Il peso, o la probabilità di selezione di una frase è fatta in modo da bilanci
 <li>
 <p>Batching: L'uso di batched=True nella funzione .map() è efficiente perché elabora più esempi contemporaneamente, velocizzando la preparazione del dataset.</p>
 </li>
-</ul>
-<p>Consigli aggiuntivi:</p>
-<ul>
 <li>
-<p>Coerenza delle etichette: Assicurati che le etichette nel tuo campo "Label" siano esattamente le stesse per ogni categoria di emozione (es. sempre "Gioia", mai "gioia" o "felicità" se "Gioia" è la tua etichetta canonica). La coerenza è fondamentale per il modello.</p>
+<p>Coerenza delle etichette: Durante l'EDA del dataset ci siamo assicurati che le emozioni categorizzate nella variabile "Label" siano esattamente le stesse (es. sempre "Gioia", mai "gioia" o "felicità" se "Gioia" è la tua etichetta canonica). La coerenza è fondamentale per il modello.</p>
 </li>
 <li>
-<p>Bilanciamento del dataset: Se possibile, cerca di avere un numero di esempi più o meno equilibrato per ciascuna delle 13 emozioni. Se alcune classi sono sovra-rappresentate e altre sotto-rappresentate, il modello potrebbe diventare bravo a predire le classi più comuni e meno bravo con quelle rare.</p>
+<p>Bilanciamento del dataset: Se possibile, è preferibile avere un numero di esempi più o meno equilibrato per ciascuna delle 13 emozioni. Se alcune classi sono sovra-rappresentate e altre sotto-rappresentate, il modello potrebbe diventare bravo a predire le classi più comuni e meno bravo con quelle rare.</p>
 </li>
 <li>
-<p>Varietà nelle frasi: Come discusso in precedenza, assicurati che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione.</p>
+<p>Varietà nelle frasi: E' preferibile che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione. Questo è il motivo che ci ha portato a rappresentare il training set non solo per tipologia di emozione, ma anche per cluster di Embeddings.</p>
 </li>
 </ul>
 <h2 id="framework">Framework</h2>
