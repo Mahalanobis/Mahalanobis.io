@@ -259,9 +259,13 @@ Il peso, o la probabilità di selezione di una frase è fatta in modo da bilanci
 <h3 id="vram">VRAM</h3>
 <p><img alt="Map" src="../assets/images/ft_vram_usage.png" /></p>
 <h3 id="training-loss">Training Loss</h3>
+<p>Il fine-tuning ottimizza la <a href="https://en.wikipedia.org/wiki/Cross-entropy">cross-entropy loss</a> per la generazione di testo.</p>
 <p><img alt="Map" src="../assets/images/ft_training_loss.png" /></p>
 <h3 id="gguf">GGUF</h3>
-<h1 id="conclusioni">Conclusioni</h1></div>
+<h1 id="conclusioni">Conclusioni</h1>
+<p>Sebbene il codice condiviso sia un buon esempio di fine-tuning di un LLM, non rappresenta un approccio State-of-the-Art (SOTA) per un task di classificazione di emozioni.</p>
+<p>L'approccio modella il problema della classificazione delle emozioni come un task di generazione di testo ("Identify emotion: {sentence}" -&gt; "{label}"). Il modello viene addestrato a "generare" l'etichetta dell'emozione come parte di una conversazione. Come superare questo limite sarà argmento di questo tutorial.</p>
+<p>Nel prossimo episodio andiamo a vedere le performance di questo LLM fine-tuned.</p></div>
             </div>
         </div>
 

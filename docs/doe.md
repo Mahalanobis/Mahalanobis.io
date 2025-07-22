@@ -157,8 +157,20 @@ L'intero processo di fine-tuning, a partire dalle 50K frasi e le rispettive emoz
 
 ### Training Loss
 
+Il fine-tuning ottimizza la [cross-entropy loss](https://en.wikipedia.org/wiki/Cross-entropy) per la generazione di testo.
+
 ![Map](assets/images/ft_training_loss.png)
 
 ### GGUF
 
 # Conclusioni
+
+Sebbene il codice condiviso sia un buon esempio di fine-tuning di un LLM, non rappresenta un approccio State-of-the-Art (SOTA) per un task di classificazione di emozioni.
+
+L'approccio modella il problema della classificazione delle emozioni come un task di generazione di testo ("Identify emotion: {sentence}" -> "{label}"). Il modello viene addestrato a "generare" l'etichetta dell'emozione come parte di una conversazione. Come superare questo limite sarà argmento di questo tutorial.
+
+Nel prossimo episodio andiamo a vedere le performance di questo LLM fine-tuned.
+
+
+
+
