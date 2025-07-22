@@ -185,10 +185,9 @@ Il peso, o la probabilità di selezione di una frase è fatta in modo da bilanci
 <h2 id="prompting">Prompting</h2>
 <p>Per addestrare efficacemente un LLM su un compito specifico come la classificazione delle emozioni, è essenziale presentare i dati al modello in un formato strutturato e coerente. Questa formattazione, spesso definita 'prompt' o 'template', guida il modello su come interpretare l'input e generare l'output desiderato. La funzione formatting_func nel nostro codice è responsabile di trasformare ogni riga del dataset in questo formato specifico.</p>
 <p>Ad esempio, una frase e la sua etichetta emotiva potrebbero essere convertite in un template come questo per il fine-tuning:</p>
-<p>'### Frase: \n{testo_della_frase}\n### Emozione: \n{etichetta_dell_emozione}&lt;|endoftext|&gt;'
-Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare."</p>
-<p>Questa integrazione renderebbe la sezione ancora più completa e chiara, coprendo un aspetto cruciale del fine-tuning degli LLM che attualmente è implicito ma non esplicitamente discusso.</p>
-<p>Perché questo formato funziona bene:</p>
+<p>'### Frase: \n{testo_della_frase}\n### Emozione: \n{etichetta_dell_emozione}&lt;|endoftext|&gt;'</p>
+<p>Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare.</p>
+<p>Vantaggi di questo approccio:</p>
 <ul>
 <li>
 <p>Chiara separazione tra input e output: L'uso dei tag <start_of_turn>user e <start_of_turn>model replica un formato di conversazione che molti LLM moderni sono abituati a processare. Questo aiuta il modello a capire chiaramente cosa è l'input (la frase da classificare) e cosa è l'output atteso (l'emozione).</p>
