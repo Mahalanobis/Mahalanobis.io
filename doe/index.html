@@ -288,7 +288,11 @@ Identify emotion: {Sentence}<end_of_turn>
 <p>Monitora la eval_loss. Se la eval_loss corrente è inferiore alla best_loss registrata finora, la best_loss viene aggiornata e il contatore bad_steps viene azzerato.</p>
 <p>Se la eval_loss non migliora, bad_steps viene incrementato.</p>
 <p>Quando bad_steps raggiunge EARLY_STOPPING_PATIENCE (50 in questo caso), il training viene interrotto prematuramente, salvando il modello che ha prodotto la best_loss.</p>
-<h3 id="test">Test</h3>
+<h3 id="tuning-dei-parametri">Tuning dei parametri</h3>
+<p>Gran parte del tuning dei parametri si può fare impostando <strong>eval_strategy="no"</strong>.</p>
+<p>Ogni volta che il Trainer esegue una valutazione, deve interrompere il training, passare al dataset di valutazione, eseguire un forward pass su tutti i batch di valutazione e calcolare la loss/metriche. Questo processo può essere costoso in termini di tempo, specialmente con dataset di valutazione grandi o modelli complessi.</p>
+<p>Quando si stanno testando rapidamente diverse configurazioni (ad esempio, batch size, learning rate, ottimizzatori, lunghezza massima della sequenza, ecc.), il tempo di esecuzione di ogni prova è fondamentale. Disabilitare la valutazione rimuove questo overhead, permettendo di vedere i risultati della training loss molto più velocemente.</p>
+<p>In fase iniziale di sperimentazione, si è interessati principalmente a vedere se il modello sta apprendendo qualcosa (se la training loss scende) e se il training sta procedendo senza errori o crash. La validation loss diventa rilevante in una fase successiva, quando si cerca di ottimizzare le prestazioni e prevenire l'overfitting.</p>
 <h2 id="framework">Framework</h2>
 <p>Le principali soluzioni utilizzate per rendere questo processo efficiente, soprattutto in termini di tempi di elaborazione e utilizzo della memoria (VRAM), sono le seguenti:</p>
 <p><img alt="Map" src="../assets/images/unsloth.png" /></p>
