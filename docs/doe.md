@@ -12,19 +12,31 @@ Il nostro obiettivo qui è chiaro: selezionare un sottoinsieme di osservazioni c
 ## Perché la scelta del Trainset è cruciale?
 Il <span style="background-color: red;">[codice](https://github.com/Mahalanobis/Mahalanobis.io/blob/main/code/FT_Emotions_Dataset_DOE.py)</span> seleziona un trainset relativamente piccolo, appena 50.000 frasi. 
 
-Questa non è una scelta casuale! Vogliamo esplorare un aspetto fondamentale della recente letteratura sugli LLM, che suggerisce come il __fine-tuning__ di un modello pre-trained possa essere incredibilmente efficace anche con un numero limitato di casi. Vogliamo verificare questa ipotesi, testando la capacità di generalizzazione di un LLM anche con un trainset più contenuto.
+Questa non è una scelta casuale! Primo, vogliamo esplorare un aspetto fondamentale della recente letteratura sugli LLM: l'idea che il fine-tuning di un modello pre-addestrato possa essere incredibilmente efficace anche con un numero limitato di esempi. Molti studi suggeriscono che non sempre servono milioni di dati per adattare un LLM a un task specifico. Il nostro obiettivo è proprio verificare questa ipotesi, testando la capacità di generalizzazione del nostro LLM con un trainset più contenuto, ma strategicamente selezionato.
 
-Ma c'è di più. La scelta di un _trainingset bilanciato_ è di importanza critica. Immaginate di voler insegnare a un bambino a riconoscere gli animali. Se gli mostraste solo gatti, il bambino diventerebbe un "esperto" di gatti, ma farebbe fatica a riconoscere un cane o un uccello. Allo stesso modo, un dataset sbilanciato – dove alcune categorie (come certe emozioni o argomenti) sono sovra-rappresentate – porterebbe l'LLM a:
+Oltre alla dimensione, la scelta di un _trainset bilanciato_  è di importanza critica. Immaginate di voler insegnare a un bambino a riconoscere gli animali. Se gli mostraste solo gatti, il bambino diventerebbe un "esperto" di gatti, ma farebbe fatica a riconoscere un cane o un uccello. Allo stesso modo, un dataset sbilanciato – dove alcune categorie (come certe emozioni o argomenti) sono sovra-rappresentate – porterebbe l'LLM a:
 
 * __Sovra-apprendere le categorie più frequenti__, diventando troppo specializzato su quelle.
 * __Sotto-stimare o addirittura ignorare le categorie meno comuni__, che potrebbero però essere altrettanto importanti per i nostri obiettivi.
 
-Un trainset bilanciato, al contrario, assicura che il modello sia esposto a tutte le sfumature e varietà presenti nei dati. Questo lo rende più __robusto__ e capace di __generalizzare__ bene anche su osservazioni che non rientrano nelle categorie più comuni.
+Un trainset bilanciato, al contrario, assicura che il modello sia esposto a tutte le sfumature e varietà presenti nei dati. Questo lo rende più __robusto__ e capace di __generalizzare__ bene anche su osservazioni che non rientrano nelle categorie più comuni o che rappresentano casi di "nicchia".
 
-A questo scopo abbiamo deciso di selezionarlo con un campionamento casuale pesato, dove ogni frase riceve una probabilità di essere selezionata in funzione delle tipologie di emozioni (Label) e della varietà degli Embeddings (Umap10KMeans, una procedura di clustering che avevamo prodotto in fase di EDA).
-Il peso, o la probabilità di selezione di una frase è fatta in modo da bilanciare la combinazione {Tipo di Emozione ; Tipo/Cluster di Embeddings} in modo che ognuna di queste sia equamente rappresentata.
+Per raggiungere questo bilanciamento, abbiamo deciso di selezionare il trainset tramite un __campionamento casuale pesato__. Ogni frase riceve una probabilità di essere inclusa nel trainset in base a due fattori cruciali: le tipologie di emozioni (Label) e la varietà degli Embeddings (Umap10KMeans), che sono cluster basati sulla vicinanza semantica delle frasi, prodotti durante la fase di analisi esplorativa dei dati (EDA).
 
-Selezionate così 50.000 frasi che costituiscono il nostro _trainset_, le restanti 81.306 frasi saranno utilizzate per misurare l'_accuracy_ degli algoritmi di Gen-AI o "tradizionali" che andremo a sviluppare.
+Il "peso", o la probabilità di selezione di una frase, è calcolato in modo da bilanciare la combinazione {Tipo di Emozione ; Tipo/Cluster di Embeddings}. In altre parole, diamo una maggiore probabilità di selezione alle frasi che appartengono a combinazioni meno rappresentate naturalmente nel dataset. Questo assicura che ogni "cella" (ogni combinazione unica di Label e Umap10KMeans) sia equamente rappresentata nel trainset finale, garantendo che l'LLM apprenda in modo più completo e meno distorto.
+
+Ma c'è un altro aspetto fondamentale per garantire una valutazione affidabile: la creazione del __validation set__. Per i gruppi di frasi con più di 40 osservazioni (definite dalla combinazione "Label" e "Umap10KMeans"), abbiamo garantito che almeno 20 di queste frasi non vengano mai incluse nel trainset. Queste osservazioni sono esplicitamente riservate per il validation set. Questa strategia è cruciale perché assicura che anche le categorie più popolose siano rappresentate in modo significativo nel set di test, permettendoci di valutare l'accuratezza del modello su una varietà di esempi che non ha mai visto durante l'addestramento, anche quelli più comuni.
+
+### Trainset e Validation Set Finali
+Una volta selezionate le 50.000 frasi che costituiscono il nostro _trainset_, le restanti 81.306 frasi formeranno il nostro validation set. Questo set sarà utilizzato per misurare l'accuratezza e la capacità di generalizzazione degli algoritmi di Gen-AI o "tradizionali" che andremo a sviluppare, fornendo una valutazione imparziale delle loro performance su esempi non disponibili per l'addestramento.
+
+#### Trainset
+
+![Map](assets/images/trainset_n.png)
+
+#### Validationset
+
+![Map](assets/images/validset_n.png)
 
 # Perchè Gemma3
 
