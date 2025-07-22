@@ -28,30 +28,27 @@ Selezionate così 50.000 frasi che costituiscono il nostro _trainset_, le restan
 
 # Perchè Gemma3
 
-In questo tutorial faremo il fine-tuning a partire dal modello pretrained [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it). Perchè questa scelta?
+In questo tutorial, il __fine-tuning__ verrà eseguito utilizzando il modello pre-trained [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it). La nostra decisione di adottare questo modello si basa su una serie di considerazioni strategiche, focalizzate sull'equilibrio tra _accessibilità_, _efficienza_ e _prestazioni_.
 
-Quando abbiamo deciso di creare un tutorial accessibile a tutti, abbiamo subito pensato agli __Small Large Language Model (LLM)__, che si contraddistinguono per il numero ridotto di parametri, sono progettati per essere efficienti e performanti in compiti specifici, pur mantenendo un'elevata coerenza nella generazione di testo. 
+Quando abbiamo concepito un tutorial che fosse fruibile da un vasto pubblico, la nostra attenzione si è subito rivolta agli __Small Large Language Model (SLLM)__. Questi modelli, caratterizzati da un numero ridotto di parametri, sono progettati per essere altamente efficienti e performanti in compiti specifici, mantenendo al contempo un'elevata coerenza nella generazione del testo. Dopo aver sperimentato diverse opzioni open source disponibili, la famiglia _Gemma 3_ di _Google_ si è costantemente distinta come una delle più promettenti per la sua notevole capacità di seguire le istruzioni in modo coerente.
 
-Ne abbiamo sperimentati diversi, limitatamente a quelli disponibili con licenza open source. La famiglia Gemma 3 sviluppata da Google si è costantemente distinta come una tra le più promettenti in termini di capacità di seguire le istruzioni in modo coerente.
-Ben sappiamo che gli LLM sono soggetti ad "allucinazioni", o possono non comprendere nell'interezza le istruzioni che gli poniamo. Limiti ancor più evidenti negli Small LLM.
+Siamo consapevoli che gli LLM, e in particolare gli SLLM, possono essere soggetti a ["allucinazioni"](https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)) o mostrare difficoltà nel comprendere appieno le istruzioni impartite. Per esplorare e mitigare questi limiti, abbiamo condotto un esperimento specifico: abbiamo chiesto a un LLM di sintetizzare una frase o un documento di testo in una singola parola. Sebbene possa apparire un compito semplice, si è rivelato una sfida significativa per l'LLM mantenere la "disciplina" e completarlo correttamente in una sequenza di tentativi.
 
-Facciamo una piccola digressione su un esperimento che a nostro avviso è molto funzionale.
+Questo esperimento si è rivelato estremamente funzionale per diverse ragioni:
 
-_L'esperimento prevedeva di chiedere ad un LLM di sintetizzare una frase o un documento di testo in una singola parola_. 
+* Ci ha permesso di valutare l'affidabilità di un LLM nella sintesi di informazioni verbali complesse in rappresentazioni concise, che possono essere utilizzate per rappresentazioni di sintesi, come grafici o altre forme di espressione.
 
-Potrebbe sembrare un compito semplice, ma è non è così semplice per un LLM "disciplinarsi" e portarlo a termine correttamente in una sequenza di tentativi. 
+* La capacità di sintetizzare una frase con una singola parola, quando possibile, apre la strada all'utilizzo e allo sfruttamento di ontologie basate sui vocabolari, che mirano a strutturare e organizzare la complessità semantica.
 
-Da un punto di vista funzionale, questo esperimento ci pare estremamente utile: 
+* Ci consente di riutilizzare modelli di Embeddings non contestualizzati, come [Word2Vec](https://www.tensorflow.org/text/tutorials/word2vec) o [FastText](https://fasttext.cc/).
 
-* ci aiuta a valutare l'affidabilità di un LLM quando si tratta di sintetizzare informazioni verbali complesse in rappresentazioni concise, siano esse grafici o altre forme di espressione;
+Nonostante i vantaggi in termini di efficienza e costi computazionali, è importante riconoscere che gli SLLM come [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it) potrebbero non possedere la stessa profondità di conoscenza o la medesima capacità di gestire compiti estremamente complessi o ambigui rispetto a modelli con un numero di parametri significativamente maggiore. Tuttavia, per il contesto specifico di questo tutorial, focalizzato sulla classificazione delle emozioni, i benefici derivanti dall'efficienza e dall'accessibilità di [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it) superano ampiamente questi compromessi, rendendolo la scelta ottimale per dimostrare l'efficacia del fine-tuning con risorse limitate.
 
-* sintetizzare una frase con una parola, per quanto questo sia possibile, ci permette di aprirci (e di poter sfruttare) quelle ontologie sviluppate sui vocabolari, che mirano a strutturare e organizzare la complessità semantica;
-
-* ci permette di riutilizzare modelli non contestualizzati di Embeddings, come Word2Vec o FastText.
+Un ulteriore elemento cruciale nella scelta di [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it) è la sua natura di modello "instruction tuned" (indicato dal suffisso "it" nel nome). Questo significa che il modello è stato pre-addestrato non solo su un vasto corpus di testo, ma anche specificamente ottimizzato per seguire istruzioni e formati di prompt. Questa caratteristica lo rende particolarmente adatto al fine-tuning per compiti specifici come la classificazione, in quanto è già predisposto a interpretare e rispondere a istruzioni ben definite, facilitando il processo di adattamento e migliorando le prestazioni sul dataset target.
 
 ![Map](assets/images/gemma3.png)
 
-
+Una [panoramica](https://ai.google.dev/gemma/docs/core/model_card_3?hl=it) su questo modello è messo a disposizione da Google stessa. Qui il [Technical Report](https://arxiv.org/abs/2503.19786).
  
 
 
@@ -73,6 +70,40 @@ Esistono diverse strategie per eseguire il fine-tuning, che si differenziano pri
 * al contrario, l'approccio utilizzato nel codice, noto come [Parameter-Efficient Fine-Tuning (PEFT)](https://arxiv.org/abs/2403.14608), e in particolare la logica LoRA (Low-Rank Adaptation), si concentra sull'addestramento di un numero molto più piccolo di parametri aggiuntivi o modificati, lasciando la maggior parte del modello originale congelata. Questo riduce drasticamente i requisiti di memoria e i tempi di addestramento, rendendo il fine-tuning accessibile anche su hardware meno potente, pur mantenendo prestazioni competitive. 
 
 Il codice utilizza LoRA per adattare un modello [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it), focalizzandosi sull'addestramento di matrici di basso rango che vengono "iniettate" nel modello, consentendo un adattamento efficace senza la necessità di modificare l'intero modello.
+
+## Prompting
+
+Per addestrare efficacemente un LLM su un compito specifico come la classificazione delle emozioni, è essenziale presentare i dati al modello in un formato strutturato e coerente. Questa formattazione, spesso definita 'prompt' o 'template', guida il modello su come interpretare l'input e generare l'output desiderato. La funzione formatting_func nel nostro codice è responsabile di trasformare ogni riga del dataset in questo formato specifico.
+
+Ad esempio, una frase e la sua etichetta emotiva potrebbero essere convertite in un template come questo per il fine-tuning:
+
+'### Frase: \n{testo_della_frase}\n### Emozione: \n{etichetta_dell_emozione}<|endoftext|>'
+Questa struttura indica chiaramente al modello quale parte è l'input (Frase:) e quale l'output atteso (Emozione:). Il tokenizer (caricato insieme al modello) è poi responsabile di convertire questo testo formattato in una sequenza di token numerici che il modello può elaborare."
+
+Questa integrazione renderebbe la sezione ancora più completa e chiara, coprendo un aspetto cruciale del fine-tuning degli LLM che attualmente è implicito ma non esplicitamente discusso.
+
+Perché questo formato funziona bene:
+
+* Chiara separazione tra input e output: L'uso dei tag <start_of_turn>user e <start_of_turn>model replica un formato di conversazione che molti LLM moderni sono abituati a processare. Questo aiuta il modello a capire chiaramente cosa è l'input (la frase da classificare) e cosa è l'output atteso (l'emozione).
+
+* Identificazione del compito: La frase "Identify emotion:" è una istruzione esplicita che guida il modello verso il compito specifico che deve eseguire. Questo è fondamentale per il fine-tuning.
+
+* Token di fine sequenza (tokenizer.eos_token): L'aggiunta del tokenizer.eos_token alla fine di ogni esempio è cruciale. Indica al modello che la sequenza corrente è terminata, il che è vitale per l'addestramento e la generazione.
+
+* Batching: L'uso di batched=True nella funzione .map() è efficiente perché elabora più esempi contemporaneamente, velocizzando la preparazione del dataset.
+
+Consigli aggiuntivi:
+
+* Coerenza delle etichette: Assicurati che le etichette nel tuo campo "Label" siano esattamente le stesse per ogni categoria di emozione (es. sempre "Gioia", mai "gioia" o "felicità" se "Gioia" è la tua etichetta canonica). La coerenza è fondamentale per il modello.
+
+* Bilanciamento del dataset: Se possibile, cerca di avere un numero di esempi più o meno equilibrato per ciascuna delle 13 emozioni. Se alcune classi sono sovra-rappresentate e altre sotto-rappresentate, il modello potrebbe diventare bravo a predire le classi più comuni e meno bravo con quelle rare.
+
+* Varietà nelle frasi: Come discusso in precedenza, assicurati che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione.
+
+
+
+
+## Framework
 
 Le principali soluzioni utilizzate per rendere questo processo efficiente, soprattutto in termini di tempi di elaborazione e utilizzo della memoria (VRAM), sono le seguenti:
 
