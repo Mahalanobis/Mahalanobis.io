@@ -169,7 +169,7 @@ Sebbene il codice condiviso sia un buon esempio di fine-tuning di un LLM, non ra
 
 L'approccio modella il problema della classificazione delle emozioni come un task di generazione di testo ("Identify emotion: {sentence}" -> "{label}"). Il modello viene addestrato a "generare" l'etichetta dell'emozione come parte di una conversazione. Come superare questo limite sarà argmento di questo tutorial.
 
-Nel prossimo episodio andiamo a vedere le performance di questo LLM fine-tuned.
+Nel [prossimo episodio](https://mahalanobis.github.io/Mahalanobis.io/accuracy/) andiamo a misurare le performance di questo LLM fine-tuned.
 
 
 
