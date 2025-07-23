@@ -269,7 +269,7 @@ Diversamente, l'intero processo di fine-tuning che ha come output un nuovo LLM i
 
 Il fine-tuning ottimizza la [cross-entropy loss](https://en.wikipedia.org/wiki/Cross-entropy) per la generazione di testo.
 
-![Map](assets/images/ft_training_loss.png)
+![Map](assets/images/ft_training_validation_loss.png)
 
 ### GGUF
 
