@@ -267,6 +267,8 @@ Il fine-tuning ottimizza la [cross-entropy loss](https://en.wikipedia.org/wiki/C
 
 ### VRAM
 
+In questo grafico riportiamo l'utilizzo della VRAM della GPU nel tempo:
+
 ![Map](assets/images/ft_vram_usage.png)
 
 
