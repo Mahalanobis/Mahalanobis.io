@@ -392,7 +392,8 @@ Identify emotion: {Sentence}<end_of_turn>
 <p><strong>"Habemus fine-tuned LLM!"</strong></p>
 <p><img alt="Map" src="../assets/images/egemma.png" /></p>
 <p>Ora qualche test in locale:</p>
-<p>...</p>
+<p><img alt="Map" src="assets/images/egemma_test1.png" /></p>
+<p>Qualche dubbio sul fatto che abbia fornito la risposta corretta, ma vedremo come si può sistemare qualcosa con del prompt engineering in fase di valutazione dell'accuracy.</p>
 <h1 id="conclusioni">Conclusioni</h1>
 <p>Nel <a href="https://mahalanobis.github.io/Mahalanobis.io/accuracy/">prossimo episodio</a> andiamo a misurare le performance di questo LLM fine-tuned.</p>
 <p>C'è un importante <strong>caveat</strong>. Sebbene il codice condiviso sia un buon esempio di fine-tuning di un LLM, non rappresenta un approccio State-of-the-Art (SOTA) per un task di classificazione di emozioni. L'approccio modella il problema della classificazione delle emozioni come un task di generazione di testo ("Identify emotion: {sentence}" -&gt; "{label}"). Il modello viene addestrato a "generare" l'etichetta dell'emozione come parte di una conversazione. Come superare questo limite sarà argomento di questo tutorial.</p></div>
