@@ -1,7 +1,5 @@
 # DoE
 
-[[!!!ALL IN WORK!!!]]
-
 Quando si parla di __Design of Experiment (DoE)__, di solito pensiamo a un metodo statistico per pianificare esperimenti. L'idea è semplice: vogliamo capire come diverse _variabili (o fattori)_ influenzano un certo _risultato (o risposta)_, cercando di ottenere il massimo delle informazioni con il minor numero di prove e garantendo che i nostri risultati siano validi ed efficienti.
 
 Tuttavia, nel contesto di questo tutorial, _il DoE assume una sfumatura un po' diversa_. Non stiamo progettando un esperimento per testare direttamente l'impatto di alcune variabili su un modello. Invece, stiamo applicando i principi del DoE per _definire con cura il dataset (il "trainset")_ che useremo. Questo trainset sarà fondamentale per due scopi:
@@ -302,15 +300,18 @@ __"Habemus fine-tuned LLM!"__
 
 ![Map](assets/images/egemma.png)
 
+Ora qualche test in locale:
 
+![Map](assets/images/egemma_test1.png)
+
+Qualche dubbio sul fatto che abbia fornito la risposta corretta, ma vedremo come si può sistemare qualcosa con del prompt engineering in fase di valutazione dell'accuracy.
 
 # Conclusioni
 
-Sebbene il codice condiviso sia un buon esempio di fine-tuning di un LLM, non rappresenta un approccio State-of-the-Art (SOTA) per un task di classificazione di emozioni.
-
-L'approccio modella il problema della classificazione delle emozioni come un task di generazione di testo ("Identify emotion: {sentence}" -> "{label}"). Il modello viene addestrato a "generare" l'etichetta dell'emozione come parte di una conversazione. Come superare questo limite sarà argmento di questo tutorial.
-
 Nel [prossimo episodio](https://mahalanobis.github.io/Mahalanobis.io/accuracy/) andiamo a misurare le performance di questo LLM fine-tuned.
+
+C'è un importante __caveat__. Sebbene il codice condiviso sia un buon esempio di fine-tuning di un LLM, non rappresenta un approccio State-of-the-Art (SOTA) per un task di classificazione di emozioni. L'approccio modella il problema della classificazione delle emozioni come un task di generazione di testo ("Identify emotion: {sentence}" -> "{label}"). Il modello viene addestrato a "generare" l'etichetta dell'emozione come parte di una conversazione. Come superare questo limite sarà argomento di questo tutorial.
+
 
 
 
