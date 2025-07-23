@@ -389,6 +389,9 @@ Identify emotion: {Sentence}<end_of_turn>
 <p>Export in GGUF: Il modello "integrato" (cioè, il modello base con i pesi aggiornati) viene quindi esportato nel formato GGUF, potenzialmente con quantizzazione, per un'inferenza efficiente e stand-alone.</p>
 </li>
 </ul>
+<p>... e finalmente:</p>
+<p><strong>"Habemus fine-tuned LLM!"</strong></p>
+<p><img alt="Map" src="../assets/images/egemma.png" /></p>
 <h1 id="conclusioni">Conclusioni</h1>
 <p>Sebbene il codice condiviso sia un buon esempio di fine-tuning di un LLM, non rappresenta un approccio State-of-the-Art (SOTA) per un task di classificazione di emozioni.</p>
 <p>L'approccio modella il problema della classificazione delle emozioni come un task di generazione di testo ("Identify emotion: {sentence}" -&gt; "{label}"). Il modello viene addestrato a "generare" l'etichetta dell'emozione come parte di una conversazione. Come superare questo limite sarà argmento di questo tutorial.</p>
