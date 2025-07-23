@@ -99,6 +99,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#presetting" class="nav-link">Presetting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#training" class="nav-link">Training</a>
               <ul class="nav flex-column">
               </ul>
@@ -217,6 +221,8 @@ Identify emotion: {Sentence}<end_of_turn>
 <p>Varietà nelle frasi: E' preferibile che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione. Questo è il motivo che ci ha portato a rappresentare il training set non solo per tipologia di emozione, ma anche per cluster di Embeddings.</p>
 </li>
 </ul>
+<h2 id="presetting">Presetting</h2>
+<p>Per accedere a <a href="https://huggingface.co/google/gemma-3-1b-it">Gemma 3 1b it</a>, è necessario iscriversi ad Hugging Face e sottoscrivere un contratto d'utilizzo con Google. Una volta sottoscritto è auspicabile salvare una versione locale del modello pretrained per generare l'LLM-fintened</p>
 <h2 id="training">Training</h2>
 <p>Il processo di training per batch, in questo codice Python, utilizzando <em>transformers.Trainer</em> (o nello specifico <em>trl.SFTTrainer</em> che lo estende) e le ottimizzazioni di Unsloth, funziona come segue:</p>
 <h3 id="1-preparazione-del-dataset-e-prompting">1. Preparazione del Dataset e Prompting</h3>
@@ -344,8 +350,9 @@ Identify emotion: {Sentence}<end_of_turn>
 </li>
 </ul>
 <h2 id="esecuzione">Esecuzione</h2>
+<p>L'intero processo di fine-tuning, a partire dalle 50K frasi e le rispettive emozioni che costituiscono il <em>trainset</em>, impiega poco meno di 900 secondi, ~15 minuti impostando <strong>eval_strategy="no"</strong>. Tempistiche assolutamente gestibili per un primo tuning dei parametri.</p>
+<p>Diversamente, l'intero processo di fine-tuning che ha come output un nuovo LLM impiega più di 40.000 secondi, ~ più di 11 ore.</p>
 <p><img alt="Map" src="../assets/images/ft_unsloth.png" /></p>
-<p>L'intero processo di fine-tuning, a partire dalle 50K frasi e le rispettive emozioni che costituiscono il <em>trainset</em>, impiega poco meno di 900 secondi, ~15 minuti.</p>
 <h3 id="vram">VRAM</h3>
 <p><img alt="Map" src="../assets/images/ft_vram_usage.png" /></p>
 <h3 id="training-loss">Training Loss</h3>
