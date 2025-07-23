@@ -296,6 +296,11 @@ I passaggi sono i seguenti:
 
 * Export in GGUF: Il modello "integrato" (cioè, il modello base con i pesi aggiornati) viene quindi esportato nel formato GGUF, potenzialmente con quantizzazione, per un'inferenza efficiente e stand-alone.
 
+... e finalmente:
+
+__"Habemus fine-tuned LLM!"__
+
+![Map](assets/images/egemma.png)
 
 
 
