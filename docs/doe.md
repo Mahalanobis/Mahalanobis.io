@@ -115,7 +115,92 @@ Vantaggi di questo approccio:
 * Varietà nelle frasi: E' preferibile che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione. Questo è il motivo che ci ha portato a rappresentare il training set non solo per tipologia di emozione, ma anche per cluster di Embeddings.
 
 
+## Training
 
+Il processo di training per batch, in questo codice Python, utilizzando _transformers.Trainer_ (o nello specifico _trl.SFTTrainer_ che lo estende) e le ottimizzazioni di Unsloth, funziona come segue:
+
+### 1. Preparazione del Dataset e Prompting
+__Caricamento e Split__: Il codice carica il _trainset_ (emotions_dataset_doe.parquet) e lo suddivide a sua volta in un set di training e un set di validazione (90% training, 10% validation).
+
+__Prompting (formatting_func)__: Ogni esempio (definito dalla coppia "Sentence" e "Label") viene trasformato in un formato adatto al fine-tuning di un LLM per compiti di tipo "instruction-following":
+
+<start_of_turn>user
+Identify emotion: {Sentence}<end_of_turn>
+<start_of_turn>model
+{Label}<end_of_turn>{tokenizer.eos_token}
+
+__Tokenizzazione implicita__: Sebbene non ci sia una fase esplicita di tokenizer() nel codice dopo _formatting_func_, _SFTTrainer_ si occupa internamente di tokenizzare il campo dataset_text_field="text" (che contiene le stringhe generate da formatting_func). Il tokenizer divide queste stringhe in ID numerici che il modello può elaborare, aggiungendo anche i token speciali come [CLS], [SEP], [PAD] (se necessari) e gestendo la massima lunghezza della sequenza (MAX_SEQ_LENGTH).
+
+### 2. Batch nel SFTTrainer
+__SFTTrainer__ è progettato per il fine-tuning di LLM per compiti di "Supervised Fine-Tuning" (SFT). Quando si parla di "training per batch", significa che il modello non elabora un singolo esempio alla volta, ma un gruppo di esempi (un "batch").
+
+per_device_train_batch_size=4: Questa impostazione nei TrainingArguments definisce la dimensione del batch che verrà elaborato da ciascuna GPU (o CPU) disponibile. In questo caso, la GPU elaborerà 4 esempi alla volta.
+
+### 3. Gradient Accumulation (gradient_accumulation_steps=1)
+gradient_accumulation_steps=1: Questa è una configurazione cruciale. Indica quante "mini-batch" devono essere accumulate prima di eseguire un'effettiva retropropagazione e un aggiornamento dei pesi del modello.
+
+Se fosse > 1 (es. 4): Il trainer elaborerebbe 4 batch consecutivi, calcolerebbe i gradienti per ciascuno, li sommerebbe (accumulerebbe), e solo dopo il quarto batch eseguirebbe la retropropagazione e l'aggiornamento dei pesi. Questo permette di simulare una dimensione del batch più grande (batch effettivo = per_device_train_batch_size * gradient_accumulation_steps) senza richiedere più VRAM di quanto non serva per un singolo mini-batch.
+
+In questo caso (= 1) non c'è accumulazione. Ogni batch da 4 esempi genererà i suoi gradienti, che verranno immediatamente usati per l'aggiornamento dei pesi del modello. Questo significa che il batch effettivo è semplicemente per_device_train_batch_size * numero_di_GPU. Con una singola GPU, il batch effettivo è di 4 esempi.
+
+### 4. Training per Batch (Iterazione)
+Il processo si svolge in un ciclo di training, passo dopo passo (step), fino a raggiungere max_steps o fino a quando l'early stopping non viene attivato.
+
+Per ogni "step" di training:
+
+* __Selezione del Batch__: Il SFTTrainer estrae un batch di per_device_train_batch_size (4 nel tuo caso) esempi dal formatted_train_dataset.
+
+* __Preparazione del Batch__:
+
+- Questi esempi formattati (stringhe) vengono tokenizzati dal tokenizer associato al modello.
+- Vengono creati gli input_ids (gli ID numerici dei token), l'attention_mask (per ignorare i token di padding) e, implicitamente, le labels (che sono gli stessi input_ids, ma con un meccanismo di mascheramento per calcolare la loss solo sulle risposte del modello, non sul prompt dell'utente).
+- Il batch viene spostato sulla GPU per l'elaborazione.
+
+* __Forward Pass__:
+
+Il batch di input viene passato attraverso il modello (model). Il modello genera le sue predizioni (logits). Contemporaneamente, viene calcolata la loss (Cross-Entropy Loss) confrontando le predizioni del modello con le labels. La loss viene calcolata solo sui token che il modello dovrebbe generare (la parte <start_of_turn>model...<end_of_turn>).
+
+* __Backward Pass e Calcolo dei Gradienti__:
+
+La loss viene retropropagato attraverso il modello. Questo calcola i gradienti per tutti i pesi addestrabili del modello (che, grazie a LoRA, sono solo i pesi degli adapter LoRA).
+
+Grazie a use_gradient_checkpointing=True in LORA_CONFIG, il processo di retropropagazione è ottimizzato per la VRAM. Non tutti gli stati intermedi del forward pass vengono memorizzati, riducendo l'uso di memoria a scapito di un leggero aumento del tempo di calcolo.
+
+* __Aggiornamento dei Pesi__ (optim="paged_adamw_8bit"):
+
+- Poiché gradient_accumulation_steps è 1, i gradienti vengono utilizzati immediatamente.
+
+- L'ottimizzatore paged_adamw_8bit (fornito da bitsandbytes e integrato da Unsloth) prende questi gradienti e aggiorna i pesi LoRA del modello. L'ottimizzatore a 8-bit è un'altra ottimizzazione chiave per ridurre l'uso della VRAM, specialmente con modelli grandi.
+
+- La learning_rate (2e-5) e la warmup_ratio (0.1) influenzano come la learning rate si evolve durante il training, con un periodo iniziale di "warmup" in cui la learning rate aumenta gradualmente.
+
+* __Logging__ (logging_steps=5):
+
+Ogni 5 step di training, il trainer registra informazioni come la training loss corrente. Queste informazioni vengono visualizzate nella console e salvate nei log di TensorBoard.
+
+* __Valutazione__ (eval_strategy="steps", eval_steps=20):
+
+Ogni 20 step di training, il trainer sospende brevemente il training, prende un batch dal formatted_eval_dataset e calcola la validation loss su di esso. Questa eval_loss è cruciale per la callback di early stopping.
+
+### 5. Early Stopping
+La CustomEarlyStoppingCallback entra in gioco dopo ogni valutazione.
+
+Monitora la eval_loss. Se la eval_loss corrente è inferiore alla best_loss registrata finora, la best_loss viene aggiornata e il contatore bad_steps viene azzerato.
+
+Se la eval_loss non migliora, bad_steps viene incrementato.
+
+Quando bad_steps raggiunge EARLY_STOPPING_PATIENCE (50 in questo caso), il training viene interrotto prematuramente, salvando il modello che ha prodotto la best_loss.
+
+
+### Tuning dei parametri
+
+Gran parte del tuning dei parametri si può fare impostando __eval_strategy="no"__.
+
+Ogni volta che il Trainer esegue una valutazione, deve interrompere il training, passare al dataset di valutazione, eseguire un forward pass su tutti i batch di valutazione e calcolare la loss/metriche. Questo processo può essere costoso in termini di tempo, specialmente con dataset di valutazione grandi o modelli complessi.
+
+Quando si stanno testando rapidamente diverse configurazioni (ad esempio, batch size, learning rate, ottimizzatori, lunghezza massima della sequenza, ecc.), il tempo di esecuzione di ogni prova è fondamentale. Disabilitare la valutazione rimuove questo overhead, permettendo di vedere i risultati della training loss molto più velocemente.
+
+In fase iniziale di sperimentazione, si è interessati principalmente a vedere se il modello sta apprendendo qualcosa (se la training loss scende) e se il training sta procedendo senza errori o crash. La validation loss diventa rilevante in una fase successiva, quando si cerca di ottimizzare le prestazioni e prevenire l'overfitting.
 
 ## Framework
 
