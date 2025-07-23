@@ -114,6 +114,11 @@ Vantaggi di questo approccio:
 
 * Varietà nelle frasi: E' preferibile che le frasi all'interno di ciascuna categoria di emozione siano varie e coprano diverse sfumature e modi di esprimere quell'emozione. Questo è il motivo che ci ha portato a rappresentare il training set non solo per tipologia di emozione, ma anche per cluster di Embeddings.
 
+## Presetting
+
+Per accedere a [Gemma 3 1b it](https://huggingface.co/google/gemma-3-1b-it), è necessario iscriversi ad Hugging Face e sottoscrivere un contratto d'utilizzo con Google. Una volta sottoscritto è auspicabile salvare una versione locale del modello pretrained per generare l'LLM-fintened
+
+
 
 ## Training
 
@@ -247,9 +252,12 @@ Le principali soluzioni utilizzate per rendere questo processo efficiente, sopra
 
 ## Esecuzione
 
+L'intero processo di fine-tuning, a partire dalle 50K frasi e le rispettive emozioni che costituiscono il _trainset_, impiega poco meno di 900 secondi, ~15 minuti impostando __eval_strategy="no"__. Tempistiche assolutamente gestibili per un primo tuning dei parametri.
+
+Diversamente, l'intero processo di fine-tuning che ha come output un nuovo LLM impiega più di 40.000 secondi, ~ più di 11 ore.
+
 ![Map](assets/images/ft_unsloth.png)
 
-L'intero processo di fine-tuning, a partire dalle 50K frasi e le rispettive emozioni che costituiscono il _trainset_, impiega poco meno di 900 secondi, ~15 minuti.
 
 
 ### VRAM
