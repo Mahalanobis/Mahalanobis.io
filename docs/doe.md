@@ -274,6 +274,31 @@ In questo grafico riportiamo l'utilizzo della VRAM della GPU nel tempo:
 
 ### GGUF
 
+GGUF è un formato binario per la serializzazione di LLM, ottimizzato per l'inferenza su CPU e GPU con librerie come GGML e llama.cpp. È particolarmente popolare per l'esecuzione di LLM localmente su hardware consumer.
+
+Caratteristiche di GGUF:
+
+* Efficienza: Permette il caricamento e l'esecuzione efficiente del modello.
+
+* Quantizzazione: Supporta varie forme di quantizzazione (ad es., int4, int8) per ridurre la dimensione del modello e i requisiti di memoria, a scapito di una minima perdita di precisione.
+
+* Metadati: Include metadati del modello utili.
+
+Per esportare il modello LLM finetuned possiamo passare attraverso GGUF e salvare il nuovo LLM in questo formato. Con un ulteriore piccolo passaggio possiamo renderlo operativo per Ollama.
+
+I passaggi sono i seguenti:
+
+* Modello Base: Si parte con un LLM pre-trained (Gemma 3 nel nostro caso).
+
+* Fine-tuning con LoRA: Si addestrano gli adattatori LoRA sul modello base utilizzando un dataset specifico per un task di fine-tuning. Il risultato sono i pesi LoRA.
+
+* Merge LoRA: Per preparare il modello all'esportazione, si uniscono i pesi LoRA con i pesi originali del modello base. Questo crea un nuovo modello che è effettivamente il risultato del fine-tuning, ma con tutti i pesi integrati direttamente. In sintesi, il merge LoRA è il passo cruciale che trasforma un modello base più adattatori LoRA in un singolo modello fine-tunato, rendendolo compatibile per l'esportazione in formati come GGUF, che richiedono un modello autonomo e completo per l'inferenza.
+
+* Export in GGUF: Il modello "integrato" (cioè, il modello base con i pesi aggiornati) viene quindi esportato nel formato GGUF, potenzialmente con quantizzazione, per un'inferenza efficiente e stand-alone.
+
+
+
+
 # Conclusioni
 
 Sebbene il codice condiviso sia un buon esempio di fine-tuning di un LLM, non rappresenta un approccio State-of-the-Art (SOTA) per un task di classificazione di emozioni.
