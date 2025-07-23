@@ -128,7 +128,6 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="doe">DoE</h1>
-<p>[[!!!ALL IN WORK!!!]]</p>
 <p>Quando si parla di <strong>Design of Experiment (DoE)</strong>, di solito pensiamo a un metodo statistico per pianificare esperimenti. L'idea è semplice: vogliamo capire come diverse <em>variabili (o fattori)</em> influenzano un certo <em>risultato (o risposta)</em>, cercando di ottenere il massimo delle informazioni con il minor numero di prove e garantendo che i nostri risultati siano validi ed efficienti.</p>
 <p>Tuttavia, nel contesto di questo tutorial, <em>il DoE assume una sfumatura un po' diversa</em>. Non stiamo progettando un esperimento per testare direttamente l'impatto di alcune variabili su un modello. Invece, stiamo applicando i principi del DoE per <em>definire con cura il dataset (il "trainset")</em> che useremo. Questo trainset sarà fondamentale per due scopi:</p>
 <ul>
@@ -392,10 +391,11 @@ Identify emotion: {Sentence}<end_of_turn>
 <p>... e finalmente:</p>
 <p><strong>"Habemus fine-tuned LLM!"</strong></p>
 <p><img alt="Map" src="../assets/images/egemma.png" /></p>
+<p>Ora qualche test in locale:</p>
+<p>...</p>
 <h1 id="conclusioni">Conclusioni</h1>
-<p>Sebbene il codice condiviso sia un buon esempio di fine-tuning di un LLM, non rappresenta un approccio State-of-the-Art (SOTA) per un task di classificazione di emozioni.</p>
-<p>L'approccio modella il problema della classificazione delle emozioni come un task di generazione di testo ("Identify emotion: {sentence}" -&gt; "{label}"). Il modello viene addestrato a "generare" l'etichetta dell'emozione come parte di una conversazione. Come superare questo limite sarà argmento di questo tutorial.</p>
-<p>Nel <a href="https://mahalanobis.github.io/Mahalanobis.io/accuracy/">prossimo episodio</a> andiamo a misurare le performance di questo LLM fine-tuned.</p></div>
+<p>Nel <a href="https://mahalanobis.github.io/Mahalanobis.io/accuracy/">prossimo episodio</a> andiamo a misurare le performance di questo LLM fine-tuned.</p>
+<p>C'è un importante <strong>caveat</strong>. Sebbene il codice condiviso sia un buon esempio di fine-tuning di un LLM, non rappresenta un approccio State-of-the-Art (SOTA) per un task di classificazione di emozioni. L'approccio modella il problema della classificazione delle emozioni come un task di generazione di testo ("Identify emotion: {sentence}" -&gt; "{label}"). Il modello viene addestrato a "generare" l'etichetta dell'emozione come parte di una conversazione. Come superare questo limite sarà argomento di questo tutorial.</p></div>
             </div>
         </div>
 
